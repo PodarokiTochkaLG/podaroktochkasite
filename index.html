@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подарок и Точка | Воздушные шары Луганск</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1530103043960-ef38714abb15?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover; background-position: center;
+        }
+        .card-shadow { transition: all 0.3s ease; }
+        .card-shadow:hover { transform: translateY(-8px); box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.15); }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-xl md:text-2xl font-extrabold text-indigo-600 tracking-tighter uppercase">Подарок и Точка</div>
+            <div class="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-widest">
+                <a href="#catalog" class="hover:text-indigo-600">Каталог</a>
+                <a href="#custom-text" class="hover:text-indigo-600 text-pink-500">Своя надпись</a>
+                <a href="#gallery" class="hover:text-indigo-600">Наши работы</a>
+            </div>
+            <a href="https://vk.com/podarok_i_tochka" target="_blank" class="bg-indigo-600 px-6 py-2 rounded-full text-white text-xs font-bold transition">МЫ В ВК</a>
+        </div>
+    </nav>
+
+    <header class="hero-bg h-[500px] md:h-[650px] flex items-center justify-center text-center text-white px-4">
+        <div>
+            <span class="uppercase tracking-[0.4em] text-xs mb-4 block font-semibold text-indigo-200">Студия аэродизайна</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6">Мир ярких шаров!</h1>
+            <a href="#catalog" class="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl inline-block">Смотреть каталог</a>
+        </div>
+    </header>
+
+    <section id="catalog" class="container mx-auto px-4 py-20">
+        <h2 class="text-4xl font-extrabold text-center mb-16 uppercase text-gray-900">Популярные наборы</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="bg-white rounded-3xl overflow-hidden card-shadow border border-slate-100 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1574391884720-bbc37bb05d3c?auto=format&fit=crop&w=600&q=80" class="w-full h-72 object-cover">
+                <div class="p-8 text-center flex-grow flex flex-col justify-between">
+                    <h3 class="text-xl font-bold mb-2">Сет «Хром & Серебро»</h3>
+                    <p class="text-2xl font-black text-indigo-600 mb-6">3 500 ₽</p>
+                    <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20сет%20Хром%20и%20Серебро" 
+                       target="_blank" class="bg-indigo-600 text-white py-4 rounded-2xl font-bold block">Заказать</a>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl overflow-hidden card-shadow border border-slate-100 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80" class="w-full h-72 object-cover">
+                <div class="p-8 text-center flex-grow flex flex-col justify-between">
+                    <h3 class="text-xl font-bold mb-2">Коробка-сюрприз</h3>
+	<p class="text-2xl font-black text-indigo-600 mb-6">4 200 ₽</p>
+                    <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20Коробку-сюрприз" 
+                       target="_blank" class="bg-indigo-600 text-white py-4 rounded-2xl font-bold block">Заказать</a>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl overflow-hidden card-shadow border border-slate-100 flex flex-col">
+                <img src="https://images.unsplash.com/photo-1525286335722-c30c6b5df541?auto=format&fit=crop&w=600&q=80" class="w-full h-72 object-cover">
+                <div class="p-8 text-center flex-grow flex flex-col justify-between">
+                    <h3 class="text-xl font-bold mb-2">Шар на Гендер-пати</h3>
+                    <p class="text-2xl font-black text-indigo-600 mb-6">1 800 ₽</p>
+                    <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20Шар%20на%20Гендер-пати" 
+                       target="_blank" class="bg-indigo-600 text-white py-4 rounded-2xl font-bold block">Заказать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="custom-text" class="container mx-auto px-4 py-10">
+        <div class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-[3rem] p-10 md:p-16 shadow-2xl text-center text-white">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-6">Ваша надпись на шаре</h2>
+            <div class="max-w-xl mx-auto bg-white p-2 rounded-3xl flex flex-col md:flex-row gap-2">
+                <input type="text" id="userText" placeholder="Напишите здесь свой текст..." class="flex-grow px-6 py-4 rounded-2xl text-gray-700 outline-none">
+                <button onclick="sendOrder()" class="bg-indigo-600 hover:bg-indigo-700 px-10 py-4 rounded-2xl font-bold transition">Отправить в TG</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="container mx-auto px-4 py-20">
+        <h2 class="text-4xl font-extrabold text-center mb-12 uppercase text-gray-900">Наши работы</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1533294160622-d5fece3e080d?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover rounded-2xl">
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-white py-12 text-center">
+        <p class="font-black uppercase mb-4">Подарок и Точка</p>
+        <p class="text-gray-500 text-sm italic">Луганск. Доставка радости 24/7</p>
+    </footer>
+
+    <script>
+        function sendOrder() {
+            const val = document.getElementById('userText').value.trim();
+            if(!val) return alert("Введите текст!");
+            
+            // Формируем сообщение с вашим префиксом
+            const fullMessage = "Мне нужна надпись на шаре: " + val;
+            const link = "https://t.me/podarok_i_tochka?text=" + encodeURIComponent(fullMessage);
+            
+            // Используем location.href вместо window.open (так надежнее для мобильных)
+            window.location.href = link;
+        }
+    </script>
+
+</body>
+</html>
