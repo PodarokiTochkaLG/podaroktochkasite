@@ -3,111 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Подарок и Точка | Воздушные шары Луганск</title>
+    <title>Подарок и Точка | Воздушные шары и подарки Луганск</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
         .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1530103043960-ef38714abb15?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1350&q=80');
             background-size: cover; background-position: center;
         }
         .card-shadow { transition: all 0.3s ease; }
-        .card-shadow:hover { transform: translateY(-8px); box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.15); }
+        .card-shadow:hover { transform: translateY(-8px); box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.05); }
     </style>
 </head>
-<body class="bg-slate-50 text-gray-800">
-
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-xl md:text-2xl font-extrabold text-indigo-600 tracking-tighter uppercase">Подарок и Точка</div>
-            <div class="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-widest">
-                <a href="#catalog" class="hover:text-indigo-600">Каталог</a>
-                <a href="#custom-text" class="hover:text-indigo-600 text-pink-500">Своя надпись</a>
-                <a href="#gallery" class="hover:text-indigo-600">Наши работы</a>
+<body class="bg-[#FBF9F6] text-[#6F5D4B]"> <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-[#F1E8D9]">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Placeholder_LCa.png" alt="Подарок и Точка" class="h-14 md:h-18 w-auto object-contain">
+            </a>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-widest text-[#6F5D4B]">
+                <a href="#catalog" class="hover:text-[#4F4135] transition">Каталог</a>
+                <a href="#custom-text" class="hover:text-[#4F4135] transition text-[#6F5D4B]">Своя надпись</a>
+                <a href="#gallery" class="hover:text-[#4F4135] transition">Наши работы</a>
+                <a href="#delivery" class="hover:text-[#4F4135] transition">Доставка</a>
             </div>
-            <a href="https://vk.com/podarok_i_tochka" target="_blank" class="bg-indigo-600 px-6 py-2 rounded-full text-white text-xs font-bold transition">МЫ В ВК</a>
+            <a href="https://vk.com/podarok_i_tochka" target="_blank" class="bg-[#6F5D4B] px-6 py-2 rounded-full text-white text-xs font-bold hover:bg-[#4F4135] transition shadow-md">МЫ В ВК</a>
         </div>
     </nav>
 
     <header class="hero-bg h-[500px] md:h-[650px] flex items-center justify-center text-center text-white px-4">
         <div>
-            <span class="uppercase tracking-[0.4em] text-xs mb-4 block font-semibold text-indigo-200">Студия аэродизайна</span>
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6">Мир ярких шаров!</h1>
-            <a href="#catalog" class="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl inline-block">Смотреть каталог</a>
+            <span class="uppercase tracking-[0.4em] text-xs mb-4 block font-semibold text-[#FBF9F6]/80">Студия аэродизайна в Луганске</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-lg leading-tight text-[#FBF9F6]">Мир ярких шаров!</h1>
+            <p class="text-lg md:text-2xl mb-10 max-w-2xl mx-auto font-light leading-relaxed text-[#FBF9F6]/90">Создаем стильные сеты из шаров и оригинальные подарки. Доставим праздник за 2 часа!</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#catalog" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white px-10 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-xl">Выбрать шары</a>
+                <a href="#custom-text" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white px-10 py-4 rounded-full font-bold text-lg transition-all border border-white/20">Заказать надпись</a>
+            </div>
         </div>
     </header>
 
+    <section class="bg-white py-16 border-b border-[#F1E8D9]">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-[#6F5D4B]">
+            <div>
+                <div class="text-5xl mb-4 text-[#A98E73]">🎈</div>
+                <h4 class="font-bold text-lg mb-2 text-[#4F4135]">Качественный гелий</h4>
+                <p class="text-[#6F5D4B]/80 text-sm italic leading-relaxed">Используем только чистый гелий и обрабатываем шары для долгого полета (от 3-х дней).</p>
+				</div>
+            <div>
+                <div class="text-5xl mb-4 text-[#A98E73]">🚚</div>
+                <h4 class="font-bold text-lg mb-2 text-[#4F4135]">Бережная доставка</h4>
+                <p class="text-[#6F5D4B]/80 text-sm italic leading-relaxed">Возим шары в специальных защитных пакетах. Доставим в любую точку Луганска вовремя.</p>
+            </div>
+            <div>
+                <div class="text-5xl mb-4 text-[#A98E73]">🎨</div>
+                <h4 class="font-bold text-lg mb-2 text-[#4F4135]">Свой стиль</h4>
+                <p class="text-[#6F5D4B]/80 text-sm italic leading-relaxed">Создадим индивидуальную надпись или логотип на большом шаре всего за 15 минут.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="catalog" class="container mx-auto px-4 py-20">
-        <h2 class="text-4xl font-extrabold text-center mb-16 uppercase text-gray-900">Популярные наборы</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div class="bg-white rounded-3xl overflow-hidden card-shadow border border-slate-100 flex flex-col">
-                <img src="https://images.unsplash.com/photo-1574391884720-bbc37bb05d3c?auto=format&fit=crop&w=600&q=80" class="w-full h-72 object-cover">
-                <div class="p-8 text-center flex-grow flex flex-col justify-between">
-                    <h3 class="text-xl font-bold mb-2">Сет «Хром & Серебро»</h3>
-                    <p class="text-2xl font-black text-indigo-600 mb-6">3 500 ₽</p>
-                    <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20сет%20Хром%20и%20Серебро" 
-                       target="_blank" class="bg-indigo-600 text-white py-4 rounded-2xl font-bold block">Заказать</a>
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-extrabold text-[#4F4135] mb-4 uppercase tracking-tight">Популярные наборы</h2>
+            <div class="w-24 h-1 bg-[#6F5D4B] mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="bg-white rounded-3xl overflow-hidden card-shadow group border border-[#F1E8D9] flex flex-col">
+                <img src="https://images.unsplash.com/photo-1574391884720-bbc37bb05d3c?auto=format&fit=crop&w=600&q=80" alt="Сет шаров" class="w-full h-80 object-cover">
+                <div class="p-8 flex-grow flex flex-col justify-between text-center">
+                    <div>
+                        <h3 class="text-xl font-bold mb-3 text-[#4F4135]">Сет «Хром & Серебро»</h3>
+                        <p class="text-[#6F5D4B] text-sm mb-6 leading-relaxed">10 шаров хром, 2 фольгированные звезды и шар с вашей надписью.</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-black text-[#6F5D4B] mb-4">3 500 ₽</p>
+                        <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20сет%20Хром%20и%20Серебро" 
+                           target="_blank" 
+                           class="w-full bg-[#6F5D4B] hover:bg-[#4F4135] text-white py-4 rounded-2xl font-bold transition block shadow-md">
+                           Заказать
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="bg-white rounded-3xl overflow-hidden card-shadow border border-slate-100 flex flex-col">
-                <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80" class="w-full h-72 object-cover">
-                <div class="p-8 text-center flex-grow flex flex-col justify-between">
-                    <h3 class="text-xl font-bold mb-2">Коробка-сюрприз</h3>
-	<p class="text-2xl font-black text-indigo-600 mb-6">4 200 ₽</p>
-                    <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20Коробку-сюрприз" 
-                       target="_blank" class="bg-indigo-600 text-white py-4 rounded-2xl font-bold block">Заказать</a>
+
+            <div class="bg-white rounded-3xl overflow-hidden card-shadow group border border-[#F1E8D9] flex flex-col">
+                <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80" alt="Коробка" class="w-full h-80 object-cover">
+                <div class="p-8 flex-grow flex flex-col justify-between text-center">
+                    <div>
+                        <h3 class="text-xl font-bold mb-3 text-[#4F4135]">Коробка-сюрприз</h3>
+                        <p class="text-[#6F5D4B] text-sm mb-6 leading-relaxed">Огромная коробка, из которой вылетают шары при открытии. </p>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-black text-[#6F5D4B] mb-4">4 200 ₽</p>
+                        <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20Коробку-сюрприз" 
+                           target="_blank" 
+                           class="w-full bg-[#6F5D4B] hover:bg-[#4F4135] text-white py-4 rounded-2xl font-bold transition block shadow-md">
+                           Заказать
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="bg-white rounded-3xl overflow-hidden card-shadow border border-slate-100 flex flex-col">
-                <img src="https://images.unsplash.com/photo-1525286335722-c30c6b5df541?auto=format&fit=crop&w=600&q=80" class="w-full h-72 object-cover">
-                <div class="p-8 text-center flex-grow flex flex-col justify-between">
-                    <h3 class="text-xl font-bold mb-2">Шар на Гендер-пати</h3>
-                    <p class="text-2xl font-black text-indigo-600 mb-6">1 800 ₽</p>
-                    <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20Шар%20на%20Гендер-пати" 
-                       target="_blank" class="bg-indigo-600 text-white py-4 rounded-2xl font-bold block">Заказать</a>
+
+            <div class="bg-white rounded-3xl overflow-hidden card-shadow group border border-[#F1E8D9] flex flex-col">
+                <img src="https://images.unsplash.com/photo-1525286335722-c30c6b5df541?auto=format&fit=crop&w=600&q=80" alt="Гендер" class="w-full h-80 object-cover">
+				<div class="p-8 flex-grow flex flex-col justify-between text-center">
+                    <div>
+                        <h3 class="text-xl font-bold mb-3 text-[#4F4135]">Шар на Гендер-пати</h3>
+                        <p class="text-[#6F5D4B] text-sm mb-6 leading-relaxed">Большой черный шар с конфетти розового или голубого цвета. </p>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-black text-[#6F5D4B] mb-4">1 800 ₽</p>
+                        <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20Шар%20на%20Гендер-пати" 
+                           target="_blank" 
+                           class="w-full bg-[#6F5D4B] hover:bg-[#4F4135] text-white py-4 rounded-2xl font-bold transition block shadow-md">
+                           Заказать
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="custom-text" class="container mx-auto px-4 py-10">
-        <div class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-[3rem] p-10 md:p-16 shadow-2xl text-center text-white">
-            <h2 class="text-3xl md:text-5xl font-extrabold mb-6">Ваша надпись на шаре</h2>
-            <div class="max-w-xl mx-auto bg-white p-2 rounded-3xl flex flex-col md:flex-row gap-2">
-                <input type="text" id="userText" placeholder="Напишите здесь свой текст..." class="flex-grow px-6 py-4 rounded-2xl text-gray-700 outline-none">
-                <button onclick="sendOrder()" class="bg-indigo-600 hover:bg-indigo-700 px-10 py-4 rounded-2xl font-bold transition">Отправить в TG</button>
+        <div class="bg-gradient-to-br from-[#6F5D4B] to-[#4F4135] rounded-[3rem] p-10 md:p-16 shadow-2xl text-center text-[#FBF9F6]">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-6 text-[#FBF9F6]">Ваша надпись на шаре</h2>
+            <p class="text-[#F1E8D9]/90 mb-10 text-lg leading-relaxed">Придумайте любой текст — поздравление, имя или шутку, — а мы нанесем его на большой шар.</p>
+            <div class="max-w-xl mx-auto bg-white p-2 rounded-3xl flex flex-col md:flex-row gap-2 shadow-inner border border-[#F1E8D9]">
+                <input type="text" id="userBalloonText" placeholder="Например: С днем рождения, Любимая!" class="flex-grow px-6 py-4 rounded-2xl border-none text-[#6F5D4B] outline-none placeholder-[#6F5D4B]/60">
+                <button onclick="sendCustomText()" class="bg-[#A98E73] hover:bg-[#6F5D4B] text-white px-10 py-4 rounded-2xl font-bold transition whitespace-nowrap">Отправить в TG</button>
             </div>
         </div>
     </section>
 
-    <section id="gallery" class="container mx-auto px-4 py-20">
-        <h2 class="text-4xl font-extrabold text-center mb-12 uppercase text-gray-900">Наши работы</h2>
+    <section id="gallery" class="container mx-auto px-4 py-20 border-t border-[#F1E8D9]">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-extrabold text-[#4F4135] mb-4 uppercase text-gray-900">Наши работы</h2>
+            <p class="text-[#6F5D4B] max-w-xl mx-auto italic">Реальные фото заказов из нашей студии в Луганске.</p>
+        </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover rounded-2xl">
-            <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover rounded-2xl">
-            <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover rounded-2xl">
-            <img src="https://images.unsplash.com/photo-1533294160622-d5fece3e080d?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=500&q=80" class="aspect-square object-cover rounded-2xl card-shadow shadow-sm">
+            <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=500&q=80" class="aspect-square object-cover rounded-2xl card-shadow shadow-sm">
+            <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=500&q=80" class="aspect-square object-cover rounded-2xl card-shadow shadow-sm">
+            <img src="https://images.unsplash.com/photo-1533294160622-d5fece3e080d?auto=format&fit=crop&w=500&q=80" class="aspect-square object-cover rounded-2xl card-shadow shadow-sm">
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-white py-12 text-center">
-        <p class="font-black uppercase mb-4">Подарок и Точка</p>
-        <p class="text-gray-500 text-sm italic">Луганск. Доставка радости 24/7</p>
+    <section id="delivery" class="bg-[#F1E8D9] py-20 text-[#6F5D4B]">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-extrabold text-[#4F4135] mb-8">Доставим праздник <br><span class="text-[#6F5D4B] font-light italic">бережно и вовремя</span></h2>
+                <ul class="space-y-4 text-[#6F5D4B]/90 text-lg leading-relaxed">
+                    <li>🎈 Шары доставляются в защитных транспортировочных пакетах</li>
+                    <li>⏱️ Курьер приедет точно в назначенное время</li>
+					<li>📸 Пришлем фото вашего заказа перед отправкой</li>
+                </ul>
+            </div>
+            <div class="bg-white p-10 rounded-[2rem] border border-[#F1E8D9] text-center shadow-md">
+                <h4 class="text-2xl font-bold mb-6 text-[#4F4135]">Остались вопросы?</h4>
+                <a href="https://t.me/podarok_i_tochka" target="_blank" class="w-full bg-[#6F5D4B] text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-[#4F4135] transition block shadow-lg">Написать мастеру</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white py-12 border-t border-[#F1E8D9]">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center text-[#6F5D4B]">
+            <div class="mb-6 md:mb-0">
+                <div class="text-xl font-black text-[#4F4135]">ПОДАРОК И ТОЧКА</div>
+                <p class="text-[#6F5D4B] text-xs mt-1 uppercase tracking-widest italic">Луганск и область. Доставка радости.</p>
+            </div>
+            <div class="flex space-x-6 text-[#6F5D4B]">
+                <a href="https://vk.com/podarok_i_tochka" class="hover:text-[#4F4135] font-bold">VKontakte</a>
+                <a href="https://t.me/podarok_i_tochka" class="hover:text-[#4F4135] font-bold">Telegram</a>
+            </div>
+        </div>
+        <p class="mt-8 text-center text-[#6F5D4B]/40 text-[10px] uppercase tracking-[0.3em]">© 2026 Студия аэродизайна</p>
     </footer>
 
     <script>
-        function sendOrder() {
-            const val = document.getElementById('userText').value.trim();
-            if(!val) return alert("Введите текст!");
+        function sendCustomText() {
+            const input = document.getElementById('userBalloonText');
+            const customText = input.value.trim();
+            if (customText === "") {
+                alert("Сначала введите текст надписи!");
+                return;
+            }
+            // Формируем сообщение с префиксом
+            const prefixMessage = "Мне нужна надпись на шаре: ";
+            const fullMessage = prefixMessage + '"' + customText + '"';
+            const encodedMessage = encodeURIComponent(fullMessage);
             
-            // Формируем сообщение с вашим префиксом
-            const fullMessage = "Мне нужна надпись на шаре: " + val;
-            const link = "https://t.me/podarok_i_tochka?text=" + encodeURIComponent(fullMessage);
-            
-            // Используем location.href вместо window.open (так надежнее для мобильных)
-            window.location.href = link;
+            // Используем location.href для надежности
+            window.location.href = https://t.me/podarok_i_tochka?text=${encodedMessage};
         }
     </script>
 
