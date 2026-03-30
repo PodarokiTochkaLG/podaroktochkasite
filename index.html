@@ -76,45 +76,74 @@
         <h2 class="text-4xl font-extrabold text-[#4F4135] mb-6 uppercase tracking-tight">Наш ассортимент</h2>
         
         <div class="flex justify-center space-x-4 mb-12">
-    <button onclick="filterCatalog('balloons')" class="...">Воздушные шары</button>
-    <button onclick="filterCatalog('gifts')" class="...">Подарки</button>
-</div>
+            <button onclick="filterCatalog('balloons')" id="btn-balloons" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95">
+                Воздушные шары
+            </button>
+            <button onclick="filterCatalog('gifts')" id="btn-gifts" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95">
+                Подарки
+            </button>
+        </div>
+    </div>
 
     <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+        
+        <div class="balloons bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center">
+            <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
+                <img src="shary_1.jpg" alt="Сет из шаров" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="flex-grow flex flex-col items-center">
+                <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Сет "Облако"</h3>
+                <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">10 нежных шаров с обработкой для долгого полета.</p>
+            </div>
+            <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
+                <div class="text-2xl font-extrabold text-[#4F4135] mb-3">1500 ₽</div>
+                <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20сет%20Облако" target="_blank" class="inline-block w-full bg-[#6F5D4B] text-white py-3 rounded-xl font-bold uppercase tracking-wider text-[10px] hover:bg-[#4F4135] transition-all">Заказать в Telegram</a>
+            </div>
+        </div>
 
-   <div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center">
-        <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square">
-            <img src="pod1.jpg" alt="подарочный бокс Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        <div class="balloons bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center">
+            <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
+                <img src="shary_2.jpg" alt="Шар Баблс" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="flex-grow flex flex-col items-center">
+                <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Шар Баблс</h3>
+                <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Прозрачный шар с перьями и вашей индивидуальной надписью.</p>
+            </div>
+            <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
+                <div class="text-2xl font-extrabold text-[#4F4135] mb-3">1800 ₽</div>
+                <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20шар%20Баблс" target="_blank" class="inline-block w-full bg-[#6F5D4B] text-white py-3 rounded-xl font-bold uppercase tracking-wider text-[10px] hover:bg-[#4F4135] transition-all">Заказать в Telegram</a>
+            </div>
         </div>
-        <div class="flex-grow flex flex-col items-center">
-            <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Алый триумф"</h3>
-            <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">
-                Праздничная фольгированная звезда и любимые сладости — беспроигрышный дуэт для дня рождения, годовщины или просто в качестве эффектного сюрприза без повода.
-            </p>
+
+        <div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" style="display: none;">
+            <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
+                <img src="pod1.jpg" alt="Алый Триумф" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="flex-grow flex flex-col items-center">
+                <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Алый Триумф</h3>
+                <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Звезда и любимые сладости — идеальный дуэт для праздника.</p>
+            </div>
+            <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
+                <div class="text-2xl font-extrabold text-[#4F4135] mb-3">1800 ₽</div>
+                <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20бокс%20Алый%20Триумф" target="_blank" class="inline-block w-full bg-[#6F5D4B] text-white py-3 rounded-xl font-bold uppercase tracking-wider text-[10px] hover:bg-[#4F4135] transition-all">Заказать в Telegram</a>
+            </div>
         </div>
-        <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
-            <div class="text-2xl font-extrabold text-[#4F4135] mb-3">1800 ₽</div>
-            <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20бокс%20Алый%20триумф" target="_blank" class="inline-block w-full bg-[#6F5D4B] text-white py-3 rounded-xl font-bold uppercase tracking-wider text-[10px] hover:bg-[#4F4135] transition-colors shadow-md">
-                Заказать в Telegram
-            </a>
+
+        <div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" style="display: none;">
+            <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
+                <img src="box_sweet.jpg" alt="Сладкий бокс" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="flex-grow flex flex-col items-center">
+                <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Сладкий бокс</h3>
+                <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Набор киндеров и тематический декор в крафтовой коробке.</p>
+            </div>
+            <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
+                <div class="text-2xl font-extrabold text-[#4F4135] mb-3">2500 ₽</div>
+                <a href="https://t.me/podarok_i_tochka?text=Здравствуйте!%20Хочу%20заказать%20Сладкий%20бокс" target="_blank" class="inline-block w-full bg-[#6F5D4B] text-white py-3 rounded-xl font-bold uppercase tracking-wider text-[10px] hover:bg-[#4F4135] transition-all">Заказать в Telegram</a>
+            </div>
         </div>
+
     </div>
-	<div class="balloons bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center">
-        <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square">
-            <img src="balloons_photo.jpg" alt="Шары Луганск" class="w-full h-full object-cover">
-        </div>
-        <div class="flex-grow flex flex-col items-center">
-            <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Сет из шаров</h3>
-            <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Описание шаров...</p>
-        </div>
-        <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
-            <div class="text-2xl font-extrabold text-[#4F4135] mb-3">1500 ₽</div>
-            <a href="https://t.me/podarok_i_tochka?text=Хочу%20шары" class="inline-block w-full bg-[#6F5D4B] text-white py-3 rounded-xl ...">Заказать в Telegram</a>
-        </div>
-    </div>
-
-
-</div>
 </section>
 
 <script>
@@ -255,6 +284,30 @@ function filterCatalog(category) {
             window.location.href = https://t.me/podarok_i_tochka?text=${encodedMessage};
         }
     </script>
+<script>
+function filterCatalog(category) {
+    const items = document.querySelectorAll('#catalog-grid > div');
+    const btnBalloons = document.getElementById('btn-balloons');
+    const btnGifts = document.getElementById('btn-gifts');
 
+    items.forEach(item => {
+        if (item.classList.contains(category)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+
+    // Стили активной кнопки
+    if (category === 'balloons') {
+        btnBalloons.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95';
+        btnGifts.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95';
+    } else {
+        btnGifts.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95';
+        btnBalloons.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95';
+    }
+}
+</script>
+	
 </body>
 </html>
