@@ -28,6 +28,21 @@
         .fade-in-up {
             animation: fadeInUp 0.5s ease-out forwards; /* Длительность 0.5 сек */
         }
+		/* CSS для карусели отзывов */
+    #review-carousel::-webkit-scrollbar {
+        display: none; /* Скрываем полосу прокрутки для Chrome/Safari */
+    }
+    #review-carousel {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        scroll-snap-type: x mandatory; /* Фиксация фото по центру при скролле */
+    }
+    .review-item {
+        scroll-snap-align: center; /* Фиксация по центру */
+    }
+		html {
+    scroll-behavior: smooth;
+}
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -49,11 +64,13 @@
         </a>
             
             <div class="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-widest text-[#6F5D4B]">
-    <a href="#about" class="hover:text-[#4F4135] transition">О нас</a>
+    
     <a href="#catalog" onclick="filterCatalog('balloons')" class="hover:text-[#4F4135] transition">Шары</a>
     <a href="#catalog" onclick="filterCatalog('gifts')" class="hover:text-[#4F4135] transition">Подарки</a>
     <a href="#custom-text" class="hover:text-[#4F4135] transition">Своя надпись</a>
     <a href="#delivery" class="hover:text-[#4F4135] transition">Доставка</a>
+	<a href="#reviews" class="hover:text-[#4F4135] transition">Отзывы</a>
+	<a href="#about" class="hover:text-[#4F4135] transition">О нас</a>
 </div>
     </nav>
 
@@ -618,18 +635,74 @@ function filterCatalog(category) {
         </div>
     </section>
 
-    <section id="gallery" class="container mx-auto px-4 py-20 border-t border-[#F1E8D9]">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-extrabold text-[#4F4135] mb-4 uppercase text-gray-900">Наши работы</h2>
-            <p class="text-[#6F5D4B] max-w-xl mx-auto italic">Реальные фото заказов из нашей студии в Луганске.</p>
+   <section id="reviews" class="container mx-auto px-4 py-20 border-t border-[#F1E8D9]">
+    <div class="text-center mb-12 relative">
+        <h2 class="text-4xl font-extrabold text-[#4F4135] mb-4 uppercase tracking-tight">Ваше доверие — наша гордость</h2>
+        <p class="text-[#6F5D4B]/80 max-w-xl mx-auto italic">Реальные отзывы и фото от счастливых получателей в Луганске.</p>
+        
+        <div class="hidden md:flex absolute top-0 right-0 space-x-2">
+            <button onclick="scrollReviews('prev')" class="bg-white p-3 rounded-full border border-[#F1E8D9] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white transition-all active:scale-95 shadow-sm">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button onclick="scrollReviews('next')" class="bg-white p-3 rounded-full border border-[#F1E8D9] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white transition-all active:scale-95 shadow-sm">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=500&q=80" class="aspect-square object-cover rounded-2xl card-shadow shadow-sm">
-            <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=500&q=80" class="aspect-square object-cover rounded-2xl card-shadow shadow-sm">
-            <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=500&q=80" class="aspect-square object-cover rounded-2xl card-shadow shadow-sm">
-            <img src="https://images.unsplash.com/photo-1533294160622-d5fece3e080d?auto=format&fit=crop&w=500&q=80" class="aspect-square object-cover rounded-2xl card-shadow shadow-sm">
+    </div>
+
+    <div id="review-carousel" class="flex overflow-x-auto space-x-6 pb-6 cursor-grab" style="scroll-behavior: smooth;">
+        
+        <div class="review-item flex-none w-[300px] md:w-[350px]">
+            <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
+                <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                    <img src="otzyv1.jpg" alt="Отзыв счастливого клиента" class="w-full h-full object-cover">
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gray-200 border-2 border-white ring-1 ring-[#F1E8D9]"></div>
+                    <div>
+                        <p class="font-bold text-[#4F4135] text-sm">Татьяна</p>
+                        <p class="text-xs text-[#6F5D4B]/70">Заказ: Фонтан «Классика»</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+
+        <div class="review-item flex-none w-[300px] md:w-[350px]">
+            <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
+                <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] mb-4 overflow-hidden">
+                    <img src="otzyv2.jpg" alt="Отзыв" class="w-full h-full object-cover">
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gray-200 border-2 border-white ring-1 ring-[#F1E8D9]"></div>
+                    <div>
+                        <p class="font-bold text-[#4F4135] text-sm">Марина</p>
+                        <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс «Сладкий микс»</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-item flex-none w-[300px] md:w-[350px]">
+            <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
+                <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] mb-4 overflow-hidden">
+                    <img src="otzyv3.jpg" alt="Отзыв Луганск" class="w-full h-full object-cover">
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gray-200 border-2 border-white ring-1 ring-[#F1E8D9]"></div>
+                    <div>
+                        <p class="font-bold text-[#4F4135] text-sm">Ольга</p>
+                        <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Баблс</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+    <div class="text-center mt-6 md:hidden">
+        <p class="text-xs text-[#6F5D4B]/60 italic">Листайте отзывы влево-вправо ← →</p>
+    </div>
+</section>
 
     <section id="delivery" class="bg-[#F1E8D9] py-20 text-[#6F5D4B]">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -800,6 +873,17 @@ function updateUI() {
 
     if (loadMoreBtn) {
         loadMoreBtn.style.display = (matchCount > displayedCount) ? 'inline-block' : 'none';
+    }
+}
+	// Функция для скролла карусели отзывов
+function scrollReviews(direction) {
+    const carousel = document.getElementById('review-carousel');
+    const scrollAmount = 374; // Ширина карточки (350px) + отступ (24px)
+    
+    if (direction === 'prev') {
+        carousel.scrollLeft -= scrollAmount;
+    } else {
+        carousel.scrollLeft += scrollAmount;
     }
 }
 
