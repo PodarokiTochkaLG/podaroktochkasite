@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://podarok-i-tochka.ru/sitemap.xml
+
+Host: https://podarok-i-tochka.ru
