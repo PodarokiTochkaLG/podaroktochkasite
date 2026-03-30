@@ -13,6 +13,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+		.hero-bg {
+    /* Добавляем качественное фото шаров и легкое затемнение, чтобы текст читался */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Эффект параллакса (красивое подлагивание при скролле) */
+}
         body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
     </style>
 </head>
@@ -23,18 +31,17 @@
             </a>
             
             <div class="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-widest text-[#6F5D4B]">
-                <a href="#catalog" class="hover:text-[#4F4135] transition">Каталог</a>
-                <a href="#custom-text" class="hover:text-[#4F4135] transition text-[#6F5D4B]">Своя надпись</a>
-                <a href="#gallery" class="hover:text-[#4F4135] transition">Наши работы</a>
-                <a href="#delivery" class="hover:text-[#4F4135] transition">Доставка</a>
-            </div>
-            <a href="https://vk.com/podarok_i_tochka" target="_blank" class="bg-[#6F5D4B] px-6 py-2 rounded-full text-white text-xs font-bold hover:bg-[#4F4135] transition shadow-md">МЫ В ВК</a>
-        </div>
+    <a href="#about" class="hover:text-[#4F4135] transition">О нас</a>
+    <a href="#catalog" onclick="filterCatalog('balloons')" class="hover:text-[#4F4135] transition">Шары</a>
+    <a href="#catalog" onclick="filterCatalog('gifts')" class="hover:text-[#4F4135] transition">Подарки</a>
+    <a href="#custom-text" class="hover:text-[#4F4135] transition">Своя надпись</a>
+    <a href="#delivery" class="hover:text-[#4F4135] transition">Доставка</a>
+</div>
     </nav>
 
     <header class="hero-bg h-[500px] md:h-[650px] flex items-center justify-center text-center text-white px-4">
         <div>
-            <span class="uppercase tracking-[0.4em] text-xs mb-4 block font-semibold text-[#FBF9F6]/80">Студия подарков в Луганске</span>
+            <span class="uppercase tracking-[0.4em] text-xs mb-4 block font-semibold text-[#FBF9F6]/80">Воздушные шары и изготовление подарков в Луганске</span>
             <h1 class="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-lg leading-tight text-[#FBF9F6]">Мир ярких шаров!</h1>
             <p class="text-lg md:text-2xl mb-10 max-w-2xl mx-auto font-light leading-relaxed text-[#FBF9F6]/90">Создаем стильные сеты из шаров и оригинальные подарки. Доставим праздник в короткий срок!</p>
             <div class="flex flex-col md:flex-row gap-4 justify-center">
