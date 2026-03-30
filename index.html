@@ -447,7 +447,10 @@ function applyFilters(category, priceLimit) {
         }
     });
 }
+	// Эта строка заставит сайт включить категорию "balloons" сразу при загрузке
+window.onload = function() {
+    filterCatalog('balloons');
+};
 </script>
-	
 </body>
 </html>
