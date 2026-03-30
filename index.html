@@ -933,6 +933,47 @@ function scrollReviews(direction) {
 window.addEventListener('DOMContentLoaded', (event) => {
     filterCatalog('balloons');
 });
+// ФУНКЦИЯ ПРОВЕРКИ ВОЗРАСТА (добавляем в самый низ)
+    document.addEventListener("DOMContentLoaded", function() {
+        const isAdult = localStorage.getItem('ageConfirmed');
+        const ageModal = document.getElementById('age-verification');
+        
+        if (isAdult === 'true') {
+            if (ageModal) ageModal.remove();
+        }
+    });
+
+    function confirmAge() {
+        const ageModal = document.getElementById('age-verification');
+        ageModal.style.opacity = '0';
+        setTimeout(() => {
+            ageModal.remove();
+            localStorage.setItem('ageConfirmed', 'true');
+        }, 500);
+    }
+
+    function rejectAge() {
+        window.location.href = "https://www.google.com";
+    }
 </script>
+<div id="age-verification" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#4F4135]/95 backdrop-blur-lg transition-opacity duration-500">
+    <div class="bg-[#FBF9F6] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full text-center mx-4 border border-[#F1E8D9]">
+        <img src="podaroktxt.png" alt="Подарок и Точка" class="h-10 mx-auto mb-6">
+        
+        <h2 class="text-2xl font-bold text-[#4F4135] mb-4 uppercase tracking-tight">Вам уже есть 18 лет?</h2>
+        <p class="text-[#6F5D4B] mb-8 leading-relaxed">
+            В нашем каталоге представлены подарки, содержащие алкогольную продукцию. Подтвердите свой возраст, чтобы продолжить.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button onclick="confirmAge()" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105">
+                Да, мне есть 18
+            </button>
+            <button onclick="rejectAge()" class="bg-white border border-[#F1E8D9] text-[#6F5D4B] hover:bg-[#F1E8D9] px-8 py-3 rounded-full font-bold transition-all">
+                Нет, мне меньше
+            </button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
