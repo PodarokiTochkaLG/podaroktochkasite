@@ -84,6 +84,14 @@
             </button>
         </div>
     </div>
+	<div class="max-w-xs mx-auto mb-10 px-4">
+    <label for="price-range" class="block text-[#4F4135] font-bold mb-2 uppercase text-xs tracking-widest">
+        Ваш бюджет: до <span id="price-value">5000</span> ₽
+    </label>
+    <input type="range" id="price-range" min="500" max="10000" step="100" value="5000" 
+           class="w-full h-2 bg-[#F1E8D9] rounded-lg appearance-none cursor-pointer accent-[#6F5D4B]"
+           oninput="filterByPrice(this.value)">
+</div>
 
     <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
         
@@ -115,7 +123,7 @@
             </div>
         </div>
 
-        <div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" style="display: none;">
+        <div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="1800">
             <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
                 <img src="pod1.jpg" alt="заказать подарок Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
             </div>
@@ -129,7 +137,7 @@
             </div>
         </div>
 		
-        <div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" style="display: none;">
+        <div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="2200">
             <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
                 <img src="pod2.jpg" alt="Сладкий бокс Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
             </div>
@@ -143,7 +151,7 @@
             </div>
         </div>
 
-		 <div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" style="display: none;">
+		 <div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="800">
             <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
                 <img src="pod3.jpg" alt="дешевый подарок Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
             </div>
@@ -157,7 +165,7 @@
             </div>
         </div>
 
-		<div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" style="display: none;">
+		<div class="gifts bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="1900">
             <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
                 <img src="pod4.jpg" alt="подарочные боксы Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
             </div>
@@ -313,27 +321,47 @@ function filterCatalog(category) {
         }
     </script>
 <script>
+// Глобальная переменная для хранения текущей категории
+let currentCategory = 'balloons';
+
 function filterCatalog(category) {
-    const items = document.querySelectorAll('#catalog-grid > div');
+    currentCategory = category;
+    const priceLimit = document.getElementById('price-range').value;
+    
+    // Обновляем визуальный вид кнопок
     const btnBalloons = document.getElementById('btn-balloons');
     const btnGifts = document.getElementById('btn-gifts');
+    
+    if (category === 'balloons') {
+        btnBalloons.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md';
+        btnGifts.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm';
+    } else {
+        btnGifts.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md';
+        btnBalloons.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm';
+    }
 
+    applyFilters(category, priceLimit);
+}
+
+function filterByPrice(value) {
+    document.getElementById('price-value').textContent = value;
+    applyFilters(currentCategory, value);
+}
+
+function applyFilters(category, priceLimit) {
+    const items = document.querySelectorAll('#catalog-grid > div');
+    
     items.forEach(item => {
-        if (item.classList.contains(category)) {
+        const itemPrice = parseInt(item.getAttribute('data-price'));
+        const hasCategory = item.classList.contains(category);
+        const isWithinBudget = itemPrice <= priceLimit;
+
+        if (hasCategory && isWithinBudget) {
             item.style.display = 'flex';
         } else {
             item.style.display = 'none';
         }
     });
-
-    // Стили активной кнопки
-    if (category === 'balloons') {
-        btnBalloons.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95';
-        btnGifts.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95';
-    } else {
-        btnGifts.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95';
-        btnBalloons.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95';
-    }
 }
 </script>
 	
