@@ -123,18 +123,21 @@ function filterCatalog(category) {
     const gifts = document.querySelectorAll('.cat-gifts');
     const btnB = document.getElementById('btn-balloons');
     const btnG = document.getElementById('btn-gifts');
-	if (category === 'balloons') {
+
+    // Сбрасываем активные стили с обеих кнопок
+    [btnB, btnG].forEach(btn => {
+        btn.classList.remove('bg-[#6F5D4B]', 'text-white');
+        btn.classList.add('text-[#6F5D4B]');
+    });
+
+    if (category === 'balloons') {
         balloons.forEach(el => el.classList.remove('hidden'));
         gifts.forEach(el => el.classList.add('hidden'));
-        // Стили кнопок
         btnB.classList.add('bg-[#6F5D4B]', 'text-white');
-        btnG.classList.remove('bg-[#6F5D4B]', 'text-white');
     } else {
         balloons.forEach(el => el.classList.add('hidden'));
         gifts.forEach(el => el.classList.remove('hidden'));
-        // Стили кнопок
         btnG.classList.add('bg-[#6F5D4B]', 'text-white');
-        btnB.classList.remove('bg-[#6F5D4B]', 'text-white');
     }
 }
 </script>
@@ -186,8 +189,6 @@ function filterCatalog(category) {
             <div class="space-y-4 text-lg">
                 <p class="font-semibold text-[#6F5D4B]">📍 Наш адрес для самовывоза:</p>
                 <p>г. Луганск, Советская 7 (ориентир магазин "Шале"</p>
-                <p class="font-semibold text-[#6F5D4B] pt-4">⏰ Режим работы:</p>
-                <p>Ежедневно с 09:00 до 20:00</p>
             </div>
             <div class="space-y-4">
                 <p class="font-semibold text-[#6F5D4B] text-lg">📞 Быстрая связь:</p>
