@@ -57,21 +57,38 @@
         body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
     </style>
 </head>
-<body class="bg-[#FBF9F6] text-[#6F5D4B]"> <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-[#F1E8D9] py-0">
+<body class="bg-[#FBF9F6] text-[#6F5D4B]"> <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-[#F1E8D9]">
     <div class="container mx-auto px-4 flex justify-between items-center h-16 md:h-20">
+        
         <a href="#" class="flex items-center">
             <img src="podaroktxt.png" alt="Подарок и Точка" class="h-6 md:h-10 w-auto object-contain">
         </a>
-            
-<div class="flex flex-wrap justify-center gap-x-4 gap-y-2 md:gap-x-8 text-[10px] md:text-sm font-bold uppercase tracking-widest text-[#4F4135] mt-4 md:mt-0">
-    <a href="#catalog" onclick="filterCatalog('balloons')" class="hover:text-[#4F4135] transition">Шары</a>
-    <a href="#catalog" onclick="filterCatalog('gifts')" class="hover:text-[#4F4135] transition">Подарки</a>
-    <a href="#custom-text" class="hover:text-[#4F4135] transition">Своя надпись</a>
-	<a href="#reviews" class="hover:text-[#4F4135] transition">Отзывы</a>
-    <a href="#delivery" class="hover:text-[#4F4135] transition">Доставка</a>
-    <a href="#about" class="hover:text-[#4F4135] transition">О нас</a>
-</div>
-    </nav>
+
+        <div class="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest text-[#4F4135]">
+            <a href="#catalog" onclick="filterCatalog('balloons')" class="hover:text-[#6F5D4B] transition">Шары</a>
+            <a href="#catalog" onclick="filterCatalog('gifts')" class="hover:text-[#6F5D4B] transition">Подарки</a>
+            <a href="#reviews" class="hover:text-[#6F5D4B] transition">Отзывы</a>
+            <a href="#delivery" class="hover:text-[#6F5D4B] transition">Доставка</a>
+            <a href="#about" class="hover:text-[#6F5D4B] transition">О нас</a>
+        </div>
+
+        <button onclick="toggleMenu()" class="md:hidden text-[#4F4135] p-2 focus:outline-none">
+            <svg id="menu-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path id="icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-xl z-50 border-b border-[#F1E8D9] md:hidden">
+        <div class="flex flex-col p-6 space-y-4 text-center font-bold uppercase tracking-widest text-[#4F4135] text-sm">
+            <a href="#catalog" onclick="toggleMenu(); filterCatalog('balloons')" class="py-3 border-b border-[#F1E8D9]/50">Шары</a>
+            <a href="#catalog" onclick="toggleMenu(); filterCatalog('gifts')" class="py-3 border-b border-[#F1E8D9]/50">Подарки</a>
+            <a href="#reviews" onclick="toggleMenu()" class="py-3 border-b border-[#F1E8D9]/50">Отзывы</a>
+            <a href="#delivery" onclick="toggleMenu()" class="py-3 border-b border-[#F1E8D9]/50">Доставка</a>
+            <a href="#about" onclick="toggleMenu()" class="py-3">О нас</a>
+        </div>
+    </div>
+</nav>
 
     <header class="hero-bg h-[500px] md:h-[650px] flex items-center justify-center text-center text-white px-4">
         <div>
@@ -793,6 +810,21 @@ function filterCatalog(category) {
         }
     </script>
 <script>
+// Функция для открытия/закрытия мобильного меню
+function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const iconPath = document.getElementById('icon-path');
+    
+    if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        // Меняем иконку на КРЕСТИК
+        iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+    } else {
+        menu.classList.add('hidden');
+        // Возвращаем ТРИ ПОЛОСКИ
+        iconPath.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+    }
+}
 let currentCategory = 'balloons';
 let visibleCount = 6; 
 
