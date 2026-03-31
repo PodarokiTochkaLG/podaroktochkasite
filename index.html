@@ -1424,22 +1424,29 @@ function scrollReviews(direction) {
 window.addEventListener('DOMContentLoaded', () => {
     const hash = window.location.hash;
     
-    if (hash && hash.startsWith('#gift')) {
-        // 1. Увеличиваем лимит
+    // Проверяем, есть ли хэш и относится ли он к товарам (gift или bal)
+    if (hash && (hash.startsWith('#gift') || hash.startsWith('#bal'))) {
+        
+        // 1. Раскрываем лимит, чтобы товары не были скрыты
         visibleCount = 100; 
         
-        // 2. Устанавливаем категорию
-        currentCategory = 'gifts'; 
+        // 2. Определяем категорию автоматически
+        if (hash.startsWith('#gift')) {
+            currentCategory = 'gifts';
+        } else if (hash.startsWith('#bal')) {
+            currentCategory = 'balloons';
+        }
         
-        // 3. ПРИНУДИТЕЛЬНО ОБНОВЛЯЕМ ИНТЕРФЕЙС (это то, чего не хватало!)
+        // 3. Обновляем интерфейс, чтобы карточки физически появились в DOM
         updateUI(); 
         
         const targetId = hash.substring(1);
         
-        // Даем небольшую паузу, чтобы всё отрисовалось
+        // 4. Ждем отрисовку (увеличим до 800мс для надежности)
         setTimeout(() => {
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
+                // Считаем отступ сверху (с учетом вашей липкой шапки)
                 const headerOffset = 100;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -1449,14 +1456,19 @@ window.addEventListener('DOMContentLoaded', () => {
                     behavior: "smooth"
                 });
 
-                // Подсветка для наглядности
+                // 5. Подсветка (чтобы клиент сразу увидел товар)
                 targetElement.style.outline = "4px solid #6F5D4B";
                 targetElement.style.outlineOffset = "4px";
                 targetElement.style.borderRadius = "24px";
-                setTimeout(() => { targetElement.style.outline = "none"; }, 3000);
+                targetElement.style.transition = "outline 0.3s ease";
+                
+                setTimeout(() => { 
+                    targetElement.style.outline = "none"; 
+                }, 3000);
             }
         }, 800); 
     } else {
+        // Если зашли без хэша — просто показываем шары по умолчанию
         filterCatalog('balloons');
     }
 });
