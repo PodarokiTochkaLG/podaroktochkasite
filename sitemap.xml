@@ -1,9 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   <url>
-      <loc>https://podarok-i-tochka.ru/</loc>
-      <lastmod>2026-03-31</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>1.0</priority>
-   </url>
+  <url>
+    <loc>https://podarok-i-tochka.ru/</loc>
+    <lastmod>2026-03-31</lastmod>
+   <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+   
+<url>
+    <loc>https://podarok-i-tochka.ru/#gifts</loc>
+    <lastmod>2026-03-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://podarok-i-tochka.ru/#balloons</loc>
+    <lastmod>2026-03-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+   
+  <url><loc>https://podarok-i-tochka.ru/#gift1</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift2</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift3</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift4</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift5</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift6</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift7</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift8</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift9</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift10</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift11</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift12</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift13</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift14</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift15</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift16</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift17</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift18</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift19</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift20</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift21</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift22</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift23</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift24</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift25</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift26</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift27</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift28</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift29</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift30</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#gift31</loc><priority>0.6</priority></url>
+
+  <url><loc>https://podarok-i-tochka.ru/#bal1</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal2</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal3</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal4</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal5</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal6</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal7</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal8</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal9</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal10</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal11</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal12</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal13</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal14</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal15</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal16</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal17</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal18</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal19</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal20</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal21</loc><priority>0.6</priority></url>
+  <url><loc>https://podarok-i-tochka.ru/#bal22</loc><priority>0.6</priority></url>
 </urlset>
