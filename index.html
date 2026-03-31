@@ -1058,15 +1058,18 @@ window.addEventListener('DOMContentLoaded', () => {
     const hash = window.location.hash;
     
     if (hash && hash.startsWith('#gift')) {
-        // УВЕЛИЧИВАЕМ ЛИМИТ, чтобы gift7, gift12 и остальные стали видимыми
+        // 1. Увеличиваем лимит
         visibleCount = 100; 
         
-        // Включаем нужную категорию
-        filterCatalog('gifts'); 
+        // 2. Устанавливаем категорию
+        currentCategory = 'gifts'; 
+        
+        // 3. ПРИНУДИТЕЛЬНО ОБНОВЛЯЕМ ИНТЕРФЕЙС (это то, чего не хватало!)
+        updateUI(); 
         
         const targetId = hash.substring(1);
         
-        // Ждем чуть дольше (800мс), чтобы все 100 товаров успели "включиться"
+        // Даем небольшую паузу, чтобы всё отрисовалось
         setTimeout(() => {
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
@@ -1079,7 +1082,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     behavior: "smooth"
                 });
 
-                // Подсветка
+                // Подсветка для наглядности
                 targetElement.style.outline = "4px solid #6F5D4B";
                 targetElement.style.outlineOffset = "4px";
                 targetElement.style.borderRadius = "24px";
