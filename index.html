@@ -937,6 +937,23 @@ function scrollReviews(direction) {
 window.addEventListener('DOMContentLoaded', (event) => {
     filterCatalog('balloons');
 });
+		// Ждем, пока страница полностью загрузится
+window.addEventListener('DOMContentLoaded', () => {
+    // Проверяем, есть ли в адресе хэш (например, #gift1)
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1); // получаем "gift1"
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            // Небольшая задержка, чтобы все товары успели отрисоваться
+            setTimeout(() => {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Можно добавить эффект "подсветки", чтобы товар мигнул
+                targetElement.style.ring = "4px solid #6F5D4B"; 
+            }, 500);
+        }
+    }
+});
 // ФУНКЦИЯ ПРОВЕРКИ ВОЗРАСТА (добавляем в самый низ)
     document.addEventListener("DOMContentLoaded", function() {
         const isAdult = localStorage.getItem('ageConfirmed');
@@ -959,23 +976,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function rejectAge() {
         window.location.href = "https://www.google.com";
     }
-	// Ждем, пока страница полностью загрузится
-window.addEventListener('DOMContentLoaded', () => {
-    // Проверяем, есть ли в адресе хэш (например, #gift1)
-    if (window.location.hash) {
-        const targetId = window.location.hash.substring(1); // получаем "gift1"
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-            // Небольшая задержка, чтобы все товары успели отрисоваться
-            setTimeout(() => {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                // Можно добавить эффект "подсветки", чтобы товар мигнул
-                targetElement.style.ring = "4px solid #6F5D4B"; 
-            }, 500);
-        }
-    }
-});
+
 </script>
 <div id="age-verification" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#4F4135]/95 backdrop-blur-lg transition-opacity duration-500">
     <div class="bg-[#FBF9F6] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full text-center mx-4 border border-[#F1E8D9]">
