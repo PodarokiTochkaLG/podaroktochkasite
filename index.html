@@ -107,8 +107,8 @@
         </p>
         
         <div class="flex flex-col md:flex-row gap-4 justify-center">
-            <a href="#catalog" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white px-10 py-4 rounded-full font-bold text-lg transition-all border border-white/20">Выбрать шары</a>
-            <a href="#custom-text" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white px-10 py-4 rounded-full font-bold text-lg transition-all border border-white/20">Заказать надпись</a>
+            <a href="#catalog" class="bg-white/20 backdrop-blur-md border border-white/40 text-white px-10 py-4 rounded-full font-bold text-lg transition-all border border-white/20">Выбрать шары</a>
+            <a href="#custom-text" class="bg-white/20 backdrop-blur-md border border-white/40 text-white px-10 py-4 rounded-full font-bold text-lg transition-all border border-white/20">Заказать надпись</a>
         </div>
     </div>
 </header>
@@ -959,6 +959,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function rejectAge() {
         window.location.href = "https://www.google.com";
     }
+	// Ждем, пока страница полностью загрузится
+window.addEventListener('DOMContentLoaded', () => {
+    // Проверяем, есть ли в адресе хэш (например, #gift1)
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1); // получаем "gift1"
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            // Небольшая задержка, чтобы все товары успели отрисоваться
+            setTimeout(() => {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Можно добавить эффект "подсветки", чтобы товар мигнул
+                targetElement.style.ring = "4px solid #6F5D4B"; 
+            }, 500);
+        }
+    }
+});
 </script>
 <div id="age-verification" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#4F4135]/95 backdrop-blur-lg transition-opacity duration-500">
     <div class="bg-[#FBF9F6] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full text-center mx-4 border border-[#F1E8D9]">
