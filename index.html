@@ -1472,21 +1472,33 @@ function filterCatalog(category) {
     </footer>
 
     <script>
-        function sendCustomText() {
-            const input = document.getElementById('userBalloonText');
-            const customText = input.value.trim();
-            if (customText === "") {
-                alert("Сначала введите текст надписи!");
-                return;
-            }
-            // Формируем сообщение с префиксом
-            const prefixMessage = "Мне нужна надпись на шаре: ";
-            const fullMessage = prefixMessage + '"' + customText + '"';
-            const encodedMessage = encodeURIComponent(fullMessage);
-            
-            // Используем location.href для надежности
-            window.location.href = https://t.me/podarok_i_tochka?text=${encodedMessage};
-        }
+      function sendCustomText() {
+    const input = document.getElementById('userBalloonText');
+    
+    // Проверяем, существует ли инпут вообще
+    if (!input) {
+        console.error("Ошибка: Поле ввода 'userBalloonText' не найдено!");
+        return;
+    }
+
+    const customText = input.value.trim();
+
+    if (customText === "") {
+        alert("Сначала введите текст надписи!");
+        input.focus(); // Сразу ставим курсор в поле, чтобы пользователю было удобно
+        return;
+    }
+
+    // Формируем сообщение
+    const message = `Мне нужна надпись на шаре: "${customText}"`;
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Формируем ссылку для Telegram
+    const tgUrl = `https://t.me/podarok_i_tochka?text=${encodedMessage}`;
+
+    // Переходим по ссылке
+    window.location.href = tgUrl;
+}
     </script>
 <script>
 // Функция для открытия/закрытия мобильного меню
