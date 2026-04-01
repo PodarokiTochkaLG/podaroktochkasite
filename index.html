@@ -1560,13 +1560,13 @@ function showMore() {
     
     // Плавный скролл к первому из вновь появившихся товаров
     // Мы ждем 100мс, чтобы браузер успел отрисовать новые блоки
-    setTimeout(() => {
-        const items = document.querySelectorAll('#catalog-grid > div');
-        const firstNewItem = items[visibleCount - 6]; 
-        if (firstNewItem) {
-            firstNewItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    }, 100);
+   setTimeout(() => {
+    // Просто плавно сдвигаем экран вниз на 400 пикселей (высота одной карточки примерно)
+    window.scrollBy({
+        top: 400, 
+        behavior: 'smooth'
+    });
+}, 100);
 }
 
 function updateUI() {
