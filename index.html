@@ -249,11 +249,11 @@
 
 <div id="bal6" class="balloons bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="1360">
     <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
-        <img src="bal6.jpg" alt="Небольшой набор шаров с мишкой Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        <img src="bal6.jpg" alt="Небольшой набор шаров с капибарой Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
     </div>
     <div class="flex-grow flex flex-col items-center">
-        <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Мишка Пух</h3>
-        <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Компактный и милый набор в мятно-бежевых тонах с фольгированным мишкой.</p>
+        <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Капибара-party</h3>
+        <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Очаровательный фонтан с милой капибарой для самого уютного праздника.</p>
     </div>
     <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
         <div class="text-2xl font-extrabold text-[#4F4135] mb-3">1360 ₽</div>
@@ -465,11 +465,11 @@
 
 <div id="bal18" class="balloons bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="4000">
     <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
-        <img src="bal18.jpg" alt="Большой набор с бабблс и надписью Happy Birthday Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        <img src="bal18.jpg" alt="Большой набор с бабблс и надписью Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
     </div>
     <div class="flex-grow flex flex-col items-center">
-        <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Розовое Счастье</h3>
-        <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Роскошный набор из нежно-розовых матовых шаров и большого именного шара с перьями.</p>
+        <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Честный повод</h3>
+        <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Стильный сет для вечеринки, где не нужны лишние слова.</p>
     </div>
     <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
         <div class="text-2xl font-extrabold text-[#4F4135] mb-3">4000 ₽</div>
@@ -537,11 +537,11 @@
 
 <div id="bal22" class="balloons bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="3400">
     <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
-        <img src="bal22.jpg" alt="Премиум набор синих хромированных шаров со стойкой Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        <img src="bal22.jpg" alt="Набор шаров Луганск" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
     </div>
     <div class="flex-grow flex flex-col items-center">
-        <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Синий Хром Элит</h3>
-        <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Шикарный премиум набор на стойке из глубоко синих хромированных сфер и прозрачных шаров.</p>
+        <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">Мамино счастье</h3>
+        <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">Нежный фонтан с трогательным признанием для самой любимой мамы.</p>
     </div>
     <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
         <div class="text-2xl font-extrabold text-[#4F4135] mb-3">3400 ₽</div>
@@ -1472,32 +1472,22 @@ function filterCatalog(category) {
     </footer>
 
     <script>
-      function sendCustomText() {
+     function sendCustomText() {
     const input = document.getElementById('userBalloonText');
-    
-    // Проверяем, существует ли инпут вообще
-    if (!input) {
-        console.error("Ошибка: Поле ввода 'userBalloonText' не найдено!");
-        return;
-    }
-
     const customText = input.value.trim();
 
     if (customText === "") {
         alert("Сначала введите текст надписи!");
-        input.focus(); // Сразу ставим курсор в поле, чтобы пользователю было удобно
         return;
     }
 
     // Формируем сообщение
-    const message = `Мне нужна надпись на шаре: "${customText}"`;
-    const encodedMessage = encodeURIComponent(message);
-    
-    // Формируем ссылку для Telegram
-    const tgUrl = `https://t.me/podarok_i_tochka?text=${encodedMessage}`;
+    const prefixMessage = "Мне нужна надпись на шаре: ";
+    const fullMessage = prefixMessage + "'" + customText + "'";
+    const encodedMessage = encodeURIComponent(fullMessage);
 
-    // Переходим по ссылке
-    window.location.href = tgUrl;
+    // Прямая ссылка без лишних символов $
+    window.location.href = "https://t.me/podarok_i_tochka?text=" + encodedMessage;
 }
     </script>
 <script>
