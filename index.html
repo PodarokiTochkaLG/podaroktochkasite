@@ -273,13 +273,18 @@ fetch(googleSheetCsvUrl)
         if (!response.ok) throw new Error('Не удалось загрузить файл таблицы. Проверьте публикацию.');
         return response.text();
     })
-    .then(csvText => {
+   .then(csvText => {
         const productsFromSheet = parseCsv(csvText);
         renderCatalog(productsFromSheet);
         
-        // 1. Поддержка твоих кнопок фильтрации каталога (если они есть)
+        // ВОТ ЗДЕСЬ МЫ ВОЗВРАЩАЕМ КНОПКУ "ПОКАЗАТЬ ЕЩЁ" ДЛЯ ШАРОВ:
+        // Проверяем, существует ли твоя функция фильтрации/скрытия товаров
         if (typeof filterProducts === 'function') {
-            const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+            // Находим, какая вкладка сейчас активна. Если никакая не выбрана, по умолчанию берем 'balloons'
+            const activeFilterBtn = document.querySelector('.filter-btn.active');
+            const activeFilter = activeFilterBtn ? activeFilterBtn.dataset.filter : 'balloons';
+            
+            // Принудительно запускаем фильтрацию, которая скроет лишние шары и покажет кнопку
             filterProducts(activeFilter);
         }
 
