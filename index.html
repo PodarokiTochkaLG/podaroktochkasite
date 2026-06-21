@@ -185,24 +185,34 @@
            oninput="filterByPrice(this.value)">
 </div>
 
-   <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4"></div>
+ <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4"></div>
 
 <script>
-// ВСТАВЬ СЮДА СВОЮ ССЫЛКУ НА CSV, КОТОРУЮ СКОПИРОВАЛ В GOOGLE ТАБЛИЦАХ
-const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnl86MjVG55uqphe5vF/pub?gid=0&single=true&output=tsv";
+// ТВОЯ ССЫЛКА НА CSV (Убедись, что на конце именно output=csv)
+const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTizF7wK-V2_gWzC7_6l0ZgL1zJ2T9pPymtX5N0O92xKzE4xR_L-L0-1L6_7P9H3Z_1x-L0/pub?gid=0&single=true&output=csv"; 
 
-// Функция парсинга CSV (обрабатывает текст из таблицы)
+// Сверхнадёжная функция парсинга CSV с защитой от пустых ячеек
 function parseCsv(text) {
-    const lines = text.split('\n');
+    const lines = text.split(/\r?\n/);
     const result = [];
+    
     for (let i = 1; i < lines.length; i++) {
-        if (!lines[i].trim()) continue;
+        const line = lines[i].trim();
+        if (!line) continue; // Пропускаем пустые строки
         
-        // Регулярное выражение, чтобы запятые внутри описания товара не ломали логику
-        const matches = lines[i].match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$|\r|$)/g);
-        if (!matches || matches.length < 7) continue;
+        // Безопасное разбиение строки по запятым (учитывает кавычки)
+        const matches = line.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$|\r|$)/g) || [];
+        
+        // Если колонок меньше 7, заполняем пустыми строками, чтобы скрипт не падал
+        while (matches.length < 7) {
+            matches.push("");
+        }
 
-        const clean = row => row.replace(/^"|"$/g, '').trim();
+        // Безопасная функция очистки данных
+        const clean = row => {
+            if (!row) return "";
+            return row.replace(/^"|"$/g, '').trim();
+        };
 
         result.push({
             id: clean(matches[0]),
@@ -217,18 +227,22 @@ function parseCsv(text) {
     return result;
 }
 
-// Функция отрисовки — ОНА ПОЛНОСТЬЮ ПОВТОРЯЕТ ТВОЙ ДИЗАЙН С ФОТО
+// Функция отрисовки карточек товаров
 function renderCatalog(items) {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
+    
+    if (items.length === 0) {
+        grid.innerHTML = '<p class="text-center text-[#4F4135] col-span-3 py-8">Товары в таблице не найдены или заполнены неверно.</p>';
+        return;
+    }
+    
     grid.innerHTML = ''; 
 
     items.forEach(item => {
-        // Формируем ссылку для заказа в Telegram
         const encodedText = encodeURIComponent(`Здравствуйте! Меня заинтересовал данный товар: https://podarok-i-tochka.ru/#${item.id}`);
         const tgLink = `https://t.me/podarok_i_tochka?text=${encodedText}`;
 
-        // Твой оригинальный HTML-код карточки (один в один как на твоём скриншоте!)
         const cardHtml = `
             <div id="${item.id}" class="${item.category} bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="${item.price}">
                 <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
@@ -252,15 +266,25 @@ function renderCatalog(items) {
     });
 }
 
-// Загрузка данных из таблицы при открытии сайта
+// Загрузка данных
 fetch(googleSheetCsvUrl)
-    .then(response => response.text())
+    .then(response => {
+        if (!response.ok) throw new Error('Не удалось загрузить файл таблицы. Проверьте публикацию.');
+        return response.text();
+    })
     .then(csvText => {
         const productsFromSheet = parseCsv(csvText);
         renderCatalog(productsFromSheet);
+        
+        // Поддержка твоих кнопок фильтрации каталога (если они есть)
+        if (typeof filterProducts === 'function') {
+            const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+            filterProducts(activeFilter);
+        }
     })
     .catch(error => {
-        console.error('Ошибка загрузки каталога:', error);
+        console.error('Ошибка:', error);
+        document.getElementById('catalog-grid').innerHTML = `<p class="text-center text-red-500 col-span-3 py-8">Ошибка загрузки: ${error.message}</p>`;
     });
 </script>
 		
