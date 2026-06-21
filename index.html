@@ -267,6 +267,7 @@ function renderCatalog(items) {
 }
 
 // Загрузка данных
+// Загрузка данных из таблицы
 fetch(googleSheetCsvUrl)
     .then(response => {
         if (!response.ok) throw new Error('Не удалось загрузить файл таблицы. Проверьте публикацию.');
@@ -276,10 +277,24 @@ fetch(googleSheetCsvUrl)
         const productsFromSheet = parseCsv(csvText);
         renderCatalog(productsFromSheet);
         
-        // Поддержка твоих кнопок фильтрации каталога (если они есть)
+        // 1. Поддержка твоих кнопок фильтрации каталога (если они есть)
         if (typeof filterProducts === 'function') {
             const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
             filterProducts(activeFilter);
+        }
+
+        // 2. МАГИЯ ДЛЯ ПЕРЕХОДА ПО ССЫЛКЕ НА ТОВАР:
+        // Проверяем, есть ли хэш в адресной строке (например, #bal8)
+        if (window.location.hash) {
+            const targetId = window.location.hash; // Получаем "#bal8"
+            // Небольшая задержка в 100 миллисекунд, чтобы браузер успел отобразить карточки в сетке
+            setTimeout(() => {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Плавно скроллим к выбранному товару
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
         }
     })
     .catch(error => {
