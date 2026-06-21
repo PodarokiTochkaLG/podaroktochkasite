@@ -162,7 +162,77 @@
         </div>
     </div>
 </section>
-	
+ /* Код варианта заказа */
+<section class="container mx-auto px-4 mb-12">
+    <div class="bg-gradient-to-br from-[#F1E8D9] to-[#E5D5C0] rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-[#6F5D4B]/10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div>
+            <span class="bg-[#6F5D4B] text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full inline-block mb-4">Быстрый заказ</span>
+            <h2 class="text-2xl md:text-4xl font-extrabold text-[#4F4135] mb-3 uppercase tracking-tight">Подобрать индивидуальный декор?</h2>
+            <p class="text-[#6F5D4B] max-w-xl text-sm md:text-base">Ответьте на 3 простых вопроса, и мы сами свяжемся с вами в Telegram или по телефону с готовыми предложениями под ваши пожелания!</p>
+        </div>
+        <button onclick="openQuiz()" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white font-bold uppercase tracking-wider text-sm px-8 py-5 rounded-2xl transition-all shadow-md hover:shadow-xl active:scale-95 whitespace-nowrap">
+            Оставить заявку за 30 сек →
+        </button>
+    </div>
+</section>
+
+<div id="quiz-modal" class="fixed inset-0 z-[120] hidden items-center justify-center bg-[#4F4135]/80 backdrop-blur-md p-4">
+    <div class="bg-[#FBF9F6] p-6 md:p-10 rounded-[2.5rem] shadow-2xl max-w-xl w-full border border-[#F1E8D9] relative flex flex-col max-h-[90vh]">
+        
+        <div class="flex justify-between items-center mb-6 pb-4 border-b border-[#F1E8D9]">
+            <div>
+                <h3 class="text-xl font-bold text-[#4F4135] uppercase tracking-tight">Заявка на подбор</h3>
+                <p id="quiz-progress" class="text-xs text-[#6F5D4B]/70 font-semibold mt-0.5">Шаг 1 из 3</p>
+            </div>
+            <button onclick="closeQuiz()" class="text-2xl font-bold text-[#6F5D4B] hover:text-[#4F4135] transition-all p-2">&times;</button>
+        </div>
+
+        <div class="overflow-y-auto flex-grow py-2 text-left">
+            
+            <div id="quiz-step-1" class="quiz-step space-y-3">
+                <h4 class="text-base font-bold text-[#4F4135] mb-3 uppercase tracking-wide">1. Что вас интересует?</h4>
+                <button onclick="selectQuizParam('type', 'Воздушные шары')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135]">🎈 Воздушные шары</button>
+                <button onclick="selectQuizParam('type', 'Подарочный бокс')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135]">🎁 Подарочный бокс</button>
+                <button onclick="selectQuizParam('type', 'Шары + Подарок')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135]">✨ И шары, и подарки</button>
+                <button onclick="selectQuizParam('type', 'Другое / Индивидуально')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135]">🤔 Другое / Нужна консультация</button>
+            </div>
+
+            <div id="quiz-step-2" class="quiz-step hidden space-y-4">
+                <h4 class="text-base font-bold text-[#4F4135] uppercase tracking-wide">2. Детали заказа</h4>
+                
+                <div>
+                    <label class="block text-xs font-bold text-[#6F5D4B] uppercase mb-1">На какую дату нужен заказ?</label>
+                    <input type="text" id="quiz-date" placeholder="Например: 25 июня или как можно скорее" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-sm outline-none focus:border-[#6F5D4B]">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-[#6F5D4B] uppercase mb-1">Планируемый бюджет (₽)</label>
+                    <input type="text" id="quiz-budget" placeholder="Например: около 3000 руб" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-sm outline-none focus:border-[#6F5D4B]">
+                </div>
+
+                <div class="flex justify-between items-center pt-4">
+                    <button onclick="prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline">← Назад</button>
+                    <button onclick="goToStep3()" class="bg-[#6F5D4B] text-white px-6 py-3 rounded-xl font-bold text-sm uppercase">Далее →</button>
+                </div>
+            </div>
+
+            <div id="quiz-step-3" class="quiz-step hidden space-y-4">
+                <h4 class="text-base font-bold text-[#4F4135] uppercase tracking-wide">3. Куда отправить варианты?</h4>
+                <p class="text-xs text-[#6F5D4B]/80 leading-relaxed">Оставьте ваш номер телефона. Мы свяжемся с вами в Telegram, MAX или обычным звонком.</p>
+                
+                <input type="tel" id="quiz-phone" placeholder="+7 (959) XXX-XX-XX" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-base font-bold text-center text-[#4F4135] outline-none focus:border-[#6F5D4B]">
+
+                <div class="flex justify-between items-center pt-4">
+                    <button onclick="prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline">← Назад</button>
+                    <button onclick="submitQuizForm()" id="quiz-submit-btn" class="bg-[#6F5D4B] text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide hover:bg-[#4F4135] transition-all">
+                        Отправить заявку
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>	
 
 <section id="catalog" class="container mx-auto px-4 py-20">
     <div class="text-center mb-12">
@@ -798,6 +868,112 @@ function scrollReviews(direction) {
         carousel.scrollLeft += scrollAmount;
     }
 }
+
+	// --- НАСТРОЙКИ СВЯЗИ ДЛЯ ЗАЯВОК ---
+const TELEGRAM_BOT_TOKEN = '8677921320:AAHe7sKNa5T4YtkJwGX0yvyLpCIRRLoNtKE'; 
+const TELEGRAM_CHAT_ID = '-5108227821'; 
+
+let quizData = { type: '', date: '', budget: '', phone: '' };
+let currentQuizStep = 1;
+
+window.openQuiz = function() {
+    currentQuizStep = 1;
+    quizData = { type: '', date: '', budget: '', phone: '' };
+    document.getElementById('quiz-date').value = '';
+    document.getElementById('quiz-budget').value = '';
+    document.getElementById('quiz-phone').value = '';
+    updateQuizView();
+    document.getElementById('quiz-modal').classList.remove('hidden');
+    document.getElementById('quiz-modal').classList.add('flex');
+};
+
+window.closeQuiz = function() {
+    document.getElementById('quiz-modal').classList.add('hidden');
+    document.getElementById('quiz-modal').classList.remove('flex');
+};
+
+window.prevQuizStep = function() {
+    if (currentQuizStep > 1) {
+        currentQuizStep--;
+        updateQuizView();
+    }
+};
+
+window.selectQuizParam = function(key, value) {
+    quizData[key] = value;
+    currentQuizStep = 2;
+    updateQuizView();
+};
+
+window.goToStep3 = function() {
+    const dateInput = document.getElementById('quiz-date').value.trim();
+    const budgetInput = document.getElementById('quiz-budget').value.trim();
+    
+    if (!dateInput) {
+        alert('Пожалуйста, укажите хотя бы примерную дату.');
+        return;
+    }
+    
+    quizData.date = dateInput;
+    quizData.budget = budgetInput || 'Не указан';
+    currentQuizStep = 3;
+    updateQuizView();
+};
+
+function updateQuizView() {
+    document.querySelectorAll('.quiz-step').forEach(step => step.classList.add('hidden'));
+    document.getElementById(`quiz-step-${currentQuizStep}`).classList.remove('hidden');
+    document.getElementById('quiz-progress').textContent = `Шаг ${currentQuizStep} из 3`;
+}
+
+window.submitQuizForm = function() {
+    const phoneInput = document.getElementById('quiz-phone').value.trim();
+    if (!phoneInput || phoneInput.length < 7) {
+        alert('Пожалуйста, введите корректный номер телефона для связи.');
+        return;
+    }
+    quizData.phone = phoneInput;
+
+    const submitBtn = document.getElementById('quiz-submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправка...';
+
+    // Формируем красивый текст для Telegram
+    const messageText = `🔔 *НОВАЯ ЗАЯВКА С САЙТА!*\n\n` +
+                        `📦 *Что ищет:* ${quizData.type}\n` +
+                        `📅 *Дата:* ${quizData.date}\n` +
+                        `💰 *Бюджет:* ${quizData.budget}\n` +
+                        `📞 *Телефон:* ${quizData.phone}`;
+
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/center' },
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: messageText,
+            parse_mode: 'Markdown'
+        })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Ошибка сети');
+        alert('Спасибо! Заявка успешно принята, мы скоро свяжемся с вами.');
+        closeQuiz();
+    })
+    .catch(error => {
+        console.error(error);
+        // Резервный вариант на случай, если бот не настроен — откроет прямую отправку сообщения
+        alert('Произошла ошибка автоотправки, открываем диалог в Telegram напрямую...');
+        const textBackup = encodeURIComponent(`Новая заявка! Интересует: ${quizData.type}, Дата: ${quizData.date}, Бюджет: ${quizData.budget}, Контакт: ${quizData.phone}`);
+        window.open(`https://t.me/podarok_i_tochka?text=${textBackup}`, '_blank');
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+    });
+};
+	
 <div id="age-verification" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#4F4135]/95 backdrop-blur-lg transition-opacity duration-500">
     <div class="bg-[#FBF9F6] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full text-center mx-4 border border-[#F1E8D9]">
         <img src="podaroktxt.png" alt="Подарок и Точка" class="h-10 mx-auto mb-6">
