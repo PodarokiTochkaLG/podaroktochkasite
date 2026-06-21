@@ -193,9 +193,10 @@ const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkw
 	
 const ITEMS_PER_PAGE = 6; // Сколько товаров показывать изначально и добавлять по кнопке
 let currentVisibleCount = ITEMS_PER_PAGE;
-let allProducts = []; // Тут будут храниться все товары из таблицы
+let allProducts = []; // Тут хранятся все товары из таблицы
+let currentCategory = 'balloons'; // По умолчанию при входе открыты Шары
 
-// Функция парсинга CSV с защитой от пустых ячеек
+// Функция парсинга CSV
 function parseCsv(text) {
     const lines = text.split(/\r?\n/);
     const result = [];
@@ -218,17 +219,13 @@ function parseCsv(text) {
     return result;
 }
 
-// Функция отрисовки каталога с учетом лимита и выбранной вкладки
+// Полноценная функция отрисовки и фильтрации
 function renderCatalog() {
     const grid = document.getElementById('catalog-grid');
     const loadMoreBtn = document.getElementById('load-more');
     if (!grid) return;
 
-    // Определяем текущую активную категорию по твоим кнопкам-фильтрам
-    const activeFilterBtn = document.querySelector('.filter-btn.active');
-    const currentCategory = activeFilterBtn ? activeFilterBtn.dataset.filter : 'balloons';
-
-    // Фильтруем товары: оставляем только нужную категорию (или все, если фильтр 'all')
+    // Фильтруем массив по выбранной категории
     const filteredItems = allProducts.filter(item => currentCategory === 'all' || item.category === currentCategory);
 
     if (filteredItems.length === 0) {
@@ -239,7 +236,7 @@ function renderCatalog() {
 
     grid.innerHTML = ''; 
 
-    // Берем только ту часть товаров, которую нужно показать сейчас
+    // Отсекаем только то количество, которое разрешено кнопкой "Показать ещё"
     const itemsToRender = filteredItems.slice(0, currentVisibleCount);
 
     itemsToRender.forEach(item => {
@@ -268,51 +265,76 @@ function renderCatalog() {
         grid.innerHTML += cardHtml;
     });
 
-    // Управление видимостью кнопки "Показать ещё"
+    // Проверяем, нужно ли показывать кнопку "Показать ещё"
     if (loadMoreBtn) {
         if (currentVisibleCount >= filteredItems.length) {
-            // Если показаны все товары из этой категории, скрываем кнопку
-            loadMoreBtn.parentElement.classList.add('hidden');
+            loadMoreBtn.parentElement.classList.add('hidden'); // Скрываем, если вывели всё
         } else {
-            // Если есть ещё скрытые товары, показываем кнопку обратно
-            loadMoreBtn.parentElement.classList.remove('hidden');
+            loadMoreBtn.parentElement.classList.remove('hidden'); // Показываем, если есть ещё
         }
     }
 }
 
-// Переопределяем функцию клика по кнопке "Показать ещё"
+// Логика кнопки "Показать ещё"
 window.showMore = function() {
-    currentVisibleCount += ITEMS_PER_PAGE; // Увеличиваем счетчик видимых товаров
-    renderCatalog(); // Перерисовываем
+    currentVisibleCount += ITEMS_PER_PAGE;
+    renderCatalog();
 };
+
+// Функция для ручного переключения категорий (связываем со старыми кнопками)
+function setupCategoryButtons() {
+    // Находим все кнопки фильтров на странице (попробуем найти их по дата-атрибуту или классу)
+    const filterButtons = document.querySelectorAll('[data-filter], .filter-btn, #filters button');
+    
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // Извлекаем категорию ('balloons', 'gifts' или 'all')
+            const filterValue = this.dataset.filter || this.getAttribute('data-filter');
+            if (!filterValue) return;
+
+            // Сбрасываем лимиты
+            currentCategory = filterValue;
+            currentVisibleCount = ITEMS_PER_PAGE;
+
+            // Визуально переключаем класс активности на кнопках, чтобы дизайн не ломался
+            filterButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            // Перерисовываем каталог под новую категорию
+            renderCatalog();
+        });
+    });
+}
 
 // Загрузка данных
 fetch(googleSheetCsvUrl)
     .then(response => {
-        if (!response.ok) throw new Error('Не удалось加载 файл таблицы.');
+        if (!response.ok) throw new Error('Не удалось загрузить файл таблицы.');
         return response.text();
     })
     .then(csvText => {
         allProducts = parseCsv(csvText);
         
-        // Перехватываем клики по твоим кнопкам категорий (Шары / Подарки), чтобы сбрасывать счетчик лимита
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем лимит до 6 при смене вкладки
-                setTimeout(renderCatalog, 50); // Небольшая задержка, чтобы успел поменяться класс .active
-            });
-        });
+        // Инициализируем клики по кнопкам категорий
+        setupCategoryButtons();
 
-        renderCatalog(); // Первая отрисовка
+        // Первая отрисовка (по умолчанию откроются первые 6 шаров и кнопка появится, если их больше)
+        renderCatalog(); 
         
         // Поддержка переходов по прямым ссылкам (#bal8)
         if (window.location.hash) {
-            currentVisibleCount = allProducts.length; // Открываем сразу все товары, чтобы нужный точно был на странице
-            renderCatalog();
-            setTimeout(() => {
-                const targetElement = document.querySelector(window.location.hash);
-                if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 150);
+            const targetId = window.location.hash;
+            const foundItem = allProducts.find(item => `#${item.id}` === targetId);
+            if (foundItem) {
+                currentCategory = foundItem.category; // Переключаем вкладку на нужную
+                currentVisibleCount = allProducts.length; // Раскрываем список полностью
+                renderCatalog();
+                
+                setTimeout(() => {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            }
         }
     })
     .catch(error => {
