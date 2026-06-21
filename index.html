@@ -163,28 +163,6 @@
     </div>
 </section>
 	
-    <section id="catalog" class="container mx-auto px-4 py-20">
-    <div class="text-center mb-12">
-        <h2 class="text-4xl font-extrabold text-[#4F4135] mb-6 uppercase tracking-tight">Наш ассортимент</h2>
-        
-        <div class="flex justify-center space-x-4 mb-12">
-            <button onclick="filterCatalog('balloons')" id="btn-balloons" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95">
-                Воздушные шары
-            </button>
-            <button onclick="filterCatalog('gifts')" id="btn-gifts" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95">
-                Подарки
-            </button>
-        </div>
-    </div>
-	<div class="max-w-xs mx-auto mb-10 px-4">
-    <label for="price-range" class="block text-[#4F4135] font-bold mb-2 uppercase text-xs tracking-widest">
-        Ваш бюджет: до <span id="price-value">10000</span> ₽
-    </label>
-    <input type="range" id="price-range" min="500" max="10000" step="100" value="10000" 
-           class="w-full h-2 bg-[#F1E8D9] rounded-lg appearance-none cursor-pointer accent-[#6F5D4B]"
-           oninput="filterByPrice(this.value)">
-</div>
-
  <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4"></div>
 
 <script>
@@ -378,13 +356,7 @@ fetch(googleSheetCsvUrl)
         document.getElementById('catalog-grid').innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Ошибка загрузки: ${error.message}</p>`;
     });
 </script>
-		
-	<div class="text-center mt-12">
-    <button id="load-more" onclick="showMore()" class="px-10 py-4 bg-white border-2 border-[#6F5D4B] text-[#6F5D4B] rounded-2xl font-bold uppercase tracking-widest hover:bg-[#6F5D4B] hover:text-white transition-all shadow-sm active:scale-95">
-        Показать ещё
-    </button>
-</div>
-	
+			
 </section>
 
 <script>
@@ -788,27 +760,6 @@ function filterCatalog(category) {
     updateUI();
 }
 
-function filterByPrice(value) {
-    const priceDisplay = document.getElementById('price-value');
-    if(priceDisplay) priceDisplay.textContent = value;
-    visibleCount = 6; 
-    updateUI();
-}
-
-function showMore() {
-    visibleCount += 6; // Увеличиваем лимит
-    updateUI(); // Обновляем отображение
-    
-    // Плавный скролл к первому из вновь появившихся товаров
-    // Мы ждем 100мс, чтобы браузер успел отрисовать новые блоки
-   setTimeout(() => {
-    // Просто плавно сдвигаем экран вниз на 400 пикселей (высота одной карточки примерно)
-    window.scrollBy({
-        top: 400, 
-        behavior: 'smooth'
-    });
-}, 100);
-}
 
 function updateUI() {
     const priceRange = document.getElementById('price-range');
@@ -933,19 +884,6 @@ window.addEventListener('DOMContentLoaded', () => {
             if (ageModal) ageModal.remove();
         }
     });
-
-    function confirmAge() {
-        const ageModal = document.getElementById('age-verification');
-        ageModal.style.opacity = '0';
-        setTimeout(() => {
-            ageModal.remove();
-            localStorage.setItem('ageConfirmed', 'true');
-        }, 500);
-    }
-
-    function rejectAge() {
-        window.location.href = "https://www.google.com";
-    }
 
 </script>
 <div id="age-verification" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#4F4135]/95 backdrop-blur-lg transition-opacity duration-500">
