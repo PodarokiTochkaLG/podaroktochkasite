@@ -162,7 +162,9 @@
         </div>
     </div>
 </section>
- /* Код варианта заказа */
+	
+// --- НАСТРОЙКИ КНОПКИ ЗАКАЗАТЬ ---
+	
 <section class="container mx-auto px-4 mb-12">
     <div class="bg-gradient-to-br from-[#F1E8D9] to-[#E5D5C0] rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-[#6F5D4B]/10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         <div>
@@ -873,23 +875,38 @@ function scrollReviews(direction) {
 const TELEGRAM_BOT_TOKEN = '8677921320:AAHe7sKNa5T4YtkJwGX0yvyLpCIRRLoNtKE'; 
 const TELEGRAM_CHAT_ID = '-5108227821'; 
 
+// --- ЛОГИКА ИНТЕРАКТИВНОГО КВИЗА (ЛИД-ФОРМА) ---
 let quizData = { type: '', date: '', budget: '', phone: '' };
 let currentQuizStep = 1;
 
+// Обязательно через window. чтобы кнопка из HTML увидела функцию!
 window.openQuiz = function() {
     currentQuizStep = 1;
     quizData = { type: '', date: '', budget: '', phone: '' };
-    document.getElementById('quiz-date').value = '';
-    document.getElementById('quiz-budget').value = '';
-    document.getElementById('quiz-phone').value = '';
+    
+    const dateField = document.getElementById('quiz-date');
+    const budgetField = document.getElementById('quiz-budget');
+    const phoneField = document.getElementById('quiz-phone');
+    
+    if(dateField) dateField.value = '';
+    if(budgetField) budgetField.value = '';
+    if(phoneField) phoneField.value = '';
+    
     updateQuizView();
-    document.getElementById('quiz-modal').classList.remove('hidden');
-    document.getElementById('quiz-modal').classList.add('flex');
+    
+    const modal = document.getElementById('quiz-modal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
 };
 
 window.closeQuiz = function() {
-    document.getElementById('quiz-modal').classList.add('hidden');
-    document.getElementById('quiz-modal').classList.remove('flex');
+    const modal = document.getElementById('quiz-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
 };
 
 window.prevQuizStep = function() {
@@ -906,8 +923,7 @@ window.selectQuizParam = function(key, value) {
 };
 
 window.goToStep3 = function() {
-    const dateInput = document.getElementById('quiz-date').value.trim();
-    const budgetInput = document.getElementById('quiz-budget').value.trim();
+    const dateInput = document.getElementById('quiz-date') ? document.getElementById('quiz-date').value.trim() : '';
     
     if (!dateInput) {
         alert('Пожалуйста, укажите хотя бы примерную дату.');
@@ -915,19 +931,22 @@ window.goToStep3 = function() {
     }
     
     quizData.date = dateInput;
-    quizData.budget = budgetInput || 'Не указан';
+    quizData.budget = document.getElementById('quiz-budget') ? document.getElementById('quiz-budget').value.trim() : 'Не указан';
     currentQuizStep = 3;
     updateQuizView();
 };
 
 function updateQuizView() {
     document.querySelectorAll('.quiz-step').forEach(step => step.classList.add('hidden'));
-    document.getElementById(`quiz-step-${currentQuizStep}`).classList.remove('hidden');
-    document.getElementById('quiz-progress').textContent = `Шаг ${currentQuizStep} из 3`;
+    const activeStep = document.getElementById(`quiz-step-${currentQuizStep}`);
+    if (activeStep) activeStep.classList.remove('hidden');
+    
+    const progressText = document.getElementById('quiz-progress');
+    if (progressText) progressText.textContent = `Шаг ${currentQuizStep} из 3`;
 }
 
 window.submitQuizForm = function() {
-    const phoneInput = document.getElementById('quiz-phone').value.trim();
+    const phoneInput = document.getElementById('quiz-phone') ? document.getElementById('quiz-phone').value.trim() : '';
     if (!phoneInput || phoneInput.length < 7) {
         alert('Пожалуйста, введите корректный номер телефона для связи.');
         return;
@@ -935,10 +954,11 @@ window.submitQuizForm = function() {
     quizData.phone = phoneInput;
 
     const submitBtn = document.getElementById('quiz-submit-btn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Отправка...';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+    }
 
-    // Формируем красивый текст для Telegram
     const messageText = `🔔 *НОВАЯ ЗАЯВКА С САЙТА!*\n\n` +
                         `📦 *Что ищет:* ${quizData.type}\n` +
                         `📅 *Дата:* ${quizData.date}\n` +
@@ -949,7 +969,7 @@ window.submitQuizForm = function() {
 
     fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/center' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             chat_id: TELEGRAM_CHAT_ID,
             text: messageText,
@@ -963,14 +983,15 @@ window.submitQuizForm = function() {
     })
     .catch(error => {
         console.error(error);
-        // Резервный вариант на случай, если бот не настроен — откроет прямую отправку сообщения
-        alert('Произошла ошибка автоотправки, открываем диалог в Telegram напрямую...');
+        alert('Произошла ошибка автоотправки, открываем диалог напрямую...');
         const textBackup = encodeURIComponent(`Новая заявка! Интересует: ${quizData.type}, Дата: ${quizData.date}, Бюджет: ${quizData.budget}, Контакт: ${quizData.phone}`);
         window.open(`https://t.me/podarok_i_tochka?text=${textBackup}`, '_blank');
     })
     .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Отправить заявку';
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить заявку';
+        }
     });
 };
 	
