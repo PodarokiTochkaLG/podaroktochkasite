@@ -191,51 +191,51 @@
 // ТВОЯ ССЫЛКА НА CSV (Убедись, что на конце именно output=csv)
 const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnl86MjVG55uqphe5vF/pub?gid=0&single=true&output=csv"; 
 	
-const ITEMS_PER_PAGE = 6; // Сколько товаров показывать изначально и добавлять по кнопке
+const ITEMS_PER_PAGE = 6; // Сколько товаров показывать изначально
 let currentVisibleCount = ITEMS_PER_PAGE;
-let allProducts = []; // Тут хранятся все товары из таблицы
-let currentCategory = 'balloons'; // По умолчанию открыта категория "Шары"
+let allProducts = []; // Все товары из таблицы
+let currentCategory = 'balloons'; // Активная категория ('balloons' или 'gifts')
+let currentMaxPrice = 10000; // Максимальный бюджет по умолчанию
 
 // --- ЛОГИКА ПРОВЕРКИ ВОЗРАСТА (18+) ---
 window.confirmAge = function() {
     const ageModal = document.getElementById('age-verification');
     if (ageModal) {
-        ageModal.style.opacity = '0'; // Плавное исчезновение
+        ageModal.style.opacity = '0';
         setTimeout(() => {
-            ageModal.classList.add('hidden'); // Полное скрытие
+            ageModal.classList.add('hidden');
             ageModal.style.display = 'none';
         }, 500);
     }
-    localStorage.setItem('age_verified', 'true'); // Запоминаем выбор, чтобы не спрашивать каждый раз
+    localStorage.setItem('age_verified', 'true');
 };
 
 window.rejectAge = function() {
-    // Если пользователю нет 18, уводим его с сайта
     window.location.href = "https://yandex.ru";
 };
 
-// Проверка при загрузке страницы: если уже подтверждали возраст, скрываем окно сразу
-document.addEventListener("DOMContentLoaded", () => {
-    const ageModal = document.getElementById('age-verification');
-    if (ageModal && localStorage.getItem('age_verified') === 'true') {
-        ageModal.classList.add('hidden');
-        ageModal.style.display = 'none';
-    }
-});
+// Проверяем возраст сразу при старте
+const ageModal = document.getElementById('age-verification');
+if (ageModal && localStorage.getItem('age_verified') === 'true') {
+    ageModal.classList.add('hidden');
+    ageModal.style.display = 'none';
+}
 
-
-// --- ФУНКЦИИ КАТАЛОГА ---
-
-// Функция парсинга CSV с защитой от пустых ячеек
+// --- УМНАЯ ФУНКЦИЯ ПАРСИНГА (поддерживает и CSV, и TSV таб-разделение) ---
 function parseCsv(text) {
     const lines = text.split(/\r?\n/);
     const result = [];
     for (let i = 1; i < lines.length; i++) {
         const line = lines[i].trim();
         if (!line) continue;
-        const matches = line.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$|\r|$)/g) || [];
+        
+        // Авто-определение разделителя: таб или запятая
+        const isTsv = text.includes('\t');
+        const matches = isTsv ? line.split('\t') : (line.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$|\r|$)/g) || []);
+        
         while (matches.length < 7) matches.push("");
         const clean = row => row ? row.replace(/^"|"$/g, '').trim() : "";
+        
         result.push({
             id: clean(matches[0]),
             category: clean(matches[1]),
@@ -249,17 +249,21 @@ function parseCsv(text) {
     return result;
 }
 
-// Полноценная функция отрисовки каталога
+// --- ЕДИНАЯ ФУНКЦИЯ ОТРИСОВКИ КАТАЛОГА (С фильтром категории и бюджета) ---
 function renderCatalog() {
     const grid = document.getElementById('catalog-grid');
     const loadMoreBtn = document.getElementById('load-more');
     if (!grid) return;
 
-    // Фильтруем товары по выбранной категории
-    const filteredItems = allProducts.filter(item => currentCategory === 'all' || item.category === currentCategory);
+    // Сначала фильтруем по категории И по цене одновременно!
+    const filteredItems = allProducts.filter(item => {
+        const matchCategory = (currentCategory === 'all' || item.category === currentCategory);
+        const matchPrice = (item.price <= currentMaxPrice);
+        return matchCategory && matchPrice;
+    });
 
     if (filteredItems.length === 0) {
-        grid.innerHTML = '<p class="text-center text-[#4F4135] col-span-3 py-8">Товары в данной категории не найдены.</p>';
+        grid.innerHTML = '<p class="text-center text-[#4F4135] col-span-full py-8 w-full block">Товары под заданные критерии не найдены.</p>';
         if (loadMoreBtn) loadMoreBtn.parentElement.classList.add('hidden');
         return;
     }
@@ -295,7 +299,7 @@ function renderCatalog() {
         grid.innerHTML += cardHtml;
     });
 
-    // Управляем кнопкой "Показать ещё"
+    // Управляем видимостью кнопки "Показать ещё"
     if (loadMoreBtn) {
         if (currentVisibleCount >= filteredItems.length) {
             loadMoreBtn.parentElement.classList.add('hidden');
@@ -305,71 +309,73 @@ function renderCatalog() {
     }
 }
 
-// Функция для кнопок переключения категорий (Шары / Подарки)
-window.filterCatalog = function(category) {
-    currentCategory = category; // Меняем категорию
-    currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем лимит отображения до 6 товаров
-    
-    // Переключаем визуальный класс 'active' на твоих HTML кнопках
-    const filterButtons = document.querySelectorAll('button[onclick^="filterCatalog"]');
-    filterButtons.forEach(btn => {
-        if (btn.getAttribute('onclick').includes(`'${category}'`)) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
+// --- ПЕРЕОПРЕДЕЛЯЕМ ФУНКЦИИ ДЛЯ ТВОИХ HTML КНОПОК И ПОЛЗУНКА ---
 
-    renderCatalog(); // Перерисовываем сетку
-};
-
-// Функция для кнопки "Показать ещё"
-window.showMore = function() {
-    currentVisibleCount += ITEMS_PER_PAGE; // Добавляем ещё 6 товаров к просмотру
+// Функция для ползунка бюджета (вызывается из HTML через oninput="filterByPrice(this.value)")
+window.filterByPrice = function(value) {
+    currentMaxPrice = parseInt(value) || 10000;
+    const priceValueLabel = document.getElementById('price-value');
+    if (priceValueLabel) priceValueLabel.textContent = currentMaxPrice; // Обновляем цифру бюджета на экране
     renderCatalog();
 };
 
-// Загрузка данных из Google Таблицы
+// Функция для кнопок категорий (вызывается из HTML через onclick="filterCatalog('...')")
+window.filterCatalog = function(category) {
+    currentCategory = category;
+    currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем до 6 при смене вкладки
+    
+    // Переключаем стили кнопок (активная/неактивная)
+    const btnBalloons = document.getElementById('btn-balloons');
+    const btnGifts = document.getElementById('btn-gifts');
+    
+    if (category === 'balloons') {
+        if (btnBalloons) btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
+        if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
+    } else if (category === 'gifts') {
+        if (btnBalloons) btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
+        if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
+    }
+
+    renderCatalog();
+};
+
+// Функция кнопки "Показать ещё" (вызывается из HTML через onclick="showMore()")
+window.showMore = function() {
+    currentVisibleCount += ITEMS_PER_PAGE; // Добавляем ещё 6 товаров
+    renderCatalog();
+};
+
+// --- ЗАГРУЗКА ДАННЫХ ---
 fetch(googleSheetCsvUrl)
     .then(response => {
-        if (!response.ok) throw new Error('Не удалось загрузить файл таблицы.');
+        if (!response.ok) throw new Error('Не удалось загрузить данные таблицы.');
         return response.text();
     })
     .then(csvText => {
         allProducts = parseCsv(csvText);
         
-        // Запускаем стартовый фильтр на категорию 'balloons'
+        // Запускаем стартовый показ шаров
         filterCatalog('balloons'); 
         
-        // Поддержка переходов по прямым ссылкам из соцсетей (#bal8)
+        // Поддержка прямых ссылок (#bal8)
         if (window.location.hash) {
             const targetId = window.location.hash;
             const foundItem = allProducts.find(item => `#${item.id}` === targetId);
             if (foundItem) {
                 currentCategory = foundItem.category;
-                currentVisibleCount = allProducts.length; // Раскрываем всё, чтобы найти товар
-                renderCatalog();
+                currentVisibleCount = allProducts.length; // Раскрываем всё, чтобы доскроллить
+                filterCatalog(currentCategory);
                 
-                // Визуально подсвечиваем нужную кнопку категории
-                const filterButtons = document.querySelectorAll('button[onclick^="filterCatalog"]');
-                filterButtons.forEach(btn => {
-                    if (btn.getAttribute('onclick').includes(`'${currentCategory}'`)) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
-                });
-
                 setTimeout(() => {
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 150);
+                }, 200);
             }
         }
     })
     .catch(error => {
-        console.error('Ошибка каталога:', error);
-        document.getElementById('catalog-grid').innerHTML = `<p class="text-center text-red-500 col-span-3 py-8">Ошибка: ${error.message}</p>`;
+        console.error('Ошибка:', error);
+        document.getElementById('catalog-grid').innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Ошибка загрузки: ${error.message}</p>`;
     });
 </script>
 		
