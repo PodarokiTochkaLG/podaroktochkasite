@@ -190,30 +190,20 @@
 <script>
 // ТВОЯ ССЫЛКА НА CSV (Убедись, что на конце именно output=csv)
 const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnl86MjVG55uqphe5vF/pub?gid=0&single=true&output=csv"; 
+const ITEMS_PER_PAGE = 6; // Сколько товаров показывать изначально и добавлять по кнопке
+let currentVisibleCount = ITEMS_PER_PAGE;
+let allProducts = []; // Тут будут храниться все товары из таблицы
 
-// Сверхнадёжная функция парсинга CSV с защитой от пустых ячеек
+// Функция парсинга CSV с защитой от пустых ячеек
 function parseCsv(text) {
     const lines = text.split(/\r?\n/);
     const result = [];
-    
     for (let i = 1; i < lines.length; i++) {
         const line = lines[i].trim();
-        if (!line) continue; // Пропускаем пустые строки
-        
-        // Безопасное разбиение строки по запятым (учитывает кавычки)
+        if (!line) continue;
         const matches = line.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$|\r|$)/g) || [];
-        
-        // Если колонок меньше 7, заполняем пустыми строками, чтобы скрипт не падал
-        while (matches.length < 7) {
-            matches.push("");
-        }
-
-        // Безопасная функция очистки данных
-        const clean = row => {
-            if (!row) return "";
-            return row.replace(/^"|"$/g, '').trim();
-        };
-
+        while (matches.length < 7) matches.push("");
+        const clean = row => row ? row.replace(/^"|"$/g, '').trim() : "";
         result.push({
             id: clean(matches[0]),
             category: clean(matches[1]),
@@ -227,26 +217,39 @@ function parseCsv(text) {
     return result;
 }
 
-// Функция отрисовки карточек товаров
-function renderCatalog(items) {
+// Функция отрисовки каталога с учетом лимита и выбранной вкладки
+function renderCatalog() {
     const grid = document.getElementById('catalog-grid');
+    const loadMoreBtn = document.getElementById('load-more');
     if (!grid) return;
-    
-    if (items.length === 0) {
-        grid.innerHTML = '<p class="text-center text-[#4F4135] col-span-3 py-8">Товары в таблице не найдены или заполнены неверно.</p>';
+
+    // Определяем текущую активную категорию по твоим кнопкам-фильтрам
+    const activeFilterBtn = document.querySelector('.filter-btn.active');
+    const currentCategory = activeFilterBtn ? activeFilterBtn.dataset.filter : 'balloons';
+
+    // Фильтруем товары: оставляем только нужную категорию (или все, если фильтр 'all')
+    const filteredItems = allProducts.filter(item => currentCategory === 'all' || item.category === currentCategory);
+
+    if (filteredItems.length === 0) {
+        grid.innerHTML = '<p class="text-center text-[#4F4135] col-span-3 py-8">Товары в данной категории не найдены.</p>';
+        if (loadMoreBtn) loadMoreBtn.parentElement.classList.add('hidden');
         return;
     }
-    
+
     grid.innerHTML = ''; 
 
-    items.forEach(item => {
+    // Берем только ту часть товаров, которую нужно показать сейчас
+    const itemsToRender = filteredItems.slice(0, currentVisibleCount);
+
+    itemsToRender.forEach(item => {
         const encodedText = encodeURIComponent(`Здравствуйте! Меня заинтересовал данный товар: https://podarok-i-tochka.ru/#${item.id}`);
         const tgLink = `https://t.me/podarok_i_tochka?text=${encodedText}`;
+        const fullImgUrl = githubBaseUrl + item.img;
 
         const cardHtml = `
             <div id="${item.id}" class="${item.category} bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="${item.price}">
                 <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
-                    <img src="${item.img}" alt="${item.alt}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="${fullImgUrl}" alt="${item.alt}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 </div>
                 <div class="flex-grow flex flex-col items-center">
                     <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">${item.name}</h3>
@@ -264,47 +267,57 @@ function renderCatalog(items) {
         `;
         grid.innerHTML += cardHtml;
     });
+
+    // Управление видимостью кнопки "Показать ещё"
+    if (loadMoreBtn) {
+        if (currentVisibleCount >= filteredItems.length) {
+            // Если показаны все товары из этой категории, скрываем кнопку
+            loadMoreBtn.parentElement.classList.add('hidden');
+        } else {
+            // Если есть ещё скрытые товары, показываем кнопку обратно
+            loadMoreBtn.parentElement.classList.remove('hidden');
+        }
+    }
 }
 
+// Переопределяем твою функцию клика по кнопке "Показать ещё"
+window.showMore = function() {
+    currentVisibleCount += ITEMS_PER_PAGE; // Увеличиваем счетчик видимых товаров
+    renderCatalog(); // Перерисовываем
+};
+
 // Загрузка данных
-// Загрузка данных из таблицы
 fetch(googleSheetCsvUrl)
     .then(response => {
-        if (!response.ok) throw new Error('Не удалось загрузить файл таблицы. Проверьте публикацию.');
+        if (!response.ok) throw new Error('Не удалось загрузить файл таблицы.');
         return response.text();
     })
-   .then(csvText => {
-        const productsFromSheet = parseCsv(csvText);
-        renderCatalog(productsFromSheet);
+    .then(csvText => {
+        allProducts = parseCsv(csvText);
         
-        // ВОТ ЗДЕСЬ МЫ ВОЗВРАЩАЕМ КНОПКУ "ПОКАЗАТЬ ЕЩЁ" ДЛЯ ШАРОВ:
-        // Проверяем, существует ли твоя функция фильтрации/скрытия товаров
-        if (typeof filterProducts === 'function') {
-            // Находим, какая вкладка сейчас активна. Если никакая не выбрана, по умолчанию берем 'balloons'
-            const activeFilterBtn = document.querySelector('.filter-btn.active');
-            const activeFilter = activeFilterBtn ? activeFilterBtn.dataset.filter : 'balloons';
-            
-            // Принудительно запускаем фильтрацию, которая скроет лишние шары и покажет кнопку
-            filterProducts(activeFilter);
-        }
+        // Перехватываем клики по твоим кнопкам категорий (Шары / Подарки), чтобы сбрасывать счетчик лимита
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем лимит до 6 при смене вкладки
+                setTimeout(renderCatalog, 50); // Небольшая задержка, чтобы успел поменяться класс .active
+            });
+        });
 
-        // 2. МАГИЯ ДЛЯ ПЕРЕХОДА ПО ССЫЛКЕ НА ТОВАР:
-        // Проверяем, есть ли хэш в адресной строке (например, #bal8)
+        renderCatalog(); // Первая отрисовка
+        
+        // Поддержка переходов по прямым ссылкам (#bal8)
         if (window.location.hash) {
-            const targetId = window.location.hash; // Получаем "#bal8"
-            // Небольшая задержка в 100 миллисекунд, чтобы браузер успел отобразить карточки в сетке
+            currentVisibleCount = allProducts.length; // Открываем сразу все товары, чтобы нужный точно был на странице
+            renderCatalog();
             setTimeout(() => {
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // Плавно скроллим к выбранному товару
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }, 100);
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 150);
         }
     })
     .catch(error => {
         console.error('Ошибка:', error);
-        document.getElementById('catalog-grid').innerHTML = `<p class="text-center text-red-500 col-span-3 py-8">Ошибка загрузки: ${error.message}</p>`;
+        document.getElementById('catalog-grid').innerHTML = `<p class="text-center text-red-500 col-span-3 py-8">Ошибка: ${error.message}</p>`;
     });
 </script>
 		
