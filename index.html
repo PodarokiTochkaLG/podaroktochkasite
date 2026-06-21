@@ -60,6 +60,126 @@
 }
         body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
     </style>
+
+<script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        const TELEGRAM_BOT_TOKEN = '8677921320:AAHe7sKNa5T4YtkJwGX0yvyLpCIRRLoNtKE'; 
+        const TELEGRAM_CHAT_ID = '-5108227821'; 
+
+        let quizData = { type: '', date: '', budget: '', phone: '' };
+        let currentQuizStep = 1;
+
+        window.openQuiz = function() {
+            currentQuizStep = 1;
+            quizData = { type: '', date: '', budget: '', phone: '' };
+            if(document.getElementById('quiz-date')) document.getElementById('quiz-date').value = '';
+            if(document.getElementById('quiz-budget')) document.getElementById('quiz-budget').value = '';
+            if(document.getElementById('quiz-phone')) document.getElementById('quiz-phone').value = '';
+            updateQuizView();
+            const modal = document.getElementById('quiz-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        };
+
+        window.closeQuiz = function() {
+            const modal = document.getElementById('quiz-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        };
+
+        window.prevQuizStep = function() {
+            if (currentQuizStep > 1) {
+                currentQuizStep--;
+                updateQuizView();
+            }
+        };
+
+        window.selectQuizParam = function(key, value) {
+            quizData[key] = value;
+            currentQuizStep = 2;
+            updateQuizView();
+        };
+
+        window.goToStep3 = function() {
+            const dateInput = document.getElementById('quiz-date') ? document.getElementById('quiz-date').value.trim() : '';
+            if (!dateInput) {
+                alert('Пожалуйста, укажите хотя бы примерную дату.');
+                return;
+            }
+            quizData.date = dateInput;
+            quizData.budget = document.getElementById('quiz-budget') ? document.getElementById('quiz-budget').value.trim() : 'Не указан';
+            currentQuizStep = 3;
+            updateQuizView();
+        };
+
+        function updateQuizView() {
+            document.querySelectorAll('.quiz-step').forEach(step => step.classList.add('hidden'));
+            const activeStep = document.getElementById(`quiz-step-${currentQuizStep}`);
+            if (activeStep) activeStep.classList.remove('hidden');
+            
+            const progressText = document.getElementById('quiz-progress');
+            if (progressText) progressText.textContent = `Шаг ${currentQuizStep} из 3`;
+        }
+
+        window.submitQuizForm = function() {
+            const phoneInput = document.getElementById('quiz-phone') ? document.getElementById('quiz-phone').value.trim() : '';
+            if (!phoneInput || phoneInput.length < 7) {
+                alert('Пожалуйста, введите корректный номер телефона для связи.');
+                return;
+            }
+            quizData.phone = phoneInput;
+
+            const submitBtn = document.getElementById('quiz-submit-btn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Отправка...';
+            }
+
+            const messageText = `🔔 *НОВАЯ ЗАЯВКА С САЙТА!*\n\n` +
+                                `📦 *Что ищет:* ${quizData.type}\n` +
+                                `📅 *Дата:* ${quizData.date}\n` +
+                                `💰 *Бюджет:* ${quizData.budget}\n` +
+                                `📞 *Телефон:* ${quizData.phone}`;
+
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: messageText,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Ошибка сети');
+                alert('Спасибо! Заявка успешно принята, мы скоро свяжемся с вами.');
+                closeQuiz();
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Произошла ошибка автоотправки, открываем диалог напрямую...');
+                const textBackup = encodeURIComponent(`Новая заявка! Интересует: ${quizData.type}, Дата: ${quizData.date}, Бюджет: ${quizData.budget}, Контакт: ${quizData.phone}`);
+                window.open(`https://t.me/podarok_i_tochka?text=${textBackup}`, '_blank');
+            })
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Отправить заявку';
+                }
+            });
+        };
+    </script>
+</head> ```
+
+Сохраняй файл, принудительно обновляй в браузере страницу через **Ctrl + F5** (чтобы сбросить кэш). Ошибка гарантированно пропадет, и при клике на кнопку всплывающее окно будет открываться идеально!
+	
 </head>
 <body class="bg-[#FBF9F6] text-[#6F5D4B]"> <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-[#F1E8D9]">
 	<!-- Yandex.Metrika counter -->
@@ -869,130 +989,6 @@ function scrollReviews(direction) {
         carousel.scrollLeft += scrollAmount;
     }
 }
-
-	// --- НАСТРОЙКИ СВЯЗИ ДЛЯ ЗАЯВОК ---
-const TELEGRAM_BOT_TOKEN = '8677921320:AAHe7sKNa5T4YtkJwGX0yvyLpCIRRLoNtKE'; 
-const TELEGRAM_CHAT_ID = '-5108227821'; 
-
-// --- ЛОГИКА ИНТЕРАКТИВНОГО КВИЗА (ЛИД-ФОРМА) ---
-let quizData = { type: '', date: '', budget: '', phone: '' };
-let currentQuizStep = 1;
-
-// Обязательно через window. чтобы кнопка из HTML увидела функцию!
-window.openQuiz = function() {
-    currentQuizStep = 1;
-    quizData = { type: '', date: '', budget: '', phone: '' };
-    
-    const dateField = document.getElementById('quiz-date');
-    const budgetField = document.getElementById('quiz-budget');
-    const phoneField = document.getElementById('quiz-phone');
-    
-    if(dateField) dateField.value = '';
-    if(budgetField) budgetField.value = '';
-    if(phoneField) phoneField.value = '';
-    
-    updateQuizView();
-    
-    const modal = document.getElementById('quiz-modal');
-    if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-    }
-};
-
-window.closeQuiz = function() {
-    const modal = document.getElementById('quiz-modal');
-    if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
-};
-
-window.prevQuizStep = function() {
-    if (currentQuizStep > 1) {
-        currentQuizStep--;
-        updateQuizView();
-    }
-};
-
-window.selectQuizParam = function(key, value) {
-    quizData[key] = value;
-    currentQuizStep = 2;
-    updateQuizView();
-};
-
-window.goToStep3 = function() {
-    const dateInput = document.getElementById('quiz-date') ? document.getElementById('quiz-date').value.trim() : '';
-    
-    if (!dateInput) {
-        alert('Пожалуйста, укажите хотя бы примерную дату.');
-        return;
-    }
-    
-    quizData.date = dateInput;
-    quizData.budget = document.getElementById('quiz-budget') ? document.getElementById('quiz-budget').value.trim() : 'Не указан';
-    currentQuizStep = 3;
-    updateQuizView();
-};
-
-function updateQuizView() {
-    document.querySelectorAll('.quiz-step').forEach(step => step.classList.add('hidden'));
-    const activeStep = document.getElementById(`quiz-step-${currentQuizStep}`);
-    if (activeStep) activeStep.classList.remove('hidden');
-    
-    const progressText = document.getElementById('quiz-progress');
-    if (progressText) progressText.textContent = `Шаг ${currentQuizStep} из 3`;
-}
-
-window.submitQuizForm = function() {
-    const phoneInput = document.getElementById('quiz-phone') ? document.getElementById('quiz-phone').value.trim() : '';
-    if (!phoneInput || phoneInput.length < 7) {
-        alert('Пожалуйста, введите корректный номер телефона для связи.');
-        return;
-    }
-    quizData.phone = phoneInput;
-
-    const submitBtn = document.getElementById('quiz-submit-btn');
-    if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Отправка...';
-    }
-
-    const messageText = `🔔 *НОВАЯ ЗАЯВКА С САЙТА!*\n\n` +
-                        `📦 *Что ищет:* ${quizData.type}\n` +
-                        `📅 *Дата:* ${quizData.date}\n` +
-                        `💰 *Бюджет:* ${quizData.budget}\n` +
-                        `📞 *Телефон:* ${quizData.phone}`;
-
-    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-
-    fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: messageText,
-            parse_mode: 'Markdown'
-        })
-    })
-    .then(response => {
-        if (!response.ok) throw new Error('Ошибка сети');
-        alert('Спасибо! Заявка успешно принята, мы скоро свяжемся с вами.');
-        closeQuiz();
-    })
-    .catch(error => {
-        console.error(error);
-        alert('Произошла ошибка автоотправки, открываем диалог напрямую...');
-        const textBackup = encodeURIComponent(`Новая заявка! Интересует: ${quizData.type}, Дата: ${quizData.date}, Бюджет: ${quizData.budget}, Контакт: ${quizData.phone}`);
-        window.open(`https://t.me/podarok_i_tochka?text=${textBackup}`, '_blank');
-    })
-    .finally(() => {
-        if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Отправить заявку';
-        }
-    });
-};
 	
 <div id="age-verification" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#4F4135]/95 backdrop-blur-lg transition-opacity duration-500">
     <div class="bg-[#FBF9F6] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full text-center mx-4 border border-[#F1E8D9]">
