@@ -169,11 +169,11 @@
 // ТВОЯ ССЫЛКА НА CSV (Убедись, что на конце именно output=csv)
 const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnl86MjVG55uqphe5vF/pub?gid=0&single=true&output=csv"; 
 	
-const ITEMS_PER_PAGE = 6; // Сколько товаров показывать изначально
+const ITEMS_PER_PAGE = 6; 
 let currentVisibleCount = ITEMS_PER_PAGE;
-let allProducts = []; // Все товары из таблицы
-let currentCategory = 'balloons'; // Активная категория ('balloons' или 'gifts')
-let currentMaxPrice = 10000; // Максимальный бюджет по умолчанию
+let allProducts = []; 
+let currentCategory = 'balloons'; 
+let currentMaxPrice = 10000; 
 
 // --- ЛОГИКА ПРОВЕРКИ ВОЗРАСТА (18+) ---
 window.confirmAge = function() {
@@ -192,14 +192,14 @@ window.rejectAge = function() {
     window.location.href = "https://yandex.ru";
 };
 
-// Проверяем возраст сразу при старте
+// Проверяем возраст сразу при старте страницы
 const ageModal = document.getElementById('age-verification');
 if (ageModal && localStorage.getItem('age_verified') === 'true') {
     ageModal.classList.add('hidden');
     ageModal.style.display = 'none';
 }
 
-// --- УМНАЯ ФУНКЦИЯ ПАРСИНГА (поддерживает и CSV, и TSV таб-разделение) ---
+// --- УМНАЯ ФУНКЦИЯ ПАРСИНГА ТАБЛИЦЫ ---
 function parseCsv(text) {
     const lines = text.split(/\r?\n/);
     const result = [];
@@ -207,7 +207,6 @@ function parseCsv(text) {
         const line = lines[i].trim();
         if (!line) continue;
         
-        // Авто-определение разделителя: таб или запятая
         const isTsv = text.includes('\t');
         const matches = isTsv ? line.split('\t') : (line.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$|\r|$)/g) || []);
         
@@ -227,13 +226,13 @@ function parseCsv(text) {
     return result;
 }
 
-// --- ЕДИНАЯ ФУНКЦИЯ ОТРИСОВКИ КАТАЛОГА (С фильтром категории и бюджета) ---
+// --- ФУНКЦИЯ ОТРИСОВКИ КАТАЛОГА С ЗАЩИТОЙ ---
 function renderCatalog() {
     const grid = document.getElementById('catalog-grid');
     const loadMoreBtn = document.getElementById('load-more');
     if (!grid) return;
 
-    // Сначала фильтруем по категории И по цене одновременно!
+    // Фильтруем массив по категории и цене
     const filteredItems = allProducts.filter(item => {
         const matchCategory = (currentCategory === 'all' || item.category === currentCategory);
         const matchPrice = (item.price <= currentMaxPrice);
@@ -248,7 +247,6 @@ function renderCatalog() {
 
     grid.innerHTML = ''; 
 
-    // Отсекаем количество товаров под кнопку "Показать ещё"
     const itemsToRender = filteredItems.slice(0, currentVisibleCount);
 
     itemsToRender.forEach(item => {
@@ -277,8 +275,8 @@ function renderCatalog() {
         grid.innerHTML += cardHtml;
     });
 
-    // Управляем видимостью кнопки "Показать ещё"
-    if (loadMoreBtn) {
+    // Безопасное управление кнопкой "Показать ещё"
+    if (loadMoreBtn && loadMoreBtn.parentElement) {
         if (currentVisibleCount >= filteredItems.length) {
             loadMoreBtn.parentElement.classList.add('hidden');
         } else {
@@ -287,25 +285,25 @@ function renderCatalog() {
     }
 }
 
-// --- ПЕРЕОПРЕДЕЛЯЕМ ФУНКЦИИ ДЛЯ ТВОИХ HTML КНОПОК И ПОЛЗУНКА ---
+// --- ПЕРЕОПРЕДЕЛЕНИЕ ФУНКЦИЙ ИНТЕРФЕЙСА (С ЗАЩИТОЙ ОТ NULL) ---
 
-// Функция для ползунка бюджета (вызывается из HTML через oninput="filterByPrice(this.value)")
+// Изменение бюджета
 window.filterByPrice = function(value) {
     currentMaxPrice = parseInt(value) || 10000;
     const priceValueLabel = document.getElementById('price-value');
-    if (priceValueLabel) priceValueLabel.textContent = currentMaxPrice; // Обновляем цифру бюджета на экране
+    if (priceValueLabel) priceValueLabel.textContent = currentMaxPrice; 
     renderCatalog();
 };
 
-// Функция для кнопок категорий (вызывается из HTML через onclick="filterCatalog('...')")
+// Переключение вкладок (Воздушные шары / Подарки)
 window.filterCatalog = function(category) {
     currentCategory = category;
-    currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем до 6 при смене вкладки
+    currentVisibleCount = ITEMS_PER_PAGE; 
     
-    // Переключаем стили кнопок (активная/неактивная)
     const btnBalloons = document.getElementById('btn-balloons');
     const btnGifts = document.getElementById('btn-gifts');
     
+    // Меняем стили только если элементы физически существуют в HTML
     if (category === 'balloons') {
         if (btnBalloons) btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
         if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
@@ -317,13 +315,13 @@ window.filterCatalog = function(category) {
     renderCatalog();
 };
 
-// Функция кнопки "Показать ещё" (вызывается из HTML через onclick="showMore()")
+// Кнопка показать ещё
 window.showMore = function() {
-    currentVisibleCount += ITEMS_PER_PAGE; // Добавляем ещё 6 товаров
+    currentVisibleCount += ITEMS_PER_PAGE; 
     renderCatalog();
 };
 
-// --- ЗАГРУЗКА ДАННЫХ ---
+// --- СТАРТ ЗАГРУЗКИ ---
 fetch(googleSheetCsvUrl)
     .then(response => {
         if (!response.ok) throw new Error('Не удалось загрузить данные таблицы.');
@@ -332,16 +330,16 @@ fetch(googleSheetCsvUrl)
     .then(csvText => {
         allProducts = parseCsv(csvText);
         
-        // Запускаем стартовый показ шаров
+        // Стартуем витрину с Шаров
         filterCatalog('balloons'); 
         
-        // Поддержка прямых ссылок (#bal8)
+        // Переход по прямым ссылкам
         if (window.location.hash) {
             const targetId = window.location.hash;
             const foundItem = allProducts.find(item => `#${item.id}` === targetId);
             if (foundItem) {
                 currentCategory = foundItem.category;
-                currentVisibleCount = allProducts.length; // Раскрываем всё, чтобы доскроллить
+                currentVisibleCount = allProducts.length; 
                 filterCatalog(currentCategory);
                 
                 setTimeout(() => {
@@ -353,7 +351,10 @@ fetch(googleSheetCsvUrl)
     })
     .catch(error => {
         console.error('Ошибка:', error);
-        document.getElementById('catalog-grid').innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Ошибка загрузки: ${error.message}</p>`;
+        const grid = document.getElementById('catalog-grid');
+        if (grid) {
+            grid.innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Ошибка загрузки: ${error.message}</p>`;
+        }
     });
 </script>
 			
