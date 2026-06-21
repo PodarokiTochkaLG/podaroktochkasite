@@ -194,9 +194,9 @@ const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkw
 const ITEMS_PER_PAGE = 6; // Сколько товаров показывать изначально и добавлять по кнопке
 let currentVisibleCount = ITEMS_PER_PAGE;
 let allProducts = []; // Тут хранятся все товары из таблицы
-let currentCategory = 'balloons'; // По умолчанию при входе открыты Шары
+let currentCategory = 'balloons'; // По умолчанию открыта категория "Шары"
 
-// Функция парсинга CSV
+// Функция парсинга CSV с защитой от пустых ячеек
 function parseCsv(text) {
     const lines = text.split(/\r?\n/);
     const result = [];
@@ -219,13 +219,13 @@ function parseCsv(text) {
     return result;
 }
 
-// Полноценная функция отрисовки и фильтрации
+// Полноценная функция отрисовки каталога
 function renderCatalog() {
     const grid = document.getElementById('catalog-grid');
     const loadMoreBtn = document.getElementById('load-more');
     if (!grid) return;
 
-    // Фильтруем массив по выбранной категории
+    // Фильтруем товары по выбранной категории
     const filteredItems = allProducts.filter(item => currentCategory === 'all' || item.category === currentCategory);
 
     if (filteredItems.length === 0) {
@@ -236,7 +236,7 @@ function renderCatalog() {
 
     grid.innerHTML = ''; 
 
-    // Отсекаем только то количество, которое разрешено кнопкой "Показать ещё"
+    // Отсекаем количество товаров под кнопку "Показать ещё"
     const itemsToRender = filteredItems.slice(0, currentVisibleCount);
 
     itemsToRender.forEach(item => {
@@ -265,48 +265,41 @@ function renderCatalog() {
         grid.innerHTML += cardHtml;
     });
 
-    // Проверяем, нужно ли показывать кнопку "Показать ещё"
+    // Управляем кнопкой "Показать ещё"
     if (loadMoreBtn) {
         if (currentVisibleCount >= filteredItems.length) {
-            loadMoreBtn.parentElement.classList.add('hidden'); // Скрываем, если вывели всё
+            loadMoreBtn.parentElement.classList.add('hidden');
         } else {
-            loadMoreBtn.parentElement.classList.remove('hidden'); // Показываем, если есть ещё
+            loadMoreBtn.parentElement.classList.remove('hidden');
         }
     }
 }
 
-// Логика кнопки "Показать ещё"
+// ТВОЯ РОДНАЯ ФУНКЦИЯ ДЛЯ КНОПОК ПЕРЕКЛЮЧЕНИЯ КАТЕГОРИЙ
+window.filterProducts = function(category) {
+    currentCategory = category; // Меняем категорию
+    currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем лимит отображения до 6 товаров
+    
+    // Переключаем визуальный класс 'active' на твоих HTML кнопках
+    const filterButtons = document.querySelectorAll('button[onclick^="filterProducts"]');
+    filterButtons.forEach(btn => {
+        if (btn.getAttribute('onclick').includes(`'${category}'`)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    renderCatalog(); // Перерисовываем сетку
+};
+
+// ТВОЯ РОДНАЯ ФУНКЦИЯ ДЛЯ КНОПКИ "ПОКАЗАТЬ ЕЩЁ"
 window.showMore = function() {
-    currentVisibleCount += ITEMS_PER_PAGE;
+    currentVisibleCount += ITEMS_PER_PAGE; // Добавляем ещё 6 товаров к просмотру
     renderCatalog();
 };
 
-// Функция для ручного переключения категорий (связываем со старыми кнопками)
-function setupCategoryButtons() {
-    // Находим все кнопки фильтров на странице (попробуем найти их по дата-атрибуту или классу)
-    const filterButtons = document.querySelectorAll('[data-filter], .filter-btn, #filters button');
-    
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            // Извлекаем категорию ('balloons', 'gifts' или 'all')
-            const filterValue = this.dataset.filter || this.getAttribute('data-filter');
-            if (!filterValue) return;
-
-            // Сбрасываем лимиты
-            currentCategory = filterValue;
-            currentVisibleCount = ITEMS_PER_PAGE;
-
-            // Визуально переключаем класс активности на кнопках, чтобы дизайн не ломался
-            filterButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            // Перерисовываем каталог под новую категорию
-            renderCatalog();
-        });
-    });
-}
-
-// Загрузка данных
+// Загрузка данных из Google Таблицы
 fetch(googleSheetCsvUrl)
     .then(response => {
         if (!response.ok) throw new Error('Не удалось загрузить файл таблицы.');
@@ -315,21 +308,28 @@ fetch(googleSheetCsvUrl)
     .then(csvText => {
         allProducts = parseCsv(csvText);
         
-        // Инициализируем клики по кнопкам категорий
-        setupCategoryButtons();
-
-        // Первая отрисовка (по умолчанию откроются первые 6 шаров и кнопка появится, если их больше)
-        renderCatalog(); 
+        // Запускаем стартовый фильтр на категорию 'balloons'
+        filterProducts('balloons'); 
         
-        // Поддержка переходов по прямым ссылкам (#bal8)
+        // Поддержка переходов по прямым ссылкам из соцсетей (#bal8)
         if (window.location.hash) {
             const targetId = window.location.hash;
             const foundItem = allProducts.find(item => `#${item.id}` === targetId);
             if (foundItem) {
-                currentCategory = foundItem.category; // Переключаем вкладку на нужную
-                currentVisibleCount = allProducts.length; // Раскрываем список полностью
+                currentCategory = foundItem.category;
+                currentVisibleCount = allProducts.length; // Раскрываем всё, чтобы найти товар
                 renderCatalog();
                 
+                // Визуально подсвечиваем нужную кнопку категории
+                const filterButtons = document.querySelectorAll('button[onclick^="filterProducts"]');
+                filterButtons.forEach(btn => {
+                    if (btn.getAttribute('onclick').includes(`'${currentCategory}'`)) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+
                 setTimeout(() => {
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -338,7 +338,7 @@ fetch(googleSheetCsvUrl)
         }
     })
     .catch(error => {
-        console.error('Ошибка:', error);
+        console.error('Ошибка каталога:', error);
         document.getElementById('catalog-grid').innerHTML = `<p class="text-center text-red-500 col-span-3 py-8">Ошибка: ${error.message}</p>`;
     });
 </script>
