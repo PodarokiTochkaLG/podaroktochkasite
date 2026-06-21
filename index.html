@@ -190,6 +190,7 @@
 <script>
 // ТВОЯ ССЫЛКА НА CSV (Убедись, что на конце именно output=csv)
 const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnl86MjVG55uqphe5vF/pub?gid=0&single=true&output=csv"; 
+	
 const ITEMS_PER_PAGE = 6; // Сколько товаров показывать изначально и добавлять по кнопке
 let currentVisibleCount = ITEMS_PER_PAGE;
 let allProducts = []; // Тут будут храниться все товары из таблицы
@@ -244,12 +245,11 @@ function renderCatalog() {
     itemsToRender.forEach(item => {
         const encodedText = encodeURIComponent(`Здравствуйте! Меня заинтересовал данный товар: https://podarok-i-tochka.ru/#${item.id}`);
         const tgLink = `https://t.me/podarok_i_tochka?text=${encodedText}`;
-        const fullImgUrl = githubBaseUrl + item.img;
 
         const cardHtml = `
             <div id="${item.id}" class="${item.category} bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="${item.price}">
                 <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
-                    <img src="${fullImgUrl}" alt="${item.alt}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="${item.img}" alt="${item.alt}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 </div>
                 <div class="flex-grow flex flex-col items-center">
                     <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">${item.name}</h3>
@@ -280,7 +280,7 @@ function renderCatalog() {
     }
 }
 
-// Переопределяем твою функцию клика по кнопке "Показать ещё"
+// Переопределяем функцию клика по кнопке "Показать ещё"
 window.showMore = function() {
     currentVisibleCount += ITEMS_PER_PAGE; // Увеличиваем счетчик видимых товаров
     renderCatalog(); // Перерисовываем
@@ -289,7 +289,7 @@ window.showMore = function() {
 // Загрузка данных
 fetch(googleSheetCsvUrl)
     .then(response => {
-        if (!response.ok) throw new Error('Не удалось загрузить файл таблицы.');
+        if (!response.ok) throw new Error('Не удалось加载 файл таблицы.');
         return response.text();
     })
     .then(csvText => {
