@@ -64,9 +64,6 @@
 <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
-        const TELEGRAM_BOT_TOKEN = '8677921320:AAHe7sKNa5T4YtkJwGX0yvyLpCIRRLoNtKE'; 
-        const TELEGRAM_CHAT_ID = '-5108227821'; 
-
         let quizData = { type: '', date: '', budget: '', phone: '' };
         let currentQuizStep = 1;
 
@@ -133,7 +130,7 @@
             const progressText = document.getElementById('quiz-progress');
             if (progressText) progressText.textContent = `Шаг ${currentQuizStep} из 3`;
         }
-
+const CLOUDFLARE_PROXY_URL = 'https://podarok-tg-proxy.djmojardwent.workers.dev';
       window.submitQuizForm = function() {
             const phoneInput = document.getElementById('quiz-phone') ? document.getElementById('quiz-phone').value.trim() : '';
             const agreementCheckbox = document.getElementById('quiz-agreement');
@@ -163,33 +160,31 @@ quizData.phone = phoneInput;
 
             const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-            fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: messageText,
-                    parse_mode: 'Markdown'
-                })
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Ошибка сети');
-                alert('Спасибо! Заявка успешно принята, мы скоро свяжемся с вами.');
-                closeQuiz();
-            })
-            .catch(error => {
-                console.error(error);
-                alert('Произошла ошибка автоотправки, открываем диалог напрямую...');
-                const textBackup = encodeURIComponent(`Новая заявка! Интересует: ${quizData.type}, Дата: ${quizData.date}, Бюджет: ${quizData.budget}, Контакт: ${quizData.phone}`);
-                window.open(`https://t.me/podarok_i_tochka?text=${textBackup}`, '_blank');
-            })
-            .finally(() => {
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Отправить заявку';
-                }
-            });
-        };
+     fetch(CLOUDFLARE_PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            message: messageText
+        })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Ошибка прокси');
+        alert('Спасибо! Заявка успешно принята, мы скоро свяжемся с вами.');
+        window.closeQuiz();
+    })
+    .catch(error => {
+        console.error(error);
+        alert('Произошла ошибка автоотправки, открываем диалог напрямую...');
+        const textBackup = encodeURIComponent(`Новая заявка! Интересует: ${quizData.type}, Дата: ${quizData.date}, Бюджет: ${quizData.budget}, Contact: ${quizData.phone}`);
+        window.open(`https://t.me/podarok_i_tochka?text=${textBackup}`, '_blank');
+    })
+    .finally(() => {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить заявку';
+        }
+    });
+};
     </script>
 </head>
 <body class="bg-[#FBF9F6] text-[#6F5D4B]"> <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-[#F1E8D9]">
