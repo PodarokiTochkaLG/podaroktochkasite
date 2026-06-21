@@ -197,14 +197,14 @@
     </div>
 </section>
 	<script>
-// ТВОЯ ССЫЛКА НА CSV (Убедись, что на конце именно output=csv)
-const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnl86MjVG55uqphe5vF/pub?gid=0&single=true&output=csv"; 
-	
+// --- НАСТРОЙКИ КАТАЛОГА ---
+const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnit186MjVG55uqphe5vF/pub?gid=0&single=true&output=csv";
+
 const ITEMS_PER_PAGE = 6; 
 let currentVisibleCount = ITEMS_PER_PAGE;
 let allProducts = []; 
-let currentCategory = 'balloons'; // По умолчанию открываем шары
-let currentMaxPrice = 10000; 
+let currentCategory = 'balloons'; 
+let currentMaxPrice = 10000;
 
 // --- ЛОГИКА ПРОВЕРКИ ВОЗРАСТА (18+) ---
 window.confirmAge = function() {
@@ -257,7 +257,7 @@ function parseCsv(text) {
     return result;
 }
 
-// --- ФУНКЦИЯ ОТРИСОВКИ КАТАЛОГА ---
+// --- ФУНКЦИЯ ОТРИСОВКИ КАТАЛОГА С ПОЛНОЙ ЗАЩИТОЙ ---
 function renderCatalog() {
     const grid = document.getElementById('catalog-grid');
     const loadMoreBtn = document.getElementById('load-more');
@@ -316,7 +316,7 @@ function renderCatalog() {
     }
 }
 
-// --- ИНТЕРФЕЙСНЫЕ ФУНКЦИИ ---
+// --- ИНТЕРФЕЙСНЫЕ ФУНКЦИИ С КОНТРОЛЕМ ОШИБОК ---
 
 // Изменение бюджета
 window.filterByPrice = function(value) {
@@ -329,7 +329,7 @@ window.filterByPrice = function(value) {
 // Переключение вкладок (Воздушные шары / Подарки)
 window.filterCatalog = function(category) {
     currentCategory = category;
-    currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем счетчик страниц при смене категории
+    currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем количество отображаемых при смене вкладки
     
     const btnBalloons = document.getElementById('btn-balloons');
     const btnGifts = document.getElementById('btn-gifts');
@@ -342,7 +342,6 @@ window.filterCatalog = function(category) {
         if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
     }
 
-    // ВАЖНО: Перерисовываем каталог с новой категорией!
     renderCatalog();
 };
 
@@ -361,10 +360,10 @@ fetch(googleSheetCsvUrl)
     .then(csvText => {
         allProducts = parseCsv(csvText);
         
-        // Исправлено: вызываем функцию через объект window, чтобы она точно сработала сразу при загрузке
+        // Стартуем витрину автоматически
         window.filterCatalog('balloons'); 
         
-        // Переход по прямым ссылкам (если есть хэш в адресе)
+        // Переход по прямым ссылкам
         if (window.location.hash) {
             const targetId = window.location.hash;
             const foundItem = allProducts.find(item => `#${item.id}` === targetId);
@@ -387,51 +386,52 @@ fetch(googleSheetCsvUrl)
             grid.innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Ошибка загрузки: ${error.message}</p>`;
         }
     });
+
+// Мобильное меню
+window.toggleMenu = function() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) menu.classList.toggle('hidden');
+};
+
+// Скролл отзывов
+window.scrollReviews = function(direction) {
+    const carousel = document.getElementById('review-carousel');
+    if (!carousel) return;
+    const scrollAmount = 350;
+    if (direction === 'prev') {
+        carousel.scrollLeft -= scrollAmount;
+    } else {
+        carousel.scrollLeft += scrollAmount;
+    }
+};
+
+// Отправка кастомного текста в ТГ
+window.sendCustomText = function() {
+    const textInput = document.getElementById('userBalloonText');
+    if (!textInput || !textInput.value.trim()) {
+        alert('Пожалуйста, введите текст надписи');
+        return;
+    }
+    const encodedText = encodeURIComponent(`Здравствуйте! Хочу заказать индивидуальную надпись на шар: "${textInput.value.trim()}"`);
+    window.open(`https://t.me/podarok_i_tochka?text=${encodedText}`, '_blank');
+};
 </script>
-			
+
+<section id="custom-text" class="container mx-auto px-4 py-10">
+    <div class="bg-gradient-to-br from-[#6F5D4B] to-[#4F4135] rounded-[3rem] p-10 md:p-16 shadow-2xl text-center text-[#FBF9F6]">
+        <h2 class="text-3xl md:text-5xl font-extrabold mb-6 text-[#FBF9F6]">Ваша надпись на шаре</h2>
+        <p class="text-[#F1E8D9]/90 mb-10 text-lg leading-relaxed">Придумайте любой текст — поздравление, имя или шутку, — а мы нанесем его на большой шар.</p>
+        <div class="max-w-xl mx-auto bg-white p-2 rounded-3xl flex flex-col md:flex-row gap-2 shadow-inner border border-[#F1E8D9]">
+            <input type="text" id="userBalloonText" placeholder="Например: С днем рождения, Любимая!" class="flex-grow px-6 py-4 rounded-2xl border-none text-[#6F5D4B] outline-none placeholder-[#6F5D4B]/60">
+            <button onclick="sendCustomText()" class="bg-[#A98E73] hover:bg-[#6F5D4B] text-white px-10 py-4 rounded-2xl font-bold transition whitespace-nowrap">Отправить в TG</button>
+        </div>
+    </div>
 </section>
 
-<script>
-function filterCatalog(category) {
-    const balloons = document.querySelectorAll('.cat-balloons');
-    const gifts = document.querySelectorAll('.cat-gifts');
-    const btnB = document.getElementById('btn-balloons');
-    const btnG = document.getElementById('btn-gifts');
-
-    // Сбрасываем активные стили с обеих кнопок
-    [btnB, btnG].forEach(btn => {
-        btn.classList.remove('bg-[#6F5D4B]', 'text-white');
-        btn.classList.add('text-[#6F5D4B]');
-    });
-
-    if (category === 'balloons') {
-        balloons.forEach(el => el.classList.remove('hidden'));
-        gifts.forEach(el => el.classList.add('hidden'));
-        btnB.classList.add('bg-[#6F5D4B]', 'text-white');
-    } else {
-        balloons.forEach(el => el.classList.add('hidden'));
-        gifts.forEach(el => el.classList.remove('hidden'));
-        btnG.classList.add('bg-[#6F5D4B]', 'text-white');
-    }
-}
-</script>
-
-    <section id="custom-text" class="container mx-auto px-4 py-10">
-        <div class="bg-gradient-to-br from-[#6F5D4B] to-[#4F4135] rounded-[3rem] p-10 md:p-16 shadow-2xl text-center text-[#FBF9F6]">
-            <h2 class="text-3xl md:text-5xl font-extrabold mb-6 text-[#FBF9F6]">Ваша надпись на шаре</h2>
-            <p class="text-[#F1E8D9]/90 mb-10 text-lg leading-relaxed">Придумайте любой текст — поздравление, имя или шутку, — а мы нанесем его на большой шар.</p>
-            <div class="max-w-xl mx-auto bg-white p-2 rounded-3xl flex flex-col md:flex-row gap-2 shadow-inner border border-[#F1E8D9]">
-                <input type="text" id="userBalloonText" placeholder="Например: С днем рождения, Любимая!" class="flex-grow px-6 py-4 rounded-2xl border-none text-[#6F5D4B] outline-none placeholder-[#6F5D4B]/60">
-                <button onclick="sendCustomText()" class="bg-[#A98E73] hover:bg-[#6F5D4B] text-white px-10 py-4 rounded-2xl font-bold transition whitespace-nowrap">Отправить в TG</button>
-            </div>
-        </div>
-    </section>
-
-   <section id="reviews" class="container mx-auto px-4 py-20 border-t border-[#F1E8D9]">
+<section id="reviews" class="container mx-auto px-4 py-20 border-t border-[#F1E8D9]">
     <div class="text-center mb-12 relative">
         <h2 class="text-4xl font-extrabold text-[#4F4135] mb-4 uppercase tracking-tight">Ваше доверие — наша гордость</h2>
         <p class="text-[#6F5D4B]/80 max-w-xl mx-auto italic">Реальные отзывы и фото от счастливых получателей в Луганске.</p>
-        
         <div class="hidden md:flex absolute top-0 right-0 space-x-2">
             <button onclick="scrollReviews('prev')" class="bg-white p-3 rounded-full border border-[#F1E8D9] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white transition-all active:scale-95 shadow-sm">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
@@ -441,499 +441,52 @@ function filterCatalog(category) {
             </button>
         </div>
     </div>
-
-<div id="review-carousel" class="flex overflow-x-auto space-x-6 pb-6 cursor-grab" style="scroll-behavior: smooth;">
-
-    <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo1.jpg" alt="Отзыв купить шары Луганск" class="w-full h-full object-cover">
-            </div>
-           <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-    <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Наращивание Ресниц-Луганск</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Фонтан «День рождения»</p>
+    <div id="review-carousel" class="flex overflow-x-auto space-x-6 pb-6 cursor-grab" style="scroll-behavior: smooth;">
+        <div class="review-item flex-none w-[300px] md:w-[350px]">
+            <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
+                <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                    <img src="review_photo1.jpg" alt="Отзыв купить шары Луганск" class="w-full h-full object-cover">
                 </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Заказывала шарики на день рождения, все очень понравилось😍 Результат совпал с ожиданием 🔥🔥🔥 Спасибо большое☺"</p>
-        </div>
-    </div>
-
-    <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo2.jpg" alt="Отзыв купить подарок Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Настёна</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с фотографиями</p>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    </div>
+                    <div>
+                        <p class="font-bold text-[#4F4135] text-sm">Наращивание Ресниц-Луганск</p>
+                        <p class="text-xs text-[#6F5D4B]/70">Заказ: Фонтан «День рождения»</p>
+                    </div>
                 </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо за такой чудесный заказ Муж очень доволен🥰 Спасибо большое 🤗"</p>
-        </div>
-    </div>
-
-    <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo3.jpg" alt="Отзыв подарочный букет Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Ольга</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Сладкий букет с шоколадом</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо за заказ! Сделано с любовью!!😍"</p>
-        </div>
-    </div>
-
-    <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo4.jpg" alt="Отзыв шар бабл Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Оксана</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с текстом</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо огромное, шар просто вау, все в восторге😊😊😊"</p>
-        </div>
-    </div>
-
-	 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo5.jpg" alt="Отзыв подарок с шаром Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Anna</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с игристым</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Заказали вот такую красоту, юбиляру и гостям очень понравилось!Спасибо, что вы предоставляете такую услугу, очень необычно,получилось замечательно!
-				За оперативность и доставку🚗 отдельное спасибо, вы молодцы!Рекомендуем всем!👍"</p>
-        </div>
-    </div>
-
-	 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo6.jpg" alt="Отзыв купить подарочный бокс Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Екатерина</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с мыльными розами</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Огромное спасибо вам за такую красоту, я уверена что именинница тоже будет в восторге от такого букета😻🌸 
-				Быстро сделали заказ не пришлось долго ждать и всё качественно. Спасибо ещё раз вам😍🥰"</p>
-        </div>
-    </div>
-
-	 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo7.jpg" alt="Отзыв шар бабблс Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Наталья</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с игристым</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо большое! Очень всем понравилось! Все пунктуально, качественно и эстетично! Процветания Вам!!!"</p>
-        </div>
-    </div>
-
-		 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo8.jpg" alt="Отзыв шар бабблс Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-     <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Анна</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с наполнением</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Хочу выразить свою благодарность за прекрасное оформление композиции для подарка, идея воплощена полностью, именинница в восторге"</p>
-        </div>
-    </div>
-
-		 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo9.jpg" alt="Отзыв подарок маме Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Елизавета</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с мыльными цветами</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо вам,маме очень понравится букетик который точно не завянет💜"</p>
-        </div>
-    </div>
-
-		 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo10.jpg" alt="Отзыв подарок мужчине Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Ameliya</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс на 23 февраля</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Безумно всё понравилось,обслуживание,сам подарок,доставка быстра🥰 Процветания вам в работе"</p>
-        </div>
-    </div>
-
-		 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo11.jpg" alt="Отзыв фонтан из шаров Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Александра</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Фонтан из шаров</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Большое спасибо ❣"</p>
-        </div>
-    </div>
-
-</div>
-
-    <div class="text-center mt-6 md:hidden">
-        <p class="text-xs text-[#6F5D4B]/60 italic">Листайте отзывы влево-вправо ← →</p>
-    </div>
-</section>
-
-    <section id="delivery" class="bg-[#F1E8D9] py-20 text-[#6F5D4B]">
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-4xl font-extrabold text-[#4F4135] mb-8">Доставим праздник <br><span class="text-[#6F5D4B] font-light italic">бережно и вовремя</span></h2>
-                <ul class="space-y-4 text-[#6F5D4B]/90 text-lg leading-relaxed">
-                    <li>🎈 Шары доставляются в защитных транспортировочных пакетах</li>
-                    <li>⏱️ Курьер приедет точно в назначенное время</li>
-					<li>📸 Пришлем фото вашего заказа перед отправкой</li>
-                </ul>
-            </div>
-            <div class="bg-white p-10 rounded-[2rem] border border-[#F1E8D9] text-center shadow-md">
-                <h4 class="text-2xl font-bold mb-6 text-[#4F4135]">Остались вопросы?</h4>
-                <a href="https://t.me/podarok_i_tochka" target="_blank" class="w-full bg-[#6F5D4B] text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-[#4F4135] transition block shadow-lg">Написать мастеру</a>
+                <p class="mt-3 text-sm text-[#4F4135] italic">"Заказывала шарики на день рождения, все очень понравилось😍 Результат совпал с ожиданием 🔥🔥🔥 Спасибо большое☺"</p>
             </div>
         </div>
-    </section>
-<section id="about" class="bg-[#FBF9F6] py-16 border-t border-[#F1E8D9] scroll-mt-20">
-    <div class="container mx-auto px-4 max-w-4xl text-center">
-        <h2 class="text-3xl font-extrabold text-[#4F4135] mb-8 uppercase tracking-tight">Подарки и шары с душой</h2>
-        
-        <div class="space-y-6 text-[#6F5D4B] text-lg leading-relaxed">
-            <p>
-                Добро пожаловать в <strong>«Подарок и Точка»</strong>! Мы специализируемся на создании праздничного настроения в Луганске. Наша работа — это сочетание ярких <strong>воздушных шаров</strong> и <strong>изготовления уникальных подарков</strong> под заказ.
-            </p>
-            
-            <p>
-                Нужен эффектный фонтан из шаров на день рождения или нежная композиция на выписку? Мы подберем идеальный вариант и нанесем любую вашу надпись всего за 15 минут. А если вы ищете что-то особенное, мы предложим <strong>подарочные боксы и сувениры</strong>, созданные специально для вашего близкого человека.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 text-left">
-                <div class="bg-white p-6 rounded-2xl border border-[#F1E8D9] shadow-sm">
-                    <h4 class="font-bold text-[#4F4135] mb-2">🎈 Воздушные шары</h4>
-                    <p class="text-sm">Огромный выбор цветов, фольгированные цифры, фигуры и шары-гиганты с индивидуальным дизайном.</p>
+        <div class="review-item flex-none w-[300px] md:w-[350px]">
+            <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
+                <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                    <img src="review_photo2.jpg" alt="Отзыв купить подарок Луганск" class="w-full h-full object-cover">
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-[#F1E8D9] shadow-sm">
-                    <h4 class="font-bold text-[#4F4135] mb-2">🎁 Подарки на заказ</h4>
-                    <p class="text-sm">Собираем стильные подарочные наборы, боксы со сладостями и памятные подарки ручной работы.</p>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    </div>
+                    <div>
+                        <p class="font-bold text-[#4F4135] text-sm">Настёна</p>
+                        <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с фотографиями</p>
+                    </div>
                 </div>
+                <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо за такой чудесный заказ Муж очень доволен🥰 Спасибо большое 🤗"</p>
             </div>
         </div>
     </div>
 </section>
-<section id="contacts" class="bg-white py-16 border-t border-[#F1E8D9]">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold text-[#4F4135] mb-8">Ждем вас в гости</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-            <div class="space-y-4 text-lg">
-                <p class="font-semibold text-[#6F5D4B]">📍 Наш адрес для самовывоза:</p>
-                <p>г. Луганск, Советская 7 (ориентир магазин "Шале")</p>
-            </div>
-            <div class="space-y-4">
-                <p class="font-semibold text-[#6F5D4B] text-lg">📞 Быстрая связь:</p>
-                <a href="tel:+79592840568" class="inline-block bg-[#A98E73] text-white px-8 py-3 rounded-full font-bold hover:bg-[#6F5D4B] transition shadow-md">+7 (959) 284-05-68</a>
-                <p class="text-sm text-gray-400 mt-2">Нажмите на номер, чтобы позвонить</p>
-            </div>
-        </div>
-    </div>
-</section>
-    <footer class="bg-white py-12 border-t border-[#F1E8D9]">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center text-[#6F5D4B]">
-            <div class="mb-6 md:mb-0">
-                <div class="text-xl font-black text-[#4F4135]">ПОДАРОК И ТОЧКА</div>
-                <p class="text-[#6F5D4B] text-xs mt-1 uppercase tracking-widest italic">Луганск и область. Доставка радости.</p>
-            </div>
-            <div class="flex space-x-6 text-[#6F5D4B]">
-                <a href="https://vk.com/podarok_i_tochka" class="hover:text-[#4F4135] font-bold">VKontakte</a>
-                <a href="https://t.me/podarok_i_tochka_lg" class="hover:text-[#4F4135] font-bold">Telegram</a>
-            </div>
-        </div>
-        <div class="mt-8 text-center text-[#6F5D4B]/40 text-[10px] uppercase tracking-[0.3em]">
-    <p>© 2026 Студия подарков "Подарок и точка"</p>
-    <p class="mt-2">Самозанятый САЛИЙ АНАСТАСИЯ ВИТАЛЬЕВНА ИНН 345954759745</p>
-</div>
-    </footer>
 
-    <script>
-     function sendCustomText() {
-    const input = document.getElementById('userBalloonText');
-    const customText = input.value.trim();
-
-    if (customText === "") {
-        alert("Сначала введите текст надписи!");
-        return;
-    }
-
-    // Формируем сообщение
-    const prefixMessage = "Мне нужна надпись на шаре: ";
-    const fullMessage = prefixMessage + "'" + customText + "'";
-    const encodedMessage = encodeURIComponent(fullMessage);
-
-    // Прямая ссылка без лишних символов $
-    window.location.href = "https://t.me/podarok_i_tochka?text=" + encodedMessage;
-}
-    </script>
-<script>
-// Функция для открытия/закрытия мобильного меню
-function toggleMenu() {
-    const menu = document.getElementById('mobile-menu');
-    const iconPath = document.getElementById('icon-path');
-    
-    if (menu.classList.contains('hidden')) {
-        menu.classList.remove('hidden');
-        // Меняем иконку на КРЕСТИК
-        iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-    } else {
-        menu.classList.add('hidden');
-        // Возвращаем ТРИ ПОЛОСКИ
-        iconPath.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
-    }
-}
-let currentCategory = 'balloons';
-let visibleCount = 6; 
-
-function filterCatalog(category) {
-    currentCategory = category;
-    visibleCount = 6; 
-    updateUI();
-}
-
-
-function updateUI() {
-    const priceRange = document.getElementById('price-range');
-    const priceLimit = priceRange ? parseInt(priceRange.value) : 10000;
-    const items = document.querySelectorAll('#catalog-grid > div');
-    const btnBalloons = document.getElementById('btn-balloons');
-    const btnGifts = document.getElementById('btn-gifts');
-    const loadMoreBtn = document.getElementById('load-more');
-
-    // Стили кнопок
-    if (currentCategory === 'balloons') {
-        if(btnBalloons) btnBalloons.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95';
-        if(btnGifts) btnGifts.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95';
-    } else {
-        if(btnGifts) btnGifts.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95';
-        if(btnBalloons) btnBalloons.className = 'px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95';
-    }
-
-    let matchCount = 0; 
-    let displayedCount = 0; 
-
-    items.forEach(item => {
-        const itemPrice = parseInt(item.getAttribute('data-price')) || 0;
-        const hasCategory = item.classList.contains(currentCategory);
-        const isWithinBudget = itemPrice <= priceLimit;
-
-        // Сначала убираем класс анимации у всех
-        item.classList.remove('fade-in-up');
-
-        if (hasCategory && isWithinBudget) {
-            matchCount++;
-            if (displayedCount < visibleCount) {
-                item.style.display = 'flex';
-                // Добавляем класс анимации только тем, кто становится видимым
-                // Используем небольшой таймаут, чтобы анимация сработала после смены display
-                setTimeout(() => {
-                    item.classList.add('fade-in-up');
-                }, 10);
-                displayedCount++;
-            } else {
-                item.style.display = 'none';
-            }
-        } else {
-            item.style.display = 'none';
-        }
-    });
-
-    if (loadMoreBtn) {
-        loadMoreBtn.style.display = (matchCount > displayedCount) ? 'inline-block' : 'none';
-    }
-}
-	// Функция для скролла карусели отзывов
-function scrollReviews(direction) {
-    const carousel = document.getElementById('review-carousel');
-    const scrollAmount = 374; // Ширина карточки (350px) + отступ (24px)
-    
-    if (direction === 'prev') {
-        carousel.scrollLeft -= scrollAmount;
-    } else {
-        carousel.scrollLeft += scrollAmount;
-    }
-}
-
-// Единый блок автозапуска при загрузке
-window.addEventListener('DOMContentLoaded', () => {
-    const hash = window.location.hash;
-    
-    // Проверяем, есть ли хэш и относится ли он к товарам (gift или bal)
-    if (hash && (hash.startsWith('#gift') || hash.startsWith('#bal'))) {
-        
-        // 1. Раскрываем лимит, чтобы товары не были скрыты
-        visibleCount = 100; 
-        
-        // 2. Определяем категорию автоматически
-        if (hash.startsWith('#gift')) {
-            currentCategory = 'gifts';
-        } else if (hash.startsWith('#bal')) {
-            currentCategory = 'balloons';
-        }
-        
-        // 3. Обновляем интерфейс, чтобы карточки физически появились в DOM
-        updateUI(); 
-        
-        const targetId = hash.substring(1);
-        
-        // 4. Ждем отрисовку (увеличим до 800мс для надежности)
-        setTimeout(() => {
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                // Считаем отступ сверху (с учетом вашей липкой шапки)
-                const headerOffset = 100;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-
-                // 5. Подсветка (чтобы клиент сразу увидел товар)
-                targetElement.style.outline = "4px solid #6F5D4B";
-                targetElement.style.outlineOffset = "4px";
-                targetElement.style.borderRadius = "24px";
-                targetElement.style.transition = "outline 0.3s ease";
-                
-                setTimeout(() => { 
-                    targetElement.style.outline = "none"; 
-                }, 3000);
-            }
-        }, 800); 
-    } else {
-        // Если зашли без хэша — просто показываем шары по умолчанию
-        filterCatalog('balloons');
-    }
-});
-// ФУНКЦИЯ ПРОВЕРКИ ВОЗРАСТА (добавляем в самый низ)
-    document.addEventListener("DOMContentLoaded", function() {
-        const isAdult = localStorage.getItem('ageConfirmed');
-        const ageModal = document.getElementById('age-verification');
-        
-        if (isAdult === 'true') {
-            if (ageModal) ageModal.remove();
-        }
-    });
-
-</script>
 <div id="age-verification" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#4F4135]/95 backdrop-blur-lg transition-opacity duration-500">
     <div class="bg-[#FBF9F6] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full text-center mx-4 border border-[#F1E8D9]">
         <img src="podaroktxt.png" alt="Подарок и Точка" class="h-10 mx-auto mb-6">
-        
         <h2 class="text-2xl font-bold text-[#4F4135] mb-4 uppercase tracking-tight">Вам уже есть 18 лет?</h2>
-        <p class="text-[#6F5D4B] mb-8 leading-relaxed">
-            В нашем каталоге представлены подарки, содержащие алкогольную продукцию. Подтвердите свой возраст, чтобы продолжить.
-        </p>
-        
+        <p class="text-[#6F5D4B] mb-8 leading-relaxed">В нашем каталоге представлены подарки, содержащие алкогольную продукцию. Подтвердите свой возраст, чтобы продолжить.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onclick="confirmAge()" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105">
-                Да, мне есть 18
-            </button>
-            <button onclick="rejectAge()" class="bg-white border border-[#F1E8D9] text-[#6F5D4B] hover:bg-[#F1E8D9] px-8 py-3 rounded-full font-bold transition-all">
-                Нет, мне меньше
-            </button>
+            <button onclick="confirmAge()" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-wider text-sm transition-all shadow-md active:scale-95 w-full">Да, мне есть 18</button>
+            <button onclick="rejectAge()" class="border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-wider text-sm transition-all active:scale-95 w-full">Нет</button>
         </div>
     </div>
 </div>
