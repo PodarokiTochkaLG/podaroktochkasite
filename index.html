@@ -196,6 +196,36 @@ let currentVisibleCount = ITEMS_PER_PAGE;
 let allProducts = []; // Тут хранятся все товары из таблицы
 let currentCategory = 'balloons'; // По умолчанию открыта категория "Шары"
 
+// --- ЛОГИКА ПРОВЕРКИ ВОЗРАСТА (18+) ---
+window.confirmAge = function() {
+    const ageModal = document.getElementById('age-verification');
+    if (ageModal) {
+        ageModal.style.opacity = '0'; // Плавное исчезновение
+        setTimeout(() => {
+            ageModal.classList.add('hidden'); // Полное скрытие
+            ageModal.style.display = 'none';
+        }, 500);
+    }
+    localStorage.setItem('age_verified', 'true'); // Запоминаем выбор, чтобы не спрашивать каждый раз
+};
+
+window.rejectAge = function() {
+    // Если пользователю нет 18, уводим его с сайта
+    window.location.href = "https://yandex.ru";
+};
+
+// Проверка при загрузке страницы: если уже подтверждали возраст, скрываем окно сразу
+document.addEventListener("DOMContentLoaded", () => {
+    const ageModal = document.getElementById('age-verification');
+    if (ageModal && localStorage.getItem('age_verified') === 'true') {
+        ageModal.classList.add('hidden');
+        ageModal.style.display = 'none';
+    }
+});
+
+
+// --- ФУНКЦИИ КАТАЛОГА ---
+
 // Функция парсинга CSV с защитой от пустых ячеек
 function parseCsv(text) {
     const lines = text.split(/\r?\n/);
@@ -275,13 +305,13 @@ function renderCatalog() {
     }
 }
 
-// ТВОЯ РОДНАЯ ФУНКЦИЯ ДЛЯ КНОПОК ПЕРЕКЛЮЧЕНИЯ КАТЕГОРИЙ
-window.filterProducts = function(category) {
+// Функция для кнопок переключения категорий (Шары / Подарки)
+window.filterCatalog = function(category) {
     currentCategory = category; // Меняем категорию
     currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем лимит отображения до 6 товаров
     
     // Переключаем визуальный класс 'active' на твоих HTML кнопках
-    const filterButtons = document.querySelectorAll('button[onclick^="filterProducts"]');
+    const filterButtons = document.querySelectorAll('button[onclick^="filterCatalog"]');
     filterButtons.forEach(btn => {
         if (btn.getAttribute('onclick').includes(`'${category}'`)) {
             btn.classList.add('active');
@@ -293,7 +323,7 @@ window.filterProducts = function(category) {
     renderCatalog(); // Перерисовываем сетку
 };
 
-// ТВОЯ РОДНАЯ ФУНКЦИЯ ДЛЯ КНОПКИ "ПОКАЗАТЬ ЕЩЁ"
+// Функция для кнопки "Показать ещё"
 window.showMore = function() {
     currentVisibleCount += ITEMS_PER_PAGE; // Добавляем ещё 6 товаров к просмотру
     renderCatalog();
@@ -309,7 +339,7 @@ fetch(googleSheetCsvUrl)
         allProducts = parseCsv(csvText);
         
         // Запускаем стартовый фильтр на категорию 'balloons'
-        filterProducts('balloons'); 
+        filterCatalog('balloons'); 
         
         // Поддержка переходов по прямым ссылкам из соцсетей (#bal8)
         if (window.location.hash) {
@@ -321,7 +351,7 @@ fetch(googleSheetCsvUrl)
                 renderCatalog();
                 
                 // Визуально подсвечиваем нужную кнопку категории
-                const filterButtons = document.querySelectorAll('button[onclick^="filterProducts"]');
+                const filterButtons = document.querySelectorAll('button[onclick^="filterCatalog"]');
                 filterButtons.forEach(btn => {
                     if (btn.getAttribute('onclick').includes(`'${currentCategory}'`)) {
                         btn.classList.add('active');
