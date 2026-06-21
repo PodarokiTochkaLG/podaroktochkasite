@@ -203,7 +203,7 @@ const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkw
 const ITEMS_PER_PAGE = 6; 
 let currentVisibleCount = ITEMS_PER_PAGE;
 let allProducts = []; 
-let currentCategory = 'balloons'; 
+let currentCategory = 'balloons'; // По умолчанию открываем шары
 let currentMaxPrice = 10000; 
 
 // --- ЛОГИКА ПРОВЕРКИ ВОЗРАСТА (18+) ---
@@ -257,13 +257,13 @@ function parseCsv(text) {
     return result;
 }
 
-// --- ФУНКЦИЯ ОТРИСОВКИ КАТАЛОГА С ПОЛНОЙ ЗАЩИТОЙ ---
+// --- ФУНКЦИЯ ОТРИСОВКИ КАТАЛОГА ---
 function renderCatalog() {
     const grid = document.getElementById('catalog-grid');
     const loadMoreBtn = document.getElementById('load-more');
     if (!grid) return;
 
-    // Фильтруем массив по категории и цене
+    // Фильтруем строго по текущей категории и цене
     const filteredItems = allProducts.filter(item => {
         const matchCategory = (currentCategory === 'all' || item.category === currentCategory);
         const matchPrice = (item.price <= currentMaxPrice);
@@ -286,7 +286,7 @@ function renderCatalog() {
 
         const cardHtml = `
             <div id="${item.id}" class="${item.category} bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="${item.price}">
-                <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100">
+                <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100 max-w-full">
                     <img src="${item.img}" alt="${item.alt}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 </div>
                 <div class="flex-grow flex flex-col items-center">
@@ -306,7 +306,7 @@ function renderCatalog() {
         grid.innerHTML += cardHtml;
     });
 
-    // Безопасное управление кнопкой "Показать ещё"
+    // Управление кнопкой "Показать ещё"
     if (loadMoreBtn && loadMoreBtn.parentElement) {
         if (currentVisibleCount >= filteredItems.length) {
             loadMoreBtn.parentElement.classList.add('hidden');
@@ -316,7 +316,7 @@ function renderCatalog() {
     }
 }
 
-// --- ИНТЕРФЕЙСНЫЕ ФУНКЦИИ С КОНТРОЛЕМ ОШИБОК ---
+// --- ИНТЕРФЕЙСНЫЕ ФУНКЦИИ ---
 
 // Изменение бюджета
 window.filterByPrice = function(value) {
@@ -329,28 +329,20 @@ window.filterByPrice = function(value) {
 // Переключение вкладок (Воздушные шары / Подарки)
 window.filterCatalog = function(category) {
     currentCategory = category;
-    currentVisibleCount = ITEMS_PER_PAGE; 
+    currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем счетчик страниц при смене категории
     
     const btnBalloons = document.getElementById('btn-balloons');
     const btnGifts = document.getElementById('btn-gifts');
     
-    // Мягкое переключение стилей: если кнопок с такими ID нет, код просто пропустит этот шаг без ошибок
     if (category === 'balloons') {
-        if (btnBalloons && btnBalloons.classList) {
-            btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
-        }
-        if (btnGifts && btnGifts.classList) {
-            btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
-        }
+        if (btnBalloons) btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
+        if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
     } else if (category === 'gifts') {
-        if (btnBalloons && btnBalloons.classList) {
-            btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
-        }
-        if (btnGifts && btnGifts.classList) {
-            btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
-        }
+        if (btnBalloons) btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
+        if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
     }
 
+    // ВАЖНО: Перерисовываем каталог с новой категорией!
     renderCatalog();
 };
 
@@ -369,17 +361,17 @@ fetch(googleSheetCsvUrl)
     .then(csvText => {
         allProducts = parseCsv(csvText);
         
-        // Стартуем витрину с Шаров
-        filterCatalog('balloons'); 
+        // Исправлено: вызываем функцию через объект window, чтобы она точно сработала сразу при загрузке
+        window.filterCatalog('balloons'); 
         
-        // Переход по прямым ссылкам
+        // Переход по прямым ссылкам (если есть хэш в адресе)
         if (window.location.hash) {
             const targetId = window.location.hash;
             const foundItem = allProducts.find(item => `#${item.id}` === targetId);
             if (foundItem) {
                 currentCategory = foundItem.category;
                 currentVisibleCount = allProducts.length; 
-                filterCatalog(currentCategory);
+                window.filterCatalog(currentCategory);
                 
                 setTimeout(() => {
                     const targetElement = document.querySelector(targetId);
