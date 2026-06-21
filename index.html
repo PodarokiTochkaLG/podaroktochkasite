@@ -105,13 +105,21 @@
             updateQuizView();
         };
 
-        window.goToStep3 = function() {
-            const dateInput = document.getElementById('quiz-date') ? document.getElementById('quiz-date').value.trim() : '';
+       window.goToStep3 = function() {
+            const dateInput = document.getElementById('quiz-date') ? document.getElementById('quiz-date').value : '';
+            
             if (!dateInput) {
-                alert('Пожалуйста, укажите хотя бы примерную дату.');
+                alert('Пожалуйста, выберите дату в календаре.');
                 return;
             }
-            quizData.date = dateInput;
+            
+            // Превращаем дату из формата YYYY-MM-DD в красивый DD.MM.YYYY
+            const parsedDate = new Date(dateInput);
+            const day = String(parsedDate.getDate()).padStart(2, '0');
+            const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
+            const year = parsedDate.getFullYear();
+            
+            quizData.date = `${day}.${month}.${year}`;
             quizData.budget = document.getElementById('quiz-budget') ? document.getElementById('quiz-budget').value.trim() : 'Не указан';
             currentQuizStep = 3;
             updateQuizView();
@@ -126,13 +134,20 @@
             if (progressText) progressText.textContent = `Шаг ${currentQuizStep} из 3`;
         }
 
-        window.submitQuizForm = function() {
+      window.submitQuizForm = function() {
             const phoneInput = document.getElementById('quiz-phone') ? document.getElementById('quiz-phone').value.trim() : '';
+            const agreementCheckbox = document.getElementById('quiz-agreement');
+
             if (!phoneInput || phoneInput.length < 7) {
                 alert('Пожалуйста, введите корректный номер телефона для связи.');
                 return;
             }
-            quizData.phone = phoneInput;
+
+            // ПРОВЕРКА ГАЛОЧКИ ОФЕРТЫ
+            if (agreementCheckbox && !agreementCheckbox.checked) {
+                alert('Для отправки заявки необходимо согласиться с условиями публичной оферты.');
+                return;
+            }
 
             const submitBtn = document.getElementById('quiz-submit-btn');
             if (submitBtn) {
@@ -176,10 +191,6 @@
             });
         };
     </script>
-</head> ```
-
-Сохраняй файл, принудительно обновляй в браузере страницу через **Ctrl + F5** (чтобы сбросить кэш). Ошибка гарантированно пропадет, и при клике на кнопку всплывающее окно будет открываться идеально!
-	
 </head>
 <body class="bg-[#FBF9F6] text-[#6F5D4B]"> <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-[#F1E8D9]">
 	<!-- Yandex.Metrika counter -->
@@ -318,12 +329,12 @@
                 <button onclick="selectQuizParam('type', 'Другое / Индивидуально')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135]">🤔 Другое / Нужна консультация</button>
             </div>
 
-            <div id="quiz-step-2" class="quiz-step hidden space-y-4">
+<div id="quiz-step-2" class="quiz-step hidden space-y-4">
                 <h4 class="text-base font-bold text-[#4F4135] uppercase tracking-wide">2. Детали заказа</h4>
                 
                 <div>
-                    <label class="block text-xs font-bold text-[#6F5D4B] uppercase mb-1">На какую дату нужен заказ?</label>
-                    <input type="text" id="quiz-date" placeholder="Например: 25 июня или как можно скорее" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-sm outline-none focus:border-[#6F5D4B]">
+                    <label class="block text-xs font-bold text-[#6F5D4B] uppercase mb-1">Выберите дату заказа</label>
+                    <input type="date" id="quiz-date" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-sm outline-none focus:border-[#6F5D4B] text-[#4F4135]">
                 </div>
 
                 <div>
@@ -332,20 +343,28 @@
                 </div>
 
                 <div class="flex justify-between items-center pt-4">
-                    <button onclick="prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline">← Назад</button>
-                    <button onclick="goToStep3()" class="bg-[#6F5D4B] text-white px-6 py-3 rounded-xl font-bold text-sm uppercase">Далее →</button>
+                    <button onclick="window.prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline">← Назад</button>
+                    <button onclick="window.goToStep3()" class="bg-[#6F5D4B] text-white px-6 py-3 rounded-xl font-bold text-sm uppercase">Далее →</button>
                 </div>
             </div>
 
             <div id="quiz-step-3" class="quiz-step hidden space-y-4">
                 <h4 class="text-base font-bold text-[#4F4135] uppercase tracking-wide">3. Куда отправить варианты?</h4>
-                <p class="text-xs text-[#6F5D4B]/80 leading-relaxed">Оставьте ваш номер телефона. Мы свяжемся с вами в Telegram, MAX или обычным звонком.</p>
+                <p class="text-xs text-[#6F5D4B]/80 leading-relaxed">Оставьте ваш номер телефона. Мы свяжемся с вами в Telegram или обычным звонком.</p>
                 
                 <input type="tel" id="quiz-phone" placeholder="+7 (959) XXX-XX-XX" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-base font-bold text-center text-[#4F4135] outline-none focus:border-[#6F5D4B]">
 
+                <div class="flex items-start space-x-3 pt-2">
+                    <input type="checkbox" id="quiz-agreement" checked class="w-4 h-4 mt-0.5 accent-[#6F5D4B] rounded cursor-pointer">
+                    <label for="quiz-agreement" class="text-xs text-[#6F5D4B]/90 leading-tight cursor-pointer select-none">
+                        Я согласен на обработку персональных данных и принимаю условия 
+                        <a href="oferta.html" target="_blank" class="underline font-bold text-[#4F4135] hover:text-black">публичной оферты</a>.
+                    </label>
+                </div>
+
                 <div class="flex justify-between items-center pt-4">
-                    <button onclick="prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline">← Назад</button>
-                    <button onclick="submitQuizForm()" id="quiz-submit-btn" class="bg-[#6F5D4B] text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide hover:bg-[#4F4135] transition-all">
+                    <button onclick="window.prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline">← Назад</button>
+                    <button onclick="window.submitQuizForm()" id="quiz-submit-btn" class="bg-[#6F5D4B] text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide hover:bg-[#4F4135] transition-all">
                         Отправить заявку
                     </button>
                 </div>
