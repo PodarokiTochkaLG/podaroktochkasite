@@ -164,7 +164,11 @@
 </section>
 	
  <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4"></div>
-
+<div class="text-center mt-12">
+    <button id="load-more" onclick="showMore()" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95">
+        Показать ещё
+    </button>
+</div>
 <script>
 // ТВОЯ ССЫЛКА НА CSV (Убедись, что на конце именно output=csv)
 const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnl86MjVG55uqphe5vF/pub?gid=0&single=true&output=csv"; 
