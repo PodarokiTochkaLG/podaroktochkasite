@@ -515,9 +515,14 @@ window.filterByPrice = function(value) {
 };
 
 // Переключение вкладок (Воздушные шары / Подарки)
-window.filterCatalog = function(category) {
+window.filterCatalog = function(category, resetCount = true) {
     currentCategory = category;
-    currentVisibleCount = ITEMS_PER_PAGE; // Сбрасываем количество отображаемых при смене вкладки
+    
+    // Сбрасываем счетчик до 6 только если это обычный клик по вкладке,
+    // а не автоматический поиск товара по прямой ссылке
+    if (resetCount) {
+        currentVisibleCount = ITEMS_PER_PAGE; 
+    }
     
     const btnBalloons = document.getElementById('btn-balloons');
     const btnGifts = document.getElementById('btn-gifts');
