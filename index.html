@@ -540,55 +540,45 @@ window.showMore = function() {
 };
 
 // --- СТАРТ ЗАГРУЗКИ ТАБЛИЦЫ ---
-fetch(googleSheetCsvUrl)
-    .then(response => {
-        if (!response.ok) throw new Error('Не удалось загрузить данные таблицы.');
-        return response.text();
-    })
-    .then(csvText => {
-        allProducts = parseCsv(csvText);
-        
-        // Стартуем витрину автоматически
-        window.filterCatalog('balloons'); 
-        
-        // Переход по прямым ссылкам
 if (window.location.hash) {
-            const targetId = window.location.hash; // Получаем например "#bal28"
-            const cleanId = targetId.replace('#', ''); // Убираем решетку, чтобы получить просто "bal28"
+            const targetId = window.location.hash;
+            const cleanId = targetId.replace('#', '');
             
-            // Ищем товар в массиве данных из Excel
+            console.log("=== ОБНАРУЖЕН ХЭШ В ССЫЛКЕ ===");
+            console.log("Ищем товар с ID:", cleanId);
+            console.log("Всего товаров загружено из Excel:", allProducts.length);
+
             const foundItem = allProducts.find(item => item.id === cleanId);
             
             if (foundItem) {
-                currentCategory = foundItem.category; // Переключаем категорию (например, на balloons)
-                currentVisibleCount = allProducts.length; // ВАЖНО: Раскрываем ВСЕ товары, чтобы bal28 отрендерился!
+                console.log("Товар найден в Excel базе!", foundItem);
                 
-                // Перерисовываем каталог с нужной категорией и полным списком товаров
+                currentCategory = foundItem.category;
+                currentVisibleCount = allProducts.length; 
+                
+                console.log("Переключаем категорию на:", currentCategory);
+                console.log("Устанавливаем лимит отображения товаров:", currentVisibleCount);
+                
                 window.filterCatalog(currentCategory);
                 
-                // Даем браузеру 300 миллисекунд, чтобы он успел вставить карточки в HTML, и скроллим
                 setTimeout(() => {
                     const targetElement = document.getElementById(cleanId);
                     if (targetElement) {
+                        console.log("Элемент успешно найден в HTML-коде страницы! Начинаем скролл.");
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         
-                        // Красивая подсветка карточки при прямом переходе
                         targetElement.classList.add('ring-4', 'ring-[#6F5D4B]', 'duration-500');
                         setTimeout(() => {
                             targetElement.classList.remove('ring-4', 'ring-[#6F5D4B]');
                         }, 2000);
+                    } else {
+                        console.error("ОШИБКА: Карточка товара есть в памяти, но её нет в HTML-разметке страницы (document.getElementById вернул null)!");
                     }
                 }, 300);
+            } else {
+                console.warn("ВНИМАНИЕ: Товар с ID '" + cleanId + "' вообще не найден в массиве данных из Excel. Проверь первую колонку в таблице.");
             }
         }
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
-        const grid = document.getElementById('catalog-grid');
-        if (grid) {
-            grid.innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Ошибка загрузки: ${error.message}</p>`;
-        }
-    });
 		
 
 // Мобильное меню
