@@ -545,6 +545,65 @@ window.showMore = function() {
 };
 
 // --- СТАРТ ЗАГРУЗКИ ТАБЛИЦЫ ---
+		fetch(googleSheetCsvUrl)
+    .then(response => {
+        if (!response.ok) throw new Error('Не удалось загрузить данные таблицы.');
+        return response.text();
+    })
+    .then(csvText => {
+        // 1. Сначала парсим данные из Excel в массив
+        allProducts = parseCsv(csvText);
+        
+        // 2. Включаем по умолчанию шары
+        window.filterCatalog('balloons', false); 
+        
+        // 3. И ТОЛЬКО ТЕПЕРЬ, когда allProducts НЕ пустой, обрабатываем хэш
+        if (window.location.hash) {
+            const targetId = window.location.hash;
+            const cleanId = targetId.replace('#', '');
+            
+            console.log("=== ОБНАРУЖЕН ХЭШ В ССЫЛКЕ ===");
+            console.log("Ищем товар с ID:", cleanId);
+            console.log("Всего товаров в базе после загрузки:", allProducts.length);
+
+            const foundItem = allProducts.find(item => item.id === cleanId);
+            
+            if (foundItem) {
+                console.log("Товар успешно найден в Excel!", foundItem);
+                
+                currentCategory = foundItem.category;
+                currentVisibleCount = allProducts.length; // Раскрываем лимит
+                
+                // Переключаем вкладку без сброса лимита
+                window.filterCatalog(currentCategory, false);
+                
+                // Скроллим к карточке
+                setTimeout(() => {
+                    const targetElement = document.getElementById(cleanId);
+                    if (targetElement) {
+                        console.log("Элемент отрисован в HTML. Скроллим...");
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        targetElement.classList.add('ring-4', 'ring-[#6F5D4B]', 'duration-500');
+                        setTimeout(() => {
+                            targetElement.classList.remove('ring-4', 'ring-[#6F5D4B]');
+                        }, 2000);
+                    } else {
+                        console.error("Ошибка: Карточка не успела создаться в HTML!");
+                    }
+                }, 400);
+            } else {
+                console.warn("Товар '" + cleanId + "' не найден в Excel. Проверь ID в таблице.");
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        const grid = document.getElementById('catalog-grid');
+        if (grid) {
+            grid.innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Ошибка загрузки: ${error.message}</p>`;
+        }
+    });
 // Переход по прямым ссылкам
         if (window.location.hash) {
             const targetId = window.location.hash;
