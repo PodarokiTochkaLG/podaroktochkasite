@@ -574,6 +574,7 @@ fetch(googleSheetCsvUrl)
             grid.innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Ошибка загрузки: ${error.message}</p>`;
         }
     });
+		
 
 // Мобильное меню
 window.toggleMenu = function() {
@@ -603,6 +604,33 @@ window.sendCustomText = function() {
     const encodedText = encodeURIComponent(`Здравствуйте! Хочу заказать индивидуальную надпись на шар: "${textInput.value.trim()}"`);
     window.open(`https://t.me/podarok_i_tochka?text=${encodedText}`, '_blank');
 };
+
+window.navigateToProduct = function(productId) {
+    const foundItem = allProducts.find(item => item.id === productId);
+    
+    if (!foundItem) {
+        console.error("Товар с ID " + productId + " не найден в таблице Excel");
+        return;
+    }
+
+    currentCategory = foundItem.category;
+    currentVisibleCount = allProducts.length; 
+    window.filterCatalog(currentCategory);
+    window.location.hash = productId;
+
+    setTimeout(() => {
+        const targetElement = document.getElementById(productId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            targetElement.classList.add('ring-4', 'ring-[#6F5D4B]', 'duration-500');
+            setTimeout(() => {
+                targetElement.classList.remove('ring-4', 'ring-[#6F5D4B]');
+            }, 2000);
+        }
+    }, 150);
+};
+		
 </script>
 	
 <section class="bg-white py-16 border-b border-[#F1E8D9]">
