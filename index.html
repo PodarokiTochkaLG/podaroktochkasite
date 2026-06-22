@@ -545,43 +545,31 @@ window.showMore = function() {
 };
 
 // --- СТАРТ ЗАГРУЗКИ ТАБЛИЦЫ ---
-if (window.location.hash) {
+// Переход по прямым ссылкам
+        if (window.location.hash) {
             const targetId = window.location.hash;
             const cleanId = targetId.replace('#', '');
             
-            console.log("=== ОБНАРУЖЕН ХЭШ В ССЫЛКЕ ===");
-            console.log("Ищем товар с ID:", cleanId);
-            console.log("Всего товаров загружено из Excel:", allProducts.length);
-
             const foundItem = allProducts.find(item => item.id === cleanId);
             
             if (foundItem) {
-                console.log("Товар найден в Excel базе!", foundItem);
-                
                 currentCategory = foundItem.category;
-                currentVisibleCount = allProducts.length; 
+                currentVisibleCount = allProducts.length; // Показываем всё
                 
-                console.log("Переключаем категорию на:", currentCategory);
-                console.log("Устанавливаем лимит отображения товаров:", currentVisibleCount);
-                
-                window.filterCatalog(currentCategory);
+                // Передаем false, чтобы функция filterCatalog НЕ сбросила лимит до 6!
+                window.filterCatalog(currentCategory, false);
                 
                 setTimeout(() => {
                     const targetElement = document.getElementById(cleanId);
                     if (targetElement) {
-                        console.log("Элемент успешно найден в HTML-коде страницы! Начинаем скролл.");
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         
                         targetElement.classList.add('ring-4', 'ring-[#6F5D4B]', 'duration-500');
                         setTimeout(() => {
                             targetElement.classList.remove('ring-4', 'ring-[#6F5D4B]');
                         }, 2000);
-                    } else {
-                        console.error("ОШИБКА: Карточка товара есть в памяти, но её нет в HTML-разметке страницы (document.getElementById вернул null)!");
                     }
-                }, 300);
-            } else {
-                console.warn("ВНИМАНИЕ: Товар с ID '" + cleanId + "' вообще не найден в массиве данных из Excel. Проверь первую колонку в таблице.");
+                }, 400); // Чуть увеличили задержку для надежности рендеринга
             }
         }
 		
