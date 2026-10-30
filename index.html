@@ -213,7 +213,275 @@
                 </div>
             </div>
         </header>
+        <!-- Секция Генератора / Конструктора -->
+<section id="generator" class="py-16 bg-[#FBF9F6]">
+  <div class="container mx-auto px-4 max-w-5xl">
+    <div class="text-center mb-10">
+      <span class="text-[#A98E73] font-bold tracking-widest uppercase text-xs">Умный сервис</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#4F4135] mt-2">Соберите идеальный подарок или сет шаров</h2>
+      <p class="text-[#6F5D4B] mt-2 max-w-xl mx-auto text-sm md:text-base">
+        Укажите параметры или соберите свою композицию — рассчитаем стоимость в реальном времени!
+      </p>
+    </div>
 
+    <!-- Переключатель режима -->
+    <div class="flex justify-center mb-8">
+      <div class="bg-[#F1E8D9]/60 p-1.5 rounded-2xl flex space-x-2 border border-[#F1E8D9]">
+        <button id="tab-smart" onclick="switchGenTab('smart')" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-[#6F5D4B] text-white shadow-md">
+          🪄 Быстрый подбор за 30 сек
+        </button>
+        <button id="tab-custom" onclick="switchGenTab('custom')" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all text-[#4F4135] hover:text-[#6F5D4B]">
+          🎨 Конструктор фонтана и надписи
+        </button>
+      </div>
+    </div>
+
+    <!-- Вкладка 1: Умный экспресс-генератор -->
+    <div id="smart-panel" class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-[#F1E8D9]">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Шаг 1 -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#4F4135] mb-2">1. Кому подарок?</label>
+          <select id="gen-target" class="w-full bg-[#FBF9F6] border border-[#F1E8D9] rounded-xl px-4 py-3 text-[#4F4135] font-medium focus:ring-2 focus:ring-[#6F5D4B] outline-none">
+            <option value="girl">Любимой девушке / Жене</option>
+            <option value="man">Мужчине / Мужу / Папе</option>
+            <option value="child">Ребенку / Подростку</option>
+            <option value="colleague">Коллеге / Руководителю</option>
+            <option value="mom">Маме / Бабушке</option>
+          </select>
+        </div>
+        <!-- Шаг 2 -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#4F4135] mb-2">2. Какой повод?</label>
+          <select id="gen-occasion" class="w-full bg-[#FBF9F6] border border-[#F1E8D9] rounded-xl px-4 py-3 text-[#4F4135] font-medium focus:ring-2 focus:ring-[#6F5D4B] outline-none">
+            <option value="bday">День Рождения / Юбилей</option>
+            <option value="love">Романтическое признание</option>
+            <option value="baby">Выписка из роддома</option>
+            <option value="party">Вечеринка / 18-летие</option>
+            <option value="just">Просто порадовать</option>
+          </select>
+        </div>
+        <!-- Шаг 3 -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#4F4135] mb-2">3. Желаемый бюджет</label>
+          <select id="gen-budget" class="w-full bg-[#FBF9F6] border border-[#F1E8D9] rounded-xl px-4 py-3 text-[#4F4135] font-medium focus:ring-2 focus:ring-[#6F5D4B] outline-none">
+            <option value="1500-2500">До 2 500 ₽ (Мини-сет)</option>
+            <option value="2500-4000" selected>2 500 – 4 000 ₽ (Оптимальный)</option>
+            <option value="4000-6500">4 000 – 6 500 ₽ (Большой сет/Бокс)</option>
+            <option value="premium">От 6 500 ₽ (VIP Композиция)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button onclick="generateRecommendation()" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white px-8 py-3.5 rounded-xl font-bold uppercase tracking-wider text-sm transition-all shadow-md active:scale-95">
+          Подобрать идеальные наборы
+        </button>
+      </div>
+
+      <!-- Зона вывода рекомендаций -->
+      <div id="gen-results" class="mt-8 pt-8 border-t border-[#F1E8D9] hidden">
+        <h4 class="text-lg font-bold text-[#4F4135] mb-4 text-center">Мы подобрали для вас лучшие решения:</h4>
+        <div id="results-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Генерируется скриптом -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Вкладка 2: Конструктор фонтана и надписи -->
+    <div id="custom-panel" class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-[#F1E8D9] hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-bold text-[#4F4135] text-lg mb-4">Параметры сета шаров:</h3>
+          
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#4F4135] mb-1">Количество латексных шаров:</label>
+          <div class="flex space-x-2 mb-4">
+            <button onclick="setBalloonsCount(5)" class="cnt-btn px-4 py-2 rounded-lg border border-[#F1E8D9] font-bold text-sm active:bg-[#6F5D4B] active:text-white" data-count="5">5 шт</button>
+            <button onclick="setBalloonsCount(7)" class="cnt-btn px-4 py-2 rounded-lg border border-[#F1E8D9] font-bold text-sm bg-[#6F5D4B] text-white" data-count="7">7 шт</button>
+            <button onclick="setBalloonsCount(10)" class="cnt-btn px-4 py-2 rounded-lg border border-[#F1E8D9] font-bold text-sm" data-count="10">10 шт</button>
+            <button onclick="setBalloonsCount(15)" class="cnt-btn px-4 py-2 rounded-lg border border-[#F1E8D9] font-bold text-sm" data-count="15">15 шт</button>
+          </div>
+
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#4F4135] mb-1">Добавить к сету фольгированные элементы:</label>
+          <div class="space-y-2 mb-4">
+            <label class="flex items-center space-x-3 text-sm text-[#4F4135] cursor-pointer">
+              <input type="checkbox" id="chk-digits" onchange="calculateLivePrice()" class="rounded border-[#F1E8D9] text-[#6F5D4B] focus:ring-0 w-4 h-4">
+              <span>Фольгированная цифра (1 шт) (+900 ₽)</span>
+            </label>
+            <label class="flex items-center space-x-3 text-sm text-[#4F4135] cursor-pointer">
+              <input type="checkbox" id="chk-heart" onchange="calculateLivePrice()" class="rounded border-[#F1E8D9] text-[#6F5D4B] focus:ring-0 w-4 h-4">
+              <span>Фольгированная звезда / сердце (+450 ₽)</span>
+            </label>
+            <label class="flex items-center space-x-3 text-sm text-[#4F4135] cursor-pointer">
+              <input type="checkbox" id="chk-bubble" onchange="calculateLivePrice()" class="rounded border-[#F1E8D9] text-[#6F5D4B] focus:ring-0 w-4 h-4">
+              <span>Прозрачный шар Bubble с перьями/конфетти (+1 500 ₽)</span>
+            </label>
+          </div>
+
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#4F4135] mb-1">Индивидуальная надпись на шар:</label>
+          <input type="text" id="custom-text-input" oninput="updateLiveTextPreview(this.value)" placeholder="Например: Любимой мамочке 50!" class="w-full bg-[#FBF9F6] border border-[#F1E8D9] rounded-xl px-4 py-2.5 text-sm text-[#4F4135] outline-none focus:ring-2 focus:ring-[#6F5D4B]">
+        </div>
+
+        <!-- Превью и расчет -->
+        <div class="bg-[#FBF9F6] rounded-2xl p-6 border border-[#F1E8D9] flex flex-col justify-between items-center text-center">
+          <div class="w-full">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#A98E73]">Интерактивное превью</span>
+            <div class="relative w-40 h-40 mx-auto my-4 bg-white rounded-full shadow-inner border border-[#F1E8D9] flex items-center justify-center p-4">
+              <span id="preview-text" class="text-xs font-bold text-[#4F4135] italic break-words text-center">
+                Ваша надпись
+              </span>
+            </div>
+            <div id="live-calc-breakdown" class="text-xs text-[#6F5D4B] mb-2 space-y-1">
+              <!-- Детализация -->
+            </div>
+          </div>
+
+          <div class="w-full pt-4 border-t border-[#F1E8D9]">
+            <div class="text-xs text-[#6F5D4B]">Ориентировочная цена:</div>
+            <div id="live-total-price" class="text-3xl font-black text-[#4F4135] my-2">1 400 ₽</div>
+            <button onclick="orderCustomSet()" class="w-full bg-[#6F5D4B] hover:bg-[#4F4135] text-white py-3 rounded-xl font-bold uppercase tracking-wider text-xs transition-all shadow-md active:scale-95">
+              Заказать этот сет в Telegram
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Переключение табов
+function switchGenTab(tab) {
+  const smartBtn = document.getElementById('tab-smart');
+  const customBtn = document.getElementById('tab-custom');
+  const smartPanel = document.getElementById('smart-panel');
+  const customPanel = document.getElementById('custom-panel');
+
+  if(tab === 'smart') {
+    smartBtn.className = "px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-[#6F5D4B] text-white shadow-md";
+    customBtn.className = "px-6 py-2.5 rounded-xl font-bold text-sm transition-all text-[#4F4135] hover:text-[#6F5D4B]";
+    smartPanel.classList.remove('hidden');
+    customPanel.classList.add('hidden');
+  } else {
+    customBtn.className = "px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-[#6F5D4B] text-white shadow-md";
+    smartBtn.className = "px-6 py-2.5 rounded-xl font-bold text-sm transition-all text-[#4F4135] hover:text-[#6F5D4B]";
+    customPanel.classList.remove('hidden');
+    smartPanel.classList.add('hidden');
+    calculateLivePrice();
+  }
+}
+
+// Конструктор: счетчик латекса
+let currentBallCount = 7;
+const PRICE_PER_LATEX = 200; // средняя цена надутого гелиевого шара с Hi-Float
+
+function setBalloonsCount(cnt) {
+  currentBallCount = cnt;
+  document.querySelectorAll('.cnt-btn').forEach(b => {
+    if(parseInt(b.dataset.count) === cnt) {
+      b.className = "cnt-btn px-4 py-2 rounded-lg border border-[#F1E8D9] font-bold text-sm bg-[#6F5D4B] text-white";
+    } else {
+      b.className = "cnt-btn px-4 py-2 rounded-lg border border-[#F1E8D9] font-bold text-sm bg-white text-[#4F4135]";
+    }
+  });
+  calculateLivePrice();
+}
+
+function updateLiveTextPreview(val) {
+  document.getElementById('preview-text').textContent = val.trim() || 'Ваша надпись';
+  calculateLivePrice();
+}
+
+function calculateLivePrice() {
+  let total = currentBallCount * PRICE_PER_LATEX;
+  let breakdown = [`${currentBallCount} латексных шаров с Hi-Float: ${currentBallCount * PRICE_PER_LATEX} ₽`];
+
+  if(document.getElementById('chk-digits').checked) {
+    total += 900;
+    breakdown.push(`Фольгированная цифра: 900 ₽`);
+  }
+  if(document.getElementById('chk-heart').checked) {
+    total += 450;
+    breakdown.push(`Сердце/звезда: 450 ₽`);
+  }
+  if(document.getElementById('chk-bubble').checked) {
+    total += 1500;
+    breakdown.push(`Шар Bubble с перьями: 1 500 ₽`);
+  }
+
+  const userText = document.getElementById('custom-text-input').value.trim();
+  if(userText) {
+    total += 350;
+    breakdown.push(`Индивидуальная надпись: 350 ₽`);
+  }
+
+  document.getElementById('live-total-price').textContent = `${total} ₽`;
+  document.getElementById('live-calc-breakdown').innerHTML = breakdown.map(item => `<div>• ${item}</div>`).join('');
+}
+
+function orderCustomSet() {
+  const userText = document.getElementById('custom-text-input').value.trim();
+  const total = document.getElementById('live-total-price').textContent;
+  const msg = `Здравствуйте! Собрал сет в конструкторе:\n- Латексных шаров: ${currentBallCount} шт\n- Цифра: ${document.getElementById('chk-digits').checked ? 'Да' : 'Нет'}\n- Фигура (сердце/звезда): ${document.getElementById('chk-heart').checked ? 'Да' : 'Нет'}\n- Bubble с перьями: ${document.getElementById('chk-bubble').checked ? 'Да' : 'Нет'}\n- Надпись: ${userText || 'Без надписи'}\nИтоговая цена: ${total}`;
+  window.open(`https://t.me/podarok_i_tochka?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// Умный генератор (подборка предложений)
+function generateRecommendation() {
+  const target = document.getElementById('gen-target').value;
+  const occasion = document.getElementById('gen-occasion').value;
+  const budget = document.getElementById('gen-budget').value;
+  
+  const resultsContainer = document.getElementById('gen-results');
+  const grid = document.getElementById('results-grid');
+  
+  resultsContainer.classList.remove('hidden');
+
+  // Шаблоны карточек подборки
+  grid.innerHTML = `
+    <div class="border border-[#F1E8D9] rounded-2xl p-4 bg-[#FBF9F6] text-center flex flex-col justify-between">
+      <div>
+        <span class="inline-block bg-[#F1E8D9] text-[#4F4135] text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-2">Сет «Классика»</span>
+        <h5 class="font-bold text-[#4F4135] mb-2">Фонтан шаров + Сердце</h5>
+        <p class="text-xs text-[#6F5D4B] mb-4">7 шаров пастель/хром с обработкой Hi-Float + фольгированная фигура.</p>
+      </div>
+      <div>
+        <div class="text-xl font-extrabold text-[#4F4135] mb-3">1 950 ₽</div>
+        <button onclick="orderSmartPack('Сет Классика', '1 950 ₽')" class="w-full bg-[#6F5D4B] text-white py-2 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-[#4F4135]">Выбрать этот сет</button>
+      </div>
+    </div>
+
+    <div class="border-2 border-[#6F5D4B] rounded-2xl p-4 bg-white text-center flex flex-col justify-between relative shadow-sm">
+      <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#6F5D4B] text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase">Хит выбора</span>
+      <div>
+        <h5 class="font-bold text-[#4F4135] mb-2 mt-2">Комбо: Подарочный бокс + Фонтан</h5>
+        <p class="text-xs text-[#6F5D4B] mb-4">Тематический крафтовый бокс со сладостями/аксессуарами + сет из 5 шаров в тон.</p>
+      </div>
+      <div>
+        <div class="text-xl font-extrabold text-[#4F4135] mb-3">3 800 ₽</div>
+        <button onclick="orderSmartPack('Комбо Бокс + Фонтан', '3 800 ₽')" class="w-full bg-[#6F5D4B] text-white py-2 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-[#4F4135]">Выбрать комбо</button>
+      </div>
+    </div>
+
+    <div class="border border-[#F1E8D9] rounded-2xl p-4 bg-[#FBF9F6] text-center flex flex-col justify-between">
+      <div>
+        <span class="inline-block bg-[#F1E8D9] text-[#4F4135] text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-2">Премиум</span>
+        <h5 class="font-bold text-[#4F4135] mb-2">Шар Bubble с вашей надписью + Бокс VIP</h5>
+        <p class="text-xs text-[#6F5D4B] mb-4">Большой кристальный шар с перьями и индивидуальным текстом + деревянный премиум-бокс.</p>
+      </div>
+      <div>
+        <div class="text-xl font-extrabold text-[#4F4135] mb-3">5 400 ₽</div>
+        <button onclick="orderSmartPack('Премиум Bubble + Бокс', '5 400 ₽')" class="w-full bg-[#6F5D4B] text-white py-2 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-[#4F4135]">Выбрать VIP</button>
+      </div>
+    </div>
+  `;
+}
+
+function orderSmartPack(name, price) {
+  const msg = `Здравствуйте! Меня заинтересовал вариант из генератора: "${name}" (${price}). Хочу уточнить детали и заказать.`;
+  window.open(`https://t.me/podarok_i_tochka?text=${encodeURIComponent(msg)}`, '_blank');
+}
+</script>
         <!-- Преимущества -->
         <section class="bg-white py-16 border-b border-[#F1E8D9]" aria-label="Наши преимущества">
             <div class="container mx-auto px-4">
