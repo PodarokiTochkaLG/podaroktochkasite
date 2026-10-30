@@ -3,76 +3,808 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <title>Воздушные шары и подарки в Луганске | Подарок и Точка</title>
-<meta name="description" content="Заказать гелиевые шары и оригинальные подарки ручной работы в Луганске. Надписи на шарах Луганск, купить подарок Луганск, воздушный шары Луганск.">
-<meta name="keywords" content="воздушные шары Луганск, изготовление подарков Луганск, гелиевые шары, подарочные боксы Луганск, шары с надписями, купить подарок Луганск">
+    <!-- Основные SEO-теги -->
+    <title>Воздушные шары и подарки в Луганске — купить с доставкой | «Подарок и Точка»</title>
+    <meta name="description" content="Купить воздушные и гелиевые шары, стильные композиции и подарки ручной работы в Луганске с доставкой. Индивидуальные надписи на шарах за 15 минут. Официально, надежно, с гарантией полета от 3 дней!">
+    <meta name="keywords" content="воздушные шары Луганск, гелиевые шары Луганск, доставка шаров Луганск, купить подарок Луганск, подарочные боксы Луганск, шары с надписями Луганск, подарки ручной работы Луганск">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://podarok-i-tochka.ru/">
+    
+    <!-- Географические мета-теги (Local SEO) -->
+    <meta name="geo.region" content="RU">
+    <meta name="geo.placename" content="Луганск">
+    <meta name="geo.position" content="48.574044;39.307815">
+    <meta name="ICBM" content="48.574044, 39.307815">
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Подарок и Точка — Шары и Подарки в Луганске">
-<meta property="og:description" content="Лучшая доставка праздничного настроения в Луганске. Индивидуальные надписи и подарки ручной работы!">
-<meta property="og:image" content="podaroktxt.png"> <meta property="og:url" content="https://podarok-i-tochka.ru/"> 
-<link rel="icon" type="image/png" href="favicon.png">
-    
+    <!-- Open Graph (VK, Telegram, WhatsApp, соцсети) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Подарок и Точка">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:title" content="Воздушные шары и подарки в Луганске — «Подарок и Точка»">
+    <meta property="og:description" content="Заказать гелиевые шары, стильные фонтаны и подарки ручной работы с доставкой по Луганску. Индивидуальные надписи за 15 минут!">
+    <meta property="og:image" content="https://podarok-i-tochka.ru/podaroktxt.png">
+    <meta property="og:image:alt" content="Логотип студии Подарок и Точка Луганск">
+    <meta property="og:url" content="https://podarok-i-tochka.ru/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Воздушные шары и подарки в Луганске | «Подарок и Точка»">
+    <meta name="twitter:description" content="Создаем праздничное настроение: гелиевые шары, индивидуальные надписи, подарочные боксы в Луганске.">
+    <meta name="twitter:image" content="https://podarok-i-tochka.ru/podaroktxt.png">
+
+    <!-- Фавикон и тема -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="theme-color" content="#4F4135">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Предзагрузка шрифтов и ресурсов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://mc.yandex.ru">
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-	<style>
-        /* Определение ключевых кадров анимации */
+
+    <!-- Стили -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+        }
+
+        /* Анимация плавного появления */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px); /* Появляется чуть снизу */
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        /* Класс, который мы будем добавлять к товарам */
         .fade-in-up {
-            animation: fadeInUp 0.5s ease-out forwards; /* Длительность 0.5 сек */
+            animation: fadeInUp 0.5s ease-out forwards;
         }
-		/* CSS для карусели отзывов */
-    #review-carousel::-webkit-scrollbar {
-        display: none; /* Скрываем полосу прокрутки для Chrome/Safari */
-    }
-    #review-carousel {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-        scroll-snap-type: x mandatory; /* Фиксация фото по центру при скролле */
-    }
-    .review-item {
-        scroll-snap-align: center; /* Фиксация по центру */
-    }
-		html {
-    scroll-behavior: smooth;
-}
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-		.hero-bg {
-    /* Добавляем качественное фото шаров и легкое затемнение, чтобы текст читался */
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                url('https://raw.githubusercontent.com/PodarokiTochkaLG/podaroktochkasite/refs/heads/main/photo-1530103862676-de8c9debad1d.jpg?auto=format&fit=crop&w=1920&q=80');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Эффект параллакса (красивое подлагивание при скролле) */
-}
-        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+
+        /* Карусель отзывов */
+        #review-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        #review-carousel {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            scroll-snap-type: x mandatory;
+        }
+        .review-item {
+            scroll-snap-align: center;
+        }
+
+        /* Hero секция */
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
+                        url('https://raw.githubusercontent.com/PodarokiTochkaLG/podaroktochkasite/refs/heads/main/photo-1530103862676-de8c9debad1d.jpg?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
     </style>
 
-<script src="https://cdn.tailwindcss.com"></script>
-    
+    <!-- Микроразметка Schema.org (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["LocalBusiness", "Store"],
+          "@id": "https://podarok-i-tochka.ru/#organization",
+          "name": "Подарок и Точка",
+          "alternateName": "Студия воздушных шаров и подарков Подарок и Точка",
+          "description": "Заказ и доставка гелиевых шаров, подарочных боксов и оригинальных сувениров ручной работы в Луганске.",
+          "url": "https://podarok-i-tochka.ru/",
+          "telephone": "+7-959-284-05-68",
+          "priceRange": "₽₽",
+          "image": "https://podarok-i-tochka.ru/podaroktxt.png",
+          "logo": "https://podarok-i-tochka.ru/podaroktxt.png",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ул. Советская, д. 7 (ориентир магазин 'Шале')",
+            "addressLocality": "Луганск",
+            "addressRegion": "Луганская Народная Республика",
+            "addressCountry": "RU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "48.574044",
+            "longitude": "39.307815"
+          },
+          "sameAs": [
+            "https://vk.com/podarok_i_tochka",
+            "https://t.me/podarok_i_tochka_lg",
+            "https://t.me/podarok_i_tochka"
+          ],
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+            ],
+            "opens": "09:00",
+            "closes": "20:00"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://podarok-i-tochka.ru/#website",
+          "url": "https://podarok-i-tochka.ru/",
+          "name": "Подарок и Точка — Воздушные шары и подарки в Луганске",
+          "publisher": {
+            "@id": "https://podarok-i-tochka.ru/#organization"
+          },
+          "inLanguage": "ru-RU"
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-[#FBF9F6] text-[#6F5D4B] antialiased selection:bg-[#6F5D4B] selection:text-white">
+
+    <!-- Шапка / Навигация -->
+    <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-[#F1E8D9]" aria-label="Основная навигация">
+        <div class="container mx-auto px-4 flex justify-between items-center h-16 md:h-20">
+            <a href="#" class="flex items-center" aria-label="Подарок и Точка — на главную">
+                <img src="podaroktxt.png" alt="Студия подарков и шаров Подарок и Точка" width="180" height="40" class="h-6 md:h-10 w-auto object-contain">
+            </a>
+
+            <div class="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest text-[#4F4135]">
+                <a href="#catalog" onclick="filterCatalog('balloons')" class="hover:text-[#6F5D4B] transition-colors">Шары</a>
+                <a href="#catalog" onclick="filterCatalog('gifts')" class="hover:text-[#6F5D4B] transition-colors">Подарки</a>
+                <a href="#reviews" class="hover:text-[#6F5D4B] transition-colors">Отзывы</a>
+                <a href="#delivery" class="hover:text-[#6F5D4B] transition-colors">Доставка</a>
+                <a href="#about" class="hover:text-[#6F5D4B] transition-colors">О нас</a>
+                <a href="#contacts" class="hover:text-[#6F5D4B] transition-colors">Контакты</a>
+            </div>
+
+            <button id="mobile-menu-btn" onclick="toggleMenu()" aria-label="Открыть меню сайта" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden text-[#4F4135] p-2 focus:outline-none focus:ring-2 focus:ring-[#6F5D4B] rounded-lg">
+                <svg id="menu-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path id="icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Мобильное меню -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-xl z-50 border-b border-[#F1E8D9] md:hidden">
+            <div class="flex flex-col p-6 space-y-4 text-center font-bold uppercase tracking-widest text-[#4F4135] text-sm">
+                <a href="#catalog" onclick="toggleMenu(); filterCatalog('balloons')" class="py-3 border-b border-[#F1E8D9]/50">Шары</a>
+                <a href="#catalog" onclick="toggleMenu(); filterCatalog('gifts')" class="py-3 border-b border-[#F1E8D9]/50">Подарки</a>
+                <a href="#reviews" onclick="toggleMenu()" class="py-3 border-b border-[#F1E8D9]/50">Отзывы</a>
+                <a href="#delivery" onclick="toggleMenu()" class="py-3 border-b border-[#F1E8D9]/50">Доставка</a>
+                <a href="#about" onclick="toggleMenu()" class="py-3 border-b border-[#F1E8D9]/50">О нас</a>
+                <a href="#contacts" onclick="toggleMenu()" class="py-3">Контакты</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Главный баннер (Hero) -->
+        <header class="hero-bg min-h-[520px] md:min-h-[650px] flex items-center justify-center text-center text-white px-4 py-16">
+            <div class="max-w-4xl mx-auto">
+                <span class="uppercase tracking-[0.4em] text-xs md:text-sm mb-4 block font-semibold text-[#FBF9F6]/90">Студия оформления «Подарок и Точка»</span>
+                
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 drop-shadow-lg leading-tight text-[#FBF9F6]">
+                    Воздушные шары и подарки в Луганске
+                </h1>
+                
+                <p class="text-base sm:text-lg md:text-2xl mb-10 max-w-2xl mx-auto font-light leading-relaxed text-[#FBF9F6]/95">
+                    Создаем стильные сеты из шаров и оригинальные подарки. Доставим праздник в короткий срок по Луганску и области!
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#catalog" class="bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 text-white px-8 md:px-10 py-4 rounded-full font-bold text-base md:text-lg transition-all shadow-lg hover:scale-105 active:scale-95">
+                        Выбрать шары
+                    </a>
+                    <a href="#custom-text" class="bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 text-white px-8 md:px-10 py-4 rounded-full font-bold text-base md:text-lg transition-all shadow-lg hover:scale-105 active:scale-95">
+                        Заказать надпись
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Преимущества -->
+        <section class="bg-white py-16 border-b border-[#F1E8D9]" aria-label="Наши преимущества">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-[#6F5D4B]">
+                    <div class="p-4 rounded-2xl transition hover:-translate-y-1">
+                        <div class="text-5xl mb-4 text-[#A98E73]" aria-hidden="true">🎈</div>
+                        <h3 class="font-bold text-lg mb-2 text-[#4F4135]">Качественный гелий</h3>
+                        <p class="text-[#6F5D4B]/80 text-sm leading-relaxed">Используем только чистый гелий и обрабатываем шары полимерным составом для длительного полета (от 3-х дней).</p>
+                    </div>
+                    <div class="p-4 rounded-2xl transition hover:-translate-y-1">
+                        <div class="text-5xl mb-4 text-[#A98E73]" aria-hidden="true">🚚</div>
+                        <h3 class="font-bold text-lg mb-2 text-[#4F4135]">Бережная доставка</h3>
+                        <p class="text-[#6F5D4B]/80 text-sm leading-relaxed">Возим шары в специальных защитных транспортировочных пакетах. Доставим в любую точку Луганска точно ко времени.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl transition hover:-translate-y-1">
+                        <div class="text-5xl mb-4 text-[#A98E73]" aria-hidden="true">🎨</div>
+                        <h3 class="font-bold text-lg mb-2 text-[#4F4135]">Свой стиль и текст</h3>
+                        <p class="text-[#6F5D4B]/80 text-sm leading-relaxed">Создадим индивидуальную надпись, поздравление или логотип на большом шаре-гиганте всего за 15 минут.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Квиз-баннер быстрого подбора -->
+        <section class="container mx-auto px-4 pt-12 mb-6" aria-label="Индивидуальный подбор декора">
+            <div class="bg-[#FBF9F6] rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-[#6F5D4B]/10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+                <div>
+                    <span class="bg-[#6F5D4B] text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full inline-block mb-4">Быстрый заказ</span>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-[#4F4135] mb-3 uppercase tracking-tight">Подобрать индивидуальный декор?</h2>
+                    <p class="text-[#6F5D4B] max-w-xl text-sm md:text-base">Ответьте на 3 простых вопроса, и мы свяжемся с вами в Telegram или по телефону с готовыми вариантами под ваш бюджет и пожелания!</p>
+                </div>
+                <button onclick="openQuiz()" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white font-bold uppercase tracking-wider text-sm px-8 py-5 rounded-2xl transition-all shadow-md hover:shadow-xl active:scale-95 whitespace-nowrap">
+                    Оставить заявку за 30 сек →
+                </button>
+            </div>
+        </section>
+
+        <!-- Модальное окно Квиза -->
+        <div id="quiz-modal" class="fixed inset-0 z-[120] hidden items-center justify-center bg-[#4F4135]/80 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+            <div class="bg-[#FBF9F6] p-6 md:p-10 rounded-[2.5rem] shadow-2xl max-w-xl w-full border border-[#F1E8D9] relative flex flex-col max-h-[90vh]">
+                <div class="flex justify-between items-center mb-6 pb-4 border-b border-[#F1E8D9]">
+                    <div>
+                        <h3 id="quiz-title" class="text-xl font-bold text-[#4F4135] uppercase tracking-tight">Заявка на подбор</h3>
+                        <p id="quiz-progress" class="text-xs text-[#6F5D4B]/70 font-semibold mt-0.5">Шаг 1 из 3</p>
+                    </div>
+                    <button onclick="closeQuiz()" aria-label="Закрыть окно заявки" class="text-2xl font-bold text-[#6F5D4B] hover:text-[#4F4135] transition-all p-2 leading-none">&times;</button>
+                </div>
+
+                <div class="overflow-y-auto flex-grow py-2 text-left">
+                    <!-- Шаг 1 -->
+                    <div id="quiz-step-1" class="quiz-step space-y-3">
+                        <h4 class="text-base font-bold text-[#4F4135] mb-3 uppercase tracking-wide">1. Что вас интересует?</h4>
+                        <button type="button" onclick="selectQuizParam('type', 'Воздушные шары')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135] transition">🎈 Воздушные шары</button>
+                        <button type="button" onclick="selectQuizParam('type', 'Подарочный бокс')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135] transition">🎁 Подарочный бокс</button>
+                        <button type="button" onclick="selectQuizParam('type', 'Шары + Подарок')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135] transition">✨ И шары, и подарки</button>
+                        <button type="button" onclick="selectQuizParam('type', 'Другое / Индивидуально')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135] transition">🤔 Другое / Нужна консультация</button>
+                    </div>
+
+                    <!-- Шаг 2 -->
+                    <div id="quiz-step-2" class="quiz-step hidden space-y-4">
+                        <h4 class="text-base font-bold text-[#4F4135] uppercase tracking-wide">2. Детали заказа</h4>
+                        <div>
+                            <label for="quiz-date" class="block text-xs font-bold text-[#6F5D4B] uppercase mb-1">Выберите дату заказа</label>
+                            <input type="date" id="quiz-date" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-sm outline-none focus:border-[#6F5D4B] text-[#4F4135]">
+                        </div>
+                        <div>
+                            <label for="quiz-budget" class="block text-xs font-bold text-[#6F5D4B] uppercase mb-1">Планируемый бюджет (₽)</label>
+                            <input type="text" id="quiz-budget" placeholder="Например: около 3000 руб" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-sm outline-none focus:border-[#6F5D4B] text-[#4F4135]">
+                        </div>
+                        <div class="flex justify-between items-center pt-4">
+                            <button type="button" onclick="window.prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline hover:text-[#4F4135]">← Назад</button>
+                            <button type="button" onclick="window.goToStep3()" class="bg-[#6F5D4B] text-white px-6 py-3 rounded-xl font-bold text-sm uppercase hover:bg-[#4F4135] transition">Далее →</button>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 3 -->
+                    <div id="quiz-step-3" class="quiz-step hidden space-y-4">
+                        <h4 class="text-base font-bold text-[#4F4135] uppercase tracking-wide">3. Куда отправить варианты?</h4>
+                        <p class="text-xs text-[#6F5D4B]/80 leading-relaxed">Оставьте ваш номер телефона. Мы свяжемся с вами в Telegram или обычным звонком.</p>
+                        
+                        <div>
+                            <label for="quiz-phone" class="sr-only">Номер телефона</label>
+                            <input type="tel" id="quiz-phone" placeholder="+7 (959) XXX-XX-XX" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-base font-bold text-center text-[#4F4135] outline-none focus:border-[#6F5D4B]">
+                        </div>
+
+                        <div class="flex items-start space-x-3 pt-2">
+                            <input type="checkbox" id="quiz-agreement" checked class="w-4 h-4 mt-0.5 accent-[#6F5D4B] rounded cursor-pointer">
+                            <label for="quiz-agreement" class="text-xs text-[#6F5D4B]/90 leading-tight cursor-pointer select-none">
+                                Я согласен на обработку персональных данных и принимаю условия 
+                                <a href="oferta.html" target="_blank" class="underline font-bold text-[#4F4135] hover:text-black">публичной оферты</a>.
+                            </label>
+                        </div>
+
+                        <div class="flex justify-between items-center pt-4">
+                            <button type="button" onclick="window.prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline hover:text-[#4F4135]">← Назад</button>
+                            <button type="button" onclick="window.submitQuizForm()" id="quiz-submit-btn" class="bg-[#6F5D4B] text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide hover:bg-[#4F4135] transition-all">
+                                Отправить заявку
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Каталог товаров -->
+        <section id="catalog" class="container mx-auto px-4 py-20 scroll-mt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-[#4F4135] mb-6 uppercase tracking-tight">Наш ассортимент</h2>
+                
+                <div class="flex justify-center space-x-4 mb-10">
+                    <button type="button" onclick="filterCatalog('balloons')" id="btn-balloons" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95">
+                        Воздушные шары
+                    </button>
+                    <button type="button" onclick="filterCatalog('gifts')" id="btn-gifts" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95">
+                        Подарки
+                    </button>
+                </div>
+
+                <!-- Фильтр по цене -->
+                <div class="max-w-xs mx-auto mb-10 px-4">
+                    <label for="price-range" class="block text-[#4F4135] font-bold mb-2 uppercase text-xs tracking-widest">
+                        Ваш бюджет: до <span id="price-value">10000</span> ₽
+                    </label>
+                    <input type="range" id="price-range" min="500" max="10000" step="100" value="10000"
+                           aria-label="Фильтр по максимальной цене"
+                           class="w-full h-2 bg-[#F1E8D9] rounded-lg appearance-none cursor-pointer accent-[#6F5D4B]"
+                           oninput="filterByPrice(this.value)">
+                </div>
+            </div>
+
+            <!-- Сетка товаров (динамически наполняется через Google Sheets) -->
+            <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-2 md:px-4 w-full min-h-[300px]">
+                <div class="col-span-full py-16 text-center text-[#6F5D4B]/70">
+                    <svg class="animate-spin h-8 w-8 mx-auto mb-4 text-[#6F5D4B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                    </svg>
+                    Загрузка каталога товаров...
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button id="load-more" onclick="showMore()" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95">
+                    Показать ещё
+                </button>
+            </div>
+        </section>
+
+        <!-- Секция для B2B / Корпоративных клиентов -->
+        <section class="bg-white py-16 border-b border-[#F1E8D9]" aria-label="Оформление для корпоративных клиентов">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto bg-[#FBF9F6] border border-[#F1E8D9] rounded-[2.5rem] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
+                    <div class="flex-1 text-center md:text-left">
+                        <div class="inline-block bg-[#4F4135]/10 text-[#4F4135] text-[10px] px-3 py-1 rounded-full uppercase tracking-widest font-bold mb-3">Для бизнеса</div>
+                        <h3 class="text-xl md:text-2xl font-black text-[#4F4135] uppercase tracking-tight mb-2">Корпоративное оформление в Луганске</h3>
+                        <p class="text-[#6F5D4B] text-sm md:text-base leading-relaxed">
+                            Оформляем открытия магазинов, фотозоны, юбилеи компаний и корпоративы. Работаем официально: безналичный расчет, счет и закрывающие документы для вашей бухгалтерии.
+                        </p>
+                    </div>
+                    <a href="https://t.me/podarok_i_tochka?text=Здравствуйте! Меня интересует корпоративное оформление" 
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="w-full md:w-auto bg-[#4F4135] text-white px-10 py-4 rounded-2xl font-bold uppercase tracking-wider hover:bg-[#6F5D4B] transition-all text-center shadow-md active:scale-95 whitespace-nowrap">
+                        Написать нам
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кастомная надпись на шаре -->
+        <section id="custom-text" class="container mx-auto px-4 py-16 scroll-mt-16" aria-label="Индивидуальная надпись на шаре">
+            <div class="bg-gradient-to-br from-[#6F5D4B] to-[#4F4135] rounded-[3rem] p-8 md:p-16 shadow-2xl text-center text-[#FBF9F6]">
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-6 text-[#FBF9F6]">Ваша надпись на шаре</h2>
+                <p class="text-[#F1E8D9]/90 mb-10 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+                    Придумайте любой текст — поздравление с днем рождения, теплое признание, имя или забавную цитату, — а мы нанесем его на большой шар за 15 минут!
+                </p>
+                <div class="max-w-xl mx-auto bg-white p-2 rounded-3xl flex flex-col sm:flex-row gap-2 shadow-inner border border-[#F1E8D9]">
+                    <label for="userBalloonText" class="sr-only">Текст вашей надписи на шаре</label>
+                    <input type="text" id="userBalloonText" placeholder="Например: С днем рождения, Любимая!" class="flex-grow px-6 py-4 rounded-2xl border-none text-[#6F5D4B] outline-none placeholder-[#6F5D4B]/60 text-sm md:text-base">
+                    <button type="button" onclick="sendCustomText()" class="bg-[#A98E73] hover:bg-[#6F5D4B] text-white px-8 md:px-10 py-4 rounded-2xl font-bold transition whitespace-nowrap active:scale-95">
+                        Отправить в TG
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Отзывы клиентов -->
+        <section id="reviews" class="container mx-auto px-4 py-20 border-t border-[#F1E8D9] scroll-mt-16" aria-label="Отзывы клиентов">
+            <div class="text-center mb-12 relative">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#4F4135] mb-4 uppercase tracking-tight">Ваше доверие — наша гордость</h2>
+                <p class="text-[#6F5D4B]/80 max-w-xl mx-auto italic">Реальные отзывы и фото от счастливых получателей в Луганске.</p>
+                
+                <div class="hidden md:flex absolute top-0 right-0 space-x-2">
+                    <button type="button" onclick="scrollReviews('prev')" aria-label="Предыдущие отзывы" class="bg-white p-3 rounded-full border border-[#F1E8D9] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white transition-all active:scale-95 shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button type="button" onclick="scrollReviews('next')" aria-label="Следующие отзывы" class="bg-white p-3 rounded-full border border-[#F1E8D9] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white transition-all active:scale-95 shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="review-carousel" class="flex overflow-x-auto space-x-6 pb-6 cursor-grab">
+                <!-- Отзыв 1 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo1.jpg" alt="Отзыв о композиции из шаров на день рождения в Луганске" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Наращивание Ресниц-Луганск</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Фонтан «День рождения»</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Заказывала шарики на день рождения, все очень понравилось😍 Результат совпал с ожиданием 🔥🔥🔥 Спасибо большое☺"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 2 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo2.jpg" alt="Отзыв о подарочном боксе с фотографиями Луганск" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Настёна</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с фотографиями</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Спасибо за такой чудесный заказ Муж очень доволен🥰 Спасибо большое 🤗"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 3 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo3.jpg" alt="Отзыв о сладком букете с шоколадом Луганск" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Ольга</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Сладкий букет с шоколадом</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Спасибо за заказ! Сделано с любовью!!😍"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 4 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo4.jpg" alt="Отзыв о шаре бабблс с индивидуальной надписью в Луганске" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Оксана</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с текстом</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Спасибо огромное, шар просто вау, все в восторге😊😊😊"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 5 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo5.jpg" alt="Отзыв о подарке с шаром бабблс и напитком в Луганске" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Anna</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с игристым</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Заказали вот такую красоту, юбиляру и гостям очень понравилось! Спасибо, что вы предоставляете такую услугу, очень необычно, получилось замечательно! За оперативность и доставку🚗 отдельное спасибо, вы молодцы! Рекомендуем всем!👍"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 6 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo6.jpg" alt="Отзыв о боксе с мыльными розами в Луганске" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Екатерина</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с мыльными розами</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Огромное спасибо вам за такую красоту, я уверена что именинница тоже будет в восторге от такого букета😻🌸 Быстро сделали заказ не пришлось долго ждать и всё качественно. Спасибо ещё раз вам😍🥰"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 7 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo7.jpg" alt="Отзыв о праздничном подарке в Луганске" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Наталья</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с игристым</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Спасибо большое! Очень всем понравилось! Все пунктуально, качественно и эстетично! Процветания Вам!!!"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 8 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo8.jpg" alt="Отзыв об оформлении шара бабблс" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Анна</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с наполнением</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Хочу выразить свою благодарность за прекрасное оформление композиции для подарка, идея воплощена полностью, именинница в восторге"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 9 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo9.jpg" alt="Отзыв о подарке маме в Луганске" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Елизавета</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с мыльными цветами</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Спасибо вам, маме очень понравится букетик который точно не завянет💜"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 10 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo10.jpg" alt="Отзыв о подарке мужчине в Луганске" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Ameliya</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс на 23 февраля</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Безумно всё понравилось, обслуживание, сам подарок, доставка быстра🥰 Процветания вам в работе"</p>
+                    </div>
+                </article>
+
+                <!-- Отзыв 11 -->
+                <article class="review-item flex-none w-[300px] md:w-[350px]">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all h-full flex flex-col">
+                        <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
+                            <img src="review_photo11.jpg" alt="Отзыв о заказе фонтана из шаров в Луганске" loading="lazy" decoding="async" width="350" height="622" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4F4135] text-sm">Александра</p>
+                                <p class="text-xs text-[#6F5D4B]/70">Заказ: Фонтан из шаров</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-[#4F4135] italic leading-relaxed">"Большое спасибо ❣"</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="text-center mt-6 md:hidden">
+                <p class="text-xs text-[#6F5D4B]/60 italic">Листайте отзывы влево-вправо ← →</p>
+            </div>
+        </section>
+
+        <!-- Доставка -->
+        <section id="delivery" class="bg-[#F1E8D9] py-20 text-[#6F5D4B] scroll-mt-16" aria-label="Условия доставки">
+            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#4F4135] mb-8 leading-snug">
+                        Доставим праздник <br><span class="text-[#6F5D4B] font-light italic">бережно и точно вовремя</span>
+                    </h2>
+                    <ul class="space-y-4 text-[#6F5D4B]/90 text-base md:text-lg leading-relaxed">
+                        <li class="flex items-center space-x-3">
+                            <span class="text-2xl" aria-hidden="true">🎈</span>
+                            <span>Шары доставляются в защитных транспортировочных пакетах от пыли и повреждений</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-2xl" aria-hidden="true">⏱️</span>
+                            <span>Курьер приедет строго к согласованному интервалу времени</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-2xl" aria-hidden="true">📸</span>
+                            <span>Обязательно присылаем фото готового заказа перед выездом курьера</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 md:p-10 rounded-[2rem] border border-[#F1E8D9] text-center shadow-md">
+                    <h3 class="text-2xl font-bold mb-4 text-[#4F4135]">Остались вопросы?</h3>
+                    <p class="text-[#6F5D4B]/80 text-sm mb-6">Напишите мастеру напрямую — подскажем по составу сета, цветам и времени доставки.</p>
+                    <a href="https://t.me/podarok_i_tochka" target="_blank" rel="noopener noreferrer" class="w-full bg-[#6F5D4B] text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-[#4F4135] transition block shadow-lg active:scale-95">
+                        Написать мастеру в Telegram
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- О нас -->
+        <section id="about" class="bg-[#FBF9F6] py-16 border-t border-[#F1E8D9] scroll-mt-20" aria-label="О компании">
+            <div class="container mx-auto px-4 max-w-4xl text-center">
+                <h2 class="text-3xl font-extrabold text-[#4F4135] mb-8 uppercase tracking-tight">Подарки и шары с душой</h2>
+                
+                <div class="space-y-6 text-[#6F5D4B] text-base md:text-lg leading-relaxed">
+                    <p>
+                        Добро пожаловать в <strong>«Подарок и Точка»</strong>! Мы специализируемся на создании праздничного настроения в Луганске. Наша работа — это гармоничное сочетание ярких <strong>воздушных шаров</strong> и <strong>изготовления уникальных подарков</strong> под заказ.
+                    </p>
+                    <p>
+                        Нужен эффектный фонтан из шаров на день рождения или нежная композиция на выписку из роддома? Мы подберем идеальный вариант и нанесем любую вашу надпись всего за 15 минут. А если вы ищете что-то особенное, мы предложим <strong>подарочные боксы и памятные сувениры</strong>, созданные специально для вашего близкого человека.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 text-left">
+                        <div class="bg-white p-6 rounded-2xl border border-[#F1E8D9] shadow-sm">
+                            <h3 class="font-bold text-[#4F4135] mb-2 flex items-center space-x-2">
+                                <span>🎈</span>
+                                <span>Воздушные шары в Луганске</span>
+                            </h3>
+                            <p class="text-sm">Огромный выбор цветов, фольгированные цифры, фигуры и шары-гиганты с индивидуальным оформлением.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-[#F1E8D9] shadow-sm">
+                            <h3 class="font-bold text-[#4F4135] mb-2 flex items-center space-x-2">
+                                <span>🎁</span>
+                                <span>Подарки ручной работы на заказ</span>
+                            </h3>
+                            <p class="text-sm">Собираем стильные подарочные наборы, боксы со сладостями, цветами и памятными деталями.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section id="contacts" class="bg-white py-16 border-t border-[#F1E8D9] scroll-mt-16" aria-label="Контакты">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold text-[#4F4135] mb-8">Ждем вас в гости</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
+                    <address class="space-y-4 text-base md:text-lg not-italic">
+                        <p class="font-semibold text-[#6F5D4B]">📍 Адрес мастерской (самовывоз):</p>
+                        <p class="text-[#4F4135] font-medium">г. Луганск, ул. Советская, д. 7 <br><span class="text-sm text-[#6F5D4B]/70">(ориентир — магазин "Шале")</span></p>
+                    </address>
+                    <div class="space-y-4">
+                        <p class="font-semibold text-[#6F5D4B] text-base md:text-lg">📞 Быстрая связь и консультация:</p>
+                        <a href="tel:+79592840568" class="inline-block bg-[#A98E73] hover:bg-[#6F5D4B] text-white px-8 py-3 rounded-full font-bold transition shadow-md active:scale-95 text-lg">
+                            +7 (959) 284-05-68
+                        </a>
+                        <p class="text-xs text-gray-400 mt-2">Нажмите на номер, чтобы позвонить прямо сейчас</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал (Footer) -->
+    <footer class="bg-white py-12 border-t border-[#F1E8D9]">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left text-[#6F5D4B]">
+            <div class="mb-6 md:mb-0">
+                <div class="text-xl font-black text-[#4F4135]">ПОДАРОК И ТОЧКА</div>
+                <p class="text-[#6F5D4B] text-xs mt-1 uppercase tracking-widest italic">Луганск и область. Доставка радости и праздника.</p>
+            </div>
+            <div class="flex space-x-6 text-[#6F5D4B]">
+                <a href="https://vk.com/podarok_i_tochka" target="_blank" rel="noopener noreferrer" class="hover:text-[#4F4135] font-bold transition">VKontakte</a>
+                <a href="https://t.me/podarok_i_tochka_lg" target="_blank" rel="noopener noreferrer" class="hover:text-[#4F4135] font-bold transition">Telegram-канал</a>
+                <a href="https://t.me/podarok_i_tochka" target="_blank" rel="noopener noreferrer" class="hover:text-[#4F4135] font-bold transition">Мастер в TG</a>
+            </div>
+        </div>
+        <div class="mt-8 text-center text-[#6F5D4B]/50 text-[10px] uppercase tracking-[0.25em] space-y-2">
+            <p>© 2026 Студия подарков «Подарок и точка». Все права защищены.</p>
+            <p>Самозанятый САЛИЙ АНАСТАСИЯ ВИТАЛЬЕВНА | ИНН 345954759745</p>
+            <p>
+                <a href="oferta.html" target="_blank" class="underline hover:text-[#4F4135] transition">Публичная оферта и политика конфиденциальности</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно подтверждения возраста 18+ -->
+    <div id="age-verification" class="fixed inset-0 z-[100] hidden items-center justify-center bg-[#4F4135]/95 backdrop-blur-lg transition-opacity duration-500" role="dialog" aria-modal="true" aria-labelledby="age-title">
+        <div class="bg-[#FBF9F6] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full text-center mx-4 border border-[#F1E8D9]">
+            <img src="podaroktxt.png" alt="Подарок и Точка" width="180" height="40" class="h-10 mx-auto mb-6 object-contain">
+            <h2 id="age-title" class="text-2xl font-bold text-[#4F4135] mb-4 uppercase tracking-tight">Вам уже есть 18 лет?</h2>
+            <p class="text-[#6F5D4B] mb-8 leading-relaxed text-sm">В нашем каталоге представлены подарки, содержащие алкогольную продукцию. Подтвердите свой возраст, чтобы продолжить просмотр.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button type="button" onclick="confirmAge()" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-wider text-sm transition-all shadow-md active:scale-95 w-full">Да, мне есть 18</button>
+                <button type="button" onclick="rejectAge()" class="border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-wider text-sm transition-all active:scale-95 w-full">Нет</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной клиентский JavaScript -->
     <script>
+        // --- 1. ПРОВЕРКА ВОЗРАСТА 18+ (БЕЗ МИГАНИЯ ДЛЯ ПОДТВЕРЖДЕННЫХ) ---
+        window.confirmAge = function() {
+            const ageModal = document.getElementById('age-verification');
+            if (ageModal) {
+                ageModal.classList.add('opacity-0');
+                setTimeout(() => {
+                    ageModal.classList.add('hidden');
+                    ageModal.classList.remove('flex', 'opacity-0');
+                }, 400);
+            }
+            try {
+                localStorage.setItem('age_verified', 'true');
+            } catch (e) {
+                console.warn('LocalStorage недоступен');
+            }
+        };
+
+        window.rejectAge = function() {
+            window.location.href = "https://yandex.ru";
+        };
+
+        // Запуск проверки возраста после формирования DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                if (localStorage.getItem('age_verified') !== 'true') {
+                    const ageModal = document.getElementById('age-verification');
+                    if (ageModal) {
+                        ageModal.classList.remove('hidden');
+                        ageModal.classList.add('flex');
+                    }
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        });
+
+        // --- 2. КВИЗ (ПОДБОР ДЕКОРА) ---
         let quizData = { type: '', date: '', budget: '', phone: '' };
         let currentQuizStep = 1;
+        const CLOUDFLARE_PROXY_URL = 'https://podarok-tg-proxy.djmojardwent.workers.dev';
 
         window.openQuiz = function() {
             currentQuizStep = 1;
             quizData = { type: '', date: '', budget: '', phone: '' };
-            if(document.getElementById('quiz-date')) document.getElementById('quiz-date').value = '';
-            if(document.getElementById('quiz-budget')) document.getElementById('quiz-budget').value = '';
-            if(document.getElementById('quiz-phone')) document.getElementById('quiz-phone').value = '';
+            const qDate = document.getElementById('quiz-date');
+            const qBudget = document.getElementById('quiz-budget');
+            const qPhone = document.getElementById('quiz-phone');
+            if (qDate) qDate.value = '';
+            if (qBudget) qBudget.value = '';
+            if (qPhone) qPhone.value = '';
             updateQuizView();
             const modal = document.getElementById('quiz-modal');
             if (modal) {
@@ -89,6 +821,19 @@
             }
         };
 
+        // Закрытие модального окна по Escape или клику вне контента
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.closeQuiz();
+            }
+        });
+        const quizModalEl = document.getElementById('quiz-modal');
+        if (quizModalEl) {
+            quizModalEl.addEventListener('click', (e) => {
+                if (e.target === quizModalEl) window.closeQuiz();
+            });
+        }
+
         window.prevQuizStep = function() {
             if (currentQuizStep > 1) {
                 currentQuizStep--;
@@ -102,15 +847,13 @@
             updateQuizView();
         };
 
-       window.goToStep3 = function() {
+        window.goToStep3 = function() {
             const dateInput = document.getElementById('quiz-date') ? document.getElementById('quiz-date').value : '';
-            
             if (!dateInput) {
                 alert('Пожалуйста, выберите дату в календаре.');
                 return;
             }
             
-            // Превращаем дату из формата YYYY-MM-DD в красивый DD.MM.YYYY
             const parsedDate = new Date(dateInput);
             const day = String(parsedDate.getDate()).padStart(2, '0');
             const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
@@ -130,8 +873,8 @@
             const progressText = document.getElementById('quiz-progress');
             if (progressText) progressText.textContent = `Шаг ${currentQuizStep} из 3`;
         }
-const CLOUDFLARE_PROXY_URL = 'https://podarok-tg-proxy.djmojardwent.workers.dev';
-      window.submitQuizForm = function() {
+
+        window.submitQuizForm = function() {
             const phoneInput = document.getElementById('quiz-phone') ? document.getElementById('quiz-phone').value.trim() : '';
             const agreementCheckbox = document.getElementById('quiz-agreement');
 
@@ -140,12 +883,12 @@ const CLOUDFLARE_PROXY_URL = 'https://podarok-tg-proxy.djmojardwent.workers.dev'
                 return;
             }
 
-            // ПРОВЕРКА ГАЛОЧКИ ОФЕРТЫ
             if (agreementCheckbox && !agreementCheckbox.checked) {
                 alert('Для отправки заявки необходимо согласиться с условиями публичной оферты.');
                 return;
             }
-quizData.phone = phoneInput;
+
+            quizData.phone = phoneInput;
             const submitBtn = document.getElementById('quiz-submit-btn');
             if (submitBtn) {
                 submitBtn.disabled = true;
@@ -158,949 +901,273 @@ quizData.phone = phoneInput;
                                 `💰 *Бюджет:* ${quizData.budget}\n` +
                                 `📞 *Телефон:* ${quizData.phone}`;
 
-     fetch(CLOUDFLARE_PROXY_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            message: messageText
-        })
-    })
-    .then(response => {
-        if (!response.ok) throw new Error('Ошибка прокси');
-        alert('Спасибо! Заявка успешно принята, мы скоро свяжемся с вами.');
-        window.closeQuiz();
-    })
-    .catch(error => {
-        console.error(error);
-        alert('Произошла ошибка автоотправки, открываем диалог напрямую...');
-        const textBackup = encodeURIComponent(`Новая заявка! Интересует: ${quizData.type}, Дата: ${quizData.date}, Бюджет: ${quizData.budget}, Contact: ${quizData.phone}`);
-        window.open(`https://t.me/podarok_i_tochka?text=${textBackup}`, '_blank');
-    })
-    .finally(() => {
-        if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Отправить заявку';
+            fetch(CLOUDFLARE_PROXY_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: messageText })
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Ошибка прокси');
+                alert('Спасибо! Заявка успешно принята, мы скоро свяжемся с вами.');
+                window.closeQuiz();
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Произошла ошибка автоотправки, открываем диалог напрямую в Telegram...');
+                const textBackup = encodeURIComponent(`Новая заявка! Интересует: ${quizData.type}, Дата: ${quizData.date}, Бюджет: ${quizData.budget}, Контакт: ${quizData.phone}`);
+                window.open(`https://t.me/podarok_i_tochka?text=${textBackup}`, '_blank');
+            })
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Отправить заявку';
+                }
+            });
+        };
+
+        // --- 3. НАСТРОЙКИ И ЛОГИКА КАТАЛОГА ТОВАРОВ ---
+        const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnl86MjVG55uqphe5vF/pub?gid=0&single=true&output=csv";
+        const ITEMS_PER_PAGE = 6; 
+        let currentVisibleCount = ITEMS_PER_PAGE;
+        let allProducts = []; 
+        let currentCategory = 'balloons'; 
+        let currentMaxPrice = 10000;
+
+        // Вспомогательная функция санитизации для предотвращения XSS и поломки HTML
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
         }
-    });
-};
-    </script>
-</head>
-<body class="bg-[#FBF9F6] text-[#6F5D4B]"> <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-[#F1E8D9]">
-	<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108349750', 'ym');
 
-    ym(108349750, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/108349750" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-    <div class="container mx-auto px-4 flex justify-between items-center h-16 md:h-20">
-        
-        <a href="#" class="flex items-center">
-            <img src="podaroktxt.png" alt="Подарок и Точка" class="h-6 md:h-10 w-auto object-contain">
-        </a>
-
-        <div class="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest text-[#4F4135]">
-            <a href="#catalog" onclick="filterCatalog('balloons')" class="hover:text-[#6F5D4B] transition">Шары</a>
-            <a href="#catalog" onclick="filterCatalog('gifts')" class="hover:text-[#6F5D4B] transition">Подарки</a>
-            <a href="#reviews" class="hover:text-[#6F5D4B] transition">Отзывы</a>
-            <a href="#delivery" class="hover:text-[#6F5D4B] transition">Доставка</a>
-            <a href="#about" class="hover:text-[#6F5D4B] transition">О нас</a>
-        </div>
-
-        <button onclick="toggleMenu()" class="md:hidden text-[#4F4135] p-2 focus:outline-none">
-            <svg id="menu-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path id="icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
-    </div>
-
-    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-xl z-50 border-b border-[#F1E8D9] md:hidden">
-        <div class="flex flex-col p-6 space-y-4 text-center font-bold uppercase tracking-widest text-[#4F4135] text-sm">
-            <a href="#catalog" onclick="toggleMenu(); filterCatalog('balloons')" class="py-3 border-b border-[#F1E8D9]/50">Шары</a>
-            <a href="#catalog" onclick="toggleMenu(); filterCatalog('gifts')" class="py-3 border-b border-[#F1E8D9]/50">Подарки</a>
-            <a href="#reviews" onclick="toggleMenu()" class="py-3 border-b border-[#F1E8D9]/50">Отзывы</a>
-            <a href="#delivery" onclick="toggleMenu()" class="py-3 border-b border-[#F1E8D9]/50">Доставка</a>
-            <a href="#about" onclick="toggleMenu()" class="py-3">О нас</a>
-        </div>
-    </div>
-</nav>
-
-    <header class="hero-bg h-[500px] md:h-[650px] flex items-center justify-center text-center text-white px-4">
-    <div>
-        <span class="uppercase tracking-[0.4em] text-xs mb-4 block font-semibold text-[#FBF9F6]/80">Подарок и Точка</span>
-        
-        <h1 class="text-3xl md:text-5xl font-extrabold mb-6 drop-shadow-lg leading-tight text-[#FBF9F6]">
-    Воздушные шары и подарки в Луганске
-</h1>
-        
-        <p class="text-lg md:text-2xl mb-10 max-w-2xl mx-auto font-light leading-relaxed text-[#FBF9F6]/90">
-            Создаем стильные сеты из шаров и оригинальные подарки. Доставим праздник в короткий срок!
-        </p>
-        
-        <div class="flex flex-col md:flex-row gap-4 justify-center">
-            <a href="#catalog" class="bg-white/20 backdrop-blur-md border border-white/40 text-white px-10 py-4 rounded-full font-bold text-lg transition-all border border-white/20">Выбрать шары</a>
-            <a href="#custom-text" class="bg-white/20 backdrop-blur-md border border-white/40 text-white px-10 py-4 rounded-full font-bold text-lg transition-all border border-white/20">Заказать надпись</a>
-        </div>
-    </div>
-</header>
-
-<section class="bg-white py-16 border-b border-[#F1E8D9]">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-[#6F5D4B] mb-16">
-            <div>
-                <div class="text-5xl mb-4 text-[#A98E73]">🎈</div>
-                <h4 class="font-bold text-lg mb-2 text-[#4F4135]">Качественный гелий</h4>
-                <p class="text-[#6F5D4B]/80 text-sm italic leading-relaxed">Используем только чистый гелий и обрабатываем шары для долгого полета (от 3-х дней).</p>
-            </div>
-            <div>
-                <div class="text-5xl mb-4 text-[#A98E73]">🚚</div>
-                <h4 class="font-bold text-lg mb-2 text-[#4F4135]">Бережная доставка</h4>
-                <p class="text-[#6F5D4B]/80 text-sm italic leading-relaxed">Возим шары в специальных защитных пакетах. Доставим в любую точку Луганска вовремя.</p>
-            </div>
-            <div>
-                <div class="text-5xl mb-4 text-[#A98E73]">🎨</div>
-                <h4 class="font-bold text-lg mb-2 text-[#4F4135]">Свой стиль</h4>
-                <p class="text-[#6F5D4B]/80 text-sm italic leading-relaxed">Создадим индивидуальную надпись или логотип на большом шаре всего за 15 минут.</p>
-            </div>
-        </div>
-    </div>
-</section>
-	
-	
-<section class="container mx-auto px-4 pt-12 mb-3">
-    <div class="bg-[#FBF9F6] rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-[#6F5D4B]/10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-        <div>
-            <span class="bg-[#6F5D4B] text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full inline-block mb-4">Быстрый заказ</span>
-            <h2 class="text-2xl md:text-4xl font-extrabold text-[#4F4135] mb-3 uppercase tracking-tight">Подобрать индивидуальный декор?</h2>
-            <p class="text-[#6F5D4B] max-w-xl text-sm md:text-base">Ответьте на 3 простых вопроса, и мы сами свяжемся с вами в Telegram или по телефону с готовыми предложениями под ваши пожелания!</p>
-        </div>
-        <button onclick="openQuiz()" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white font-bold uppercase tracking-wider text-sm px-8 py-5 rounded-2xl transition-all shadow-md hover:shadow-xl active:scale-95 whitespace-nowrap">
-            Оставить заявку за 30 сек →
-        </button>
-    </div>
-</section>
-
-<div id="quiz-modal" class="fixed inset-0 z-[120] hidden items-center justify-center bg-[#4F4135]/80 backdrop-blur-md p-4">
-    <div class="bg-[#FBF9F6] p-6 md:p-10 rounded-[2.5rem] shadow-2xl max-w-xl w-full border border-[#F1E8D9] relative flex flex-col max-h-[90vh]">
-        
-        <div class="flex justify-between items-center mb-6 pb-4 border-b border-[#F1E8D9]">
-            <div>
-                <h3 class="text-xl font-bold text-[#4F4135] uppercase tracking-tight">Заявка на подбор</h3>
-                <p id="quiz-progress" class="text-xs text-[#6F5D4B]/70 font-semibold mt-0.5">Шаг 1 из 3</p>
-            </div>
-            <button onclick="closeQuiz()" class="text-2xl font-bold text-[#6F5D4B] hover:text-[#4F4135] transition-all p-2">&times;</button>
-        </div>
-
-        <div class="overflow-y-auto flex-grow py-2 text-left">
-            
-            <div id="quiz-step-1" class="quiz-step space-y-3">
-                <h4 class="text-base font-bold text-[#4F4135] mb-3 uppercase tracking-wide">1. Что вас интересует?</h4>
-                <button onclick="selectQuizParam('type', 'Воздушные шары')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135]">🎈 Воздушные шары</button>
-                <button onclick="selectQuizParam('type', 'Подарочный бокс')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135]">🎁 Подарочный бокс</button>
-                <button onclick="selectQuizParam('type', 'Шары + Подарок')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135]">✨ И шары, и подарки</button>
-                <button onclick="selectQuizParam('type', 'Другое / Индивидуально')" class="w-full text-left p-4 rounded-xl border border-[#F1E8D9] bg-white hover:border-[#6F5D4B] font-bold text-[#4F4135]">🤔 Другое / Нужна консультация</button>
-            </div>
-
-<div id="quiz-step-2" class="quiz-step hidden space-y-4">
-                <h4 class="text-base font-bold text-[#4F4135] uppercase tracking-wide">2. Детали заказа</h4>
+        // Парсинг CSV данных из Google Таблиц
+        function parseCsv(text) {
+            const lines = text.split(/\r?\n/);
+            const result = [];
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
                 
-                <div>
-                    <label class="block text-xs font-bold text-[#6F5D4B] uppercase mb-1">Выберите дату заказа</label>
-                    <input type="date" id="quiz-date" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-sm outline-none focus:border-[#6F5D4B] text-[#4F4135]">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-[#6F5D4B] uppercase mb-1">Планируемый бюджет (₽)</label>
-                    <input type="text" id="quiz-budget" placeholder="Например: около 3000 руб" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-sm outline-none focus:border-[#6F5D4B]">
-                </div>
-
-                <div class="flex justify-between items-center pt-4">
-                    <button onclick="window.prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline">← Назад</button>
-                    <button onclick="window.goToStep3()" class="bg-[#6F5D4B] text-white px-6 py-3 rounded-xl font-bold text-sm uppercase">Далее →</button>
-                </div>
-            </div>
-
-            <div id="quiz-step-3" class="quiz-step hidden space-y-4">
-                <h4 class="text-base font-bold text-[#4F4135] uppercase tracking-wide">3. Куда отправить варианты?</h4>
-                <p class="text-xs text-[#6F5D4B]/80 leading-relaxed">Оставьте ваш номер телефона. Мы свяжемся с вами в Telegram или обычным звонком.</p>
+                const isTsv = text.includes('\t');
+                const matches = isTsv ? line.split('\t') : (line.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$|\r|$)/g) || []);
                 
-                <input type="tel" id="quiz-phone" placeholder="+7 (959) XXX-XX-XX" class="w-full p-4 rounded-xl border border-[#F1E8D9] bg-white text-base font-bold text-center text-[#4F4135] outline-none focus:border-[#6F5D4B]">
-
-                <div class="flex items-start space-x-3 pt-2">
-                    <input type="checkbox" id="quiz-agreement" checked class="w-4 h-4 mt-0.5 accent-[#6F5D4B] rounded cursor-pointer">
-                    <label for="quiz-agreement" class="text-xs text-[#6F5D4B]/90 leading-tight cursor-pointer select-none">
-                        Я согласен на обработку персональных данных и принимаю условия 
-                        <a href="oferta.html" target="_blank" class="underline font-bold text-[#4F4135] hover:text-black">публичной оферты</a>.
-                    </label>
-                </div>
-
-                <div class="flex justify-between items-center pt-4">
-                    <button onclick="window.prevQuizStep()" class="text-xs font-bold text-[#6F5D4B] underline">← Назад</button>
-                    <button onclick="window.submitQuizForm()" id="quiz-submit-btn" class="bg-[#6F5D4B] text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide hover:bg-[#4F4135] transition-all">
-                        Отправить заявку
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>	
-
-<section id="catalog" class="container mx-auto px-4 py-20">
-    <div class="text-center mb-12">
-        <h2 class="text-4xl font-extrabold text-[#4F4135] mb-6 uppercase tracking-tight">Наш ассортимент</h2>
-        
-        <div class="flex justify-center space-x-4 mb-12">
-            <button onclick="filterCatalog('balloons')" id="btn-balloons" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95">
-                Воздушные шары
-            </button>
-            <button onclick="filterCatalog('gifts')" id="btn-gifts" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95">
-                Подарки
-            </button>
-        </div>
-    </div>
-
-    <div class="max-w-xs mx-auto mb-10 px-4">
-        <label for="price-range" class="block text-[#4F4135] font-bold mb-2 uppercase text-xs tracking-widest">
-            Ваш бюджет: до <span id="price-value">10000</span> ₽
-        </label>
-        <input type="range" id="price-range" min="500" max="10000" step="100" value="10000"
-               class="w-full h-2 bg-[#F1E8D9] rounded-lg appearance-none cursor-pointer accent-[#6F5D4B]"
-               oninput="filterByPrice(this.value)">
-    </div>
-
-<div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 w-full">
-    </div>
-
-    <div class="text-center mt-12">
-        <button id="load-more" onclick="showMore()" class="px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95">
-            Показать ещё
-        </button>
-    </div>
-</section>
-	<script>		
-// --- НАСТРОЙКИ КАТАЛОГА ---
-const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLkwWKT--H_QYGiTYoVhfPRHo-oUAHM_Nd3lFh4BqZ9QwdQa_u0NpPeGLL1cnl86MjVG55uqphe5vF/pub?gid=0&single=true&output=csv";
-
-const ITEMS_PER_PAGE = 6; 
-let currentVisibleCount = ITEMS_PER_PAGE;
-let allProducts = []; 
-let currentCategory = 'balloons'; 
-let currentMaxPrice = 10000;
-
-// --- ЛОГИКА ПРОВЕРКИ ВОЗРАСТА (18+) ---
-window.confirmAge = function() {
-    const ageModal = document.getElementById('age-verification');
-    if (ageModal) {
-        ageModal.style.opacity = '0';
-        setTimeout(() => {
-            ageModal.classList.add('hidden');
-            ageModal.style.display = 'none';
-        }, 500);
-    }
-    localStorage.setItem('age_verified', 'true');
-};
-
-window.rejectAge = function() {
-    window.location.href = "https://yandex.ru";
-};
-
-// Проверяем возраст сразу при старте страницы
-const ageModal = document.getElementById('age-verification');
-if (ageModal && localStorage.getItem('age_verified') === 'true') {
-    ageModal.classList.add('hidden');
-    ageModal.style.display = 'none';
-}
-
-// --- УМНАЯ ФУНКЦИЯ ПАРСИНГА ТАБЛИЦЫ ---
-function parseCsv(text) {
-    const lines = text.split(/\r?\n/);
-    const result = [];
-    for (let i = 1; i < lines.length; i++) {
-        const line = lines[i].trim();
-        if (!line) continue;
-        
-        const isTsv = text.includes('\t');
-        const matches = isTsv ? line.split('\t') : (line.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$|\r|$)/g) || []);
-        
-        while (matches.length < 7) matches.push("");
-        const clean = row => row ? row.replace(/^"|"$/g, '').trim() : "";
-        
-        result.push({
-            id: clean(matches[0]),
-            category: clean(matches[1]),
-            price: parseInt(clean(matches[2])) || 0,
-            img: clean(matches[3]),
-            alt: clean(matches[4]),
-            name: clean(matches[5]),
-            desc: clean(matches[6])
-        });
-    }
-    return result;
-}
-
-// --- ФУНКЦИЯ ОТРИСОВКИ КАТАЛОГА С ПОЛНОЙ ЗАЩИТОЙ ---
-function renderCatalog() {
-    const grid = document.getElementById('catalog-grid');
-    const loadMoreBtn = document.getElementById('load-more');
-    if (!grid) return;
-
-    // Фильтруем строго по текущей категории и цене
-    const filteredItems = allProducts.filter(item => {
-        const matchCategory = (currentCategory === 'all' || item.category === currentCategory);
-        const matchPrice = (item.price <= currentMaxPrice);
-        return matchCategory && matchPrice;
-    });
-
-    if (filteredItems.length === 0) {
-        grid.innerHTML = '<p class="text-center text-[#4F4135] col-span-full py-8 w-full block">Товары под заданные критерии не найдены.</p>';
-        if (loadMoreBtn && loadMoreBtn.parentElement) loadMoreBtn.parentElement.classList.add('hidden');
-        return;
-    }
-
-    grid.innerHTML = ''; 
-
-    const itemsToRender = filteredItems.slice(0, currentVisibleCount);
-
-    itemsToRender.forEach(item => {
-        const encodedText = encodeURIComponent(`Здравствуйте! Меня заинтересовал данный товар: https://podarok-i-tochka.ru/#${item.id}`);
-        const tgLink = `https://t.me/podarok_i_tochka?text=${encodedText}`;
-
-        const cardHtml = `
-            <div id="${item.id}" class="${item.category} bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center" data-price="${item.price}">
-                <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100 max-w-full">
-                    <img src="${item.img}" alt="${item.alt}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <div class="flex-grow flex flex-col items-center">
-                    <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">${item.name}</h3>
-                    <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[200px]">${item.desc}</p>
-                </div>
-                <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
-                    <div class="text-2xl font-extrabold text-[#4F4135] mb-3">${item.price} ₽</div>
-                    <a href="${tgLink}" 
-                       target="_blank" 
-                       class="inline-block w-full bg-[#6F5D4B] text-white py-3 rounded-xl font-bold uppercase tracking-wider text-sm transition-all hover:bg-[#4F4135] text-center">
-                        Заказать в Telegram
-                    </a>
-                </div>
-            </div>
-        `;
-        grid.innerHTML += cardHtml;
-    });
-
-    // Управление кнопкой "Показать ещё"
-    if (loadMoreBtn && loadMoreBtn.parentElement) {
-        if (currentVisibleCount >= filteredItems.length) {
-            loadMoreBtn.parentElement.classList.add('hidden');
-        } else {
-            loadMoreBtn.parentElement.classList.remove('hidden');
+                while (matches.length < 7) matches.push("");
+                const clean = row => row ? row.replace(/^"|"$/g, '').trim() : "";
+                
+                result.push({
+                    id: clean(matches[0]),
+                    category: clean(matches[1]),
+                    price: parseInt(clean(matches[2])) || 0,
+                    img: clean(matches[3]),
+                    alt: clean(matches[4]),
+                    name: clean(matches[5]),
+                    desc: clean(matches[6])
+                });
+            }
+            return result;
         }
-    }
-}
 
-// --- ИНТЕРФЕЙСНЫЕ ФУНКЦИИ С КОНТРОЛЕМ ОШИБОК ---
+        // Отрисовка каталога
+        function renderCatalog() {
+            const grid = document.getElementById('catalog-grid');
+            const loadMoreBtn = document.getElementById('load-more');
+            if (!grid) return;
 
-// Изменение бюджета
-window.filterByPrice = function(value) {
-    currentMaxPrice = parseInt(value) || 10000;
-    const priceValueLabel = document.getElementById('price-value');
-    if (priceValueLabel) priceValueLabel.textContent = currentMaxPrice; 
-    renderCatalog();
-};
+            const filteredItems = allProducts.filter(item => {
+                const matchCategory = (currentCategory === 'all' || item.category === currentCategory);
+                const matchPrice = (item.price <= currentMaxPrice);
+                return matchCategory && matchPrice;
+            });
 
-// Переключение вкладок (Воздушные шары / Подарки)
-window.filterCatalog = function(category, resetCount = true) {
-    currentCategory = category;
-    
-    // Сбрасываем счетчик до 6 только если это обычный клик по вкладке,
-    // а не автоматический поиск товара по прямой ссылке
-    if (resetCount) {
-        currentVisibleCount = ITEMS_PER_PAGE; 
-    }
-    
-    const btnBalloons = document.getElementById('btn-balloons');
-    const btnGifts = document.getElementById('btn-gifts');
-    
-    if (category === 'balloons') {
-        if (btnBalloons) btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
-        if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
-    } else if (category === 'gifts') {
-        if (btnBalloons) btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
-        if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
-    }
+            if (filteredItems.length === 0) {
+                grid.innerHTML = '<p class="text-center text-[#4F4135] col-span-full py-12 w-full block font-medium">Товары под заданные критерии не найдены. Попробуйте увеличить бюджет.</p>';
+                if (loadMoreBtn && loadMoreBtn.parentElement) loadMoreBtn.parentElement.classList.add('hidden');
+                return;
+            }
 
-    renderCatalog();
-};
+            const itemsToRender = filteredItems.slice(0, currentVisibleCount);
+            let htmlBuffer = '';
 
-// Кнопка показать ещё
-window.showMore = function() {
-    currentVisibleCount += ITEMS_PER_PAGE; 
-    renderCatalog();
-};
+            itemsToRender.forEach(item => {
+                const encodedText = encodeURIComponent(`Здравствуйте! Меня заинтересовал данный товар: https://podarok-i-tochka.ru/#${item.id}`);
+                const tgLink = `https://t.me/podarok_i_tochka?text=${encodedText}`;
 
-// --- СТАРТ ЗАГРУЗКИ ТАБЛИЦЫ ---
-		fetch(googleSheetCsvUrl)
-    .then(response => {
-        if (!response.ok) throw new Error('Не удалось загрузить данные таблицы.');
-        return response.text();
-    })
-    .then(csvText => {
-        // 1. Сначала парсим данные из Excel в массив
-        allProducts = parseCsv(csvText);
-        
-        // 2. Включаем по умолчанию шары
-        window.filterCatalog('balloons', false); 
-        
-        // 3. И ТОЛЬКО ТЕПЕРЬ, когда allProducts НЕ пустой, обрабатываем хэш
-        if (window.location.hash) {
-            const targetId = window.location.hash;
-            const cleanId = targetId.replace('#', '');
+                htmlBuffer += `
+                    <div id="${escapeHtml(item.id)}" class="${escapeHtml(item.category)} bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#F1E8D9] group flex flex-col p-4 text-center fade-in-up" data-price="${item.price}">
+                        <div class="relative overflow-hidden rounded-2xl mb-4 aspect-square bg-gray-100 max-w-full">
+                            <img src="${escapeHtml(item.img)}" alt="${escapeHtml(item.alt || item.name)}" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="flex-grow flex flex-col items-center">
+                            <h3 class="text-xl font-bold text-[#4F4135] mb-2 uppercase tracking-tight">${escapeHtml(item.name)}</h3>
+                            <p class="text-xs text-[#6F5D4B]/70 mb-4 leading-snug max-w-[220px]">${escapeHtml(item.desc)}</p>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-[#F1E8D9]/50">
+                            <div class="text-2xl font-extrabold text-[#4F4135] mb-3">${item.price} ₽</div>
+                            <a href="${tgLink}" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="inline-block w-full bg-[#6F5D4B] text-white py-3 rounded-xl font-bold uppercase tracking-wider text-sm transition-all hover:bg-[#4F4135] text-center active:scale-95 shadow-sm">
+                                Заказать в Telegram
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = htmlBuffer;
+
+            if (loadMoreBtn && loadMoreBtn.parentElement) {
+                if (currentVisibleCount >= filteredItems.length) {
+                    loadMoreBtn.parentElement.classList.add('hidden');
+                } else {
+                    loadMoreBtn.parentElement.classList.remove('hidden');
+                }
+            }
+        }
+
+        // Фильтрация по бюджету
+        window.filterByPrice = function(value) {
+            currentMaxPrice = parseInt(value) || 10000;
+            const priceValueLabel = document.getElementById('price-value');
+            if (priceValueLabel) priceValueLabel.textContent = currentMaxPrice; 
+            renderCatalog();
+        };
+
+        // Переключение категорий
+        window.filterCatalog = function(category, resetCount = true) {
+            currentCategory = category;
+            if (resetCount) {
+                currentVisibleCount = ITEMS_PER_PAGE; 
+            }
             
-            console.log("=== ОБНАРУЖЕН ХЭШ В ССЫЛКЕ ===");
-            console.log("Ищем товар с ID:", cleanId);
-            console.log("Всего товаров в базе после загрузки:", allProducts.length);
-
-            const foundItem = allProducts.find(item => item.id === cleanId);
+            const btnBalloons = document.getElementById('btn-balloons');
+            const btnGifts = document.getElementById('btn-gifts');
             
-            if (foundItem) {
-                console.log("Товар успешно найден в Excel!", foundItem);
-                
-                currentCategory = foundItem.category;
-                currentVisibleCount = allProducts.length; // Раскрываем лимит
-                
-                // Переключаем вкладку без сброса лимита
-                window.filterCatalog(currentCategory, false);
-                
-                // Скроллим к карточке
-                setTimeout(() => {
-                    const targetElement = document.getElementById(cleanId);
-                    if (targetElement) {
-                        console.log("Элемент отрисован в HTML. Скроллим...");
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (category === 'balloons') {
+                if (btnBalloons) btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
+                if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
+            } else if (category === 'gifts') {
+                if (btnBalloons) btnBalloons.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white shadow-sm active:scale-95";
+                if (btnGifts) btnGifts.className = "px-8 py-3 rounded-full font-bold transition-all border-2 border-[#6F5D4B] bg-[#6F5D4B] text-white shadow-md active:scale-95";
+            }
+
+            renderCatalog();
+        };
+
+        window.showMore = function() {
+            currentVisibleCount += ITEMS_PER_PAGE; 
+            renderCatalog();
+        };
+
+        // Загрузка товаров из Google Таблицы
+        fetch(googleSheetCsvUrl)
+            .then(response => {
+                if (!response.ok) throw new Error('Не удалось загрузить данные каталога');
+                return response.text();
+            })
+            .then(csvText => {
+                allProducts = parseCsv(csvText);
+                window.filterCatalog('balloons', false);
+
+                // Обработка прямого хэша в URL (например, переход на #item_123)
+                if (window.location.hash) {
+                    const cleanId = window.location.hash.replace('#', '');
+                    const foundItem = allProducts.find(item => item.id === cleanId);
+                    
+                    if (foundItem) {
+                        currentCategory = foundItem.category;
+                        currentVisibleCount = allProducts.length;
+                        window.filterCatalog(currentCategory, false);
                         
-                        targetElement.classList.add('ring-4', 'ring-[#6F5D4B]', 'duration-500');
                         setTimeout(() => {
-                            targetElement.classList.remove('ring-4', 'ring-[#6F5D4B]');
-                        }, 2000);
-                    } else {
-                        console.error("Ошибка: Карточка не успела создаться в HTML!");
+                            const targetElement = document.getElementById(cleanId);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                targetElement.classList.add('ring-4', 'ring-[#6F5D4B]', 'duration-500');
+                                setTimeout(() => {
+                                    targetElement.classList.remove('ring-4', 'ring-[#6F5D4B]');
+                                }, 2500);
+                            }
+                        }, 300);
                     }
-                }, 400);
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки каталога:', error);
+                const grid = document.getElementById('catalog-grid');
+                if (grid) {
+                    grid.innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Не удалось загрузить товары: ${escapeHtml(error.message)}. Пожалуйста, обновите страницу или напишите нам в Telegram.</p>`;
+                }
+            });
+
+        // --- 4. МОБИЛЬНОЕ МЕНЮ ---
+        window.toggleMenu = function() {
+            const menu = document.getElementById('mobile-menu');
+            const iconPath = document.getElementById('icon-path');
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            if (!menu) return;
+
+            const isClosed = menu.classList.contains('hidden');
+            if (isClosed) {
+                menu.classList.remove('hidden');
+                if (iconPath) iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                if (menuBtn) menuBtn.setAttribute('aria-expanded', 'true');
             } else {
-                console.warn("Товар '" + cleanId + "' не найден в Excel. Проверь ID в таблице.");
+                menu.classList.add('hidden');
+                if (iconPath) iconPath.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+                if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
             }
-        }
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
-        const grid = document.getElementById('catalog-grid');
-        if (grid) {
-            grid.innerHTML = `<p class="text-center text-red-500 col-span-full py-8">Ошибка загрузки: ${error.message}</p>`;
-        }
-    });
-// Переход по прямым ссылкам
-        if (window.location.hash) {
-            const targetId = window.location.hash;
-            const cleanId = targetId.replace('#', '');
-            
-            const foundItem = allProducts.find(item => item.id === cleanId);
-            
-            if (foundItem) {
-                currentCategory = foundItem.category;
-                currentVisibleCount = allProducts.length; // Показываем всё
-                
-                // Передаем false, чтобы функция filterCatalog НЕ сбросила лимит до 6!
-                window.filterCatalog(currentCategory, false);
-                
-                setTimeout(() => {
-                    const targetElement = document.getElementById(cleanId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        
-                        targetElement.classList.add('ring-4', 'ring-[#6F5D4B]', 'duration-500');
-                        setTimeout(() => {
-                            targetElement.classList.remove('ring-4', 'ring-[#6F5D4B]');
-                        }, 2000);
-                    }
-                }, 400); // Чуть увеличили задержку для надежности рендеринга
+        };
+
+        // --- 5. СКРОЛЛ КАРУСЕЛИ ОТЗЫВОВ ---
+        window.scrollReviews = function(direction) {
+            const carousel = document.getElementById('review-carousel');
+            if (!carousel) return;
+            const scrollAmount = 374; 
+            if (direction === 'prev') {
+                carousel.scrollLeft -= scrollAmount;
+            } else {
+                carousel.scrollLeft += scrollAmount;
             }
-        }
-		
+        };
 
-// Мобильное меню
-window.toggleMenu = function() {
-    const menu = document.getElementById('mobile-menu');
-    if (menu) menu.classList.toggle('hidden');
-};
-
-// Скролл отзывов
-window.scrollReviews = function(direction) {
-    const carousel = document.getElementById('review-carousel');
-    if (!carousel) return;
-    const scrollAmount = 350;
-    if (direction === 'prev') {
-        carousel.scrollLeft -= scrollAmount;
-    } else {
-        carousel.scrollLeft += scrollAmount;
-    }
-};
-
-// Отправка кастомного текста в ТГ
-window.sendCustomText = function() {
-    const textInput = document.getElementById('userBalloonText');
-    if (!textInput || !textInput.value.trim()) {
-        alert('Пожалуйста, введите текст надписи');
-        return;
-    }
-    const encodedText = encodeURIComponent(`Здравствуйте! Хочу заказать индивидуальную надпись на шар: "${textInput.value.trim()}"`);
-    window.open(`https://t.me/podarok_i_tochka?text=${encodedText}`, '_blank');
-};
-
-window.navigateToProduct = function(productId) {
-    const foundItem = allProducts.find(item => item.id === productId);
-    
-    if (!foundItem) {
-        console.error("Товар с ID " + productId + " не найден в таблице Excel");
-        return;
-    }
-
-    currentCategory = foundItem.category;
-    currentVisibleCount = allProducts.length; 
-    window.filterCatalog(currentCategory);
-    window.location.hash = productId;
-
-    setTimeout(() => {
-        const targetElement = document.getElementById(productId);
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            targetElement.classList.add('ring-4', 'ring-[#6F5D4B]', 'duration-500');
-            setTimeout(() => {
-                targetElement.classList.remove('ring-4', 'ring-[#6F5D4B]');
-            }, 2000);
-        }
-    }, 150);
-};
-		
-</script>
-	
-<section class="bg-white py-16 border-b border-[#F1E8D9]">
-    <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto bg-[#FBF9F6] border border-[#F1E8D9] rounded-[2.5rem] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
-            <div class="flex-1 text-center md:text-left">
-                <div class="inline-block bg-[#4F4135]/10 text-[#4F4135] text-[10px] px-3 py-1 rounded-full uppercase tracking-widest font-bold mb-3">Для компаний</div>
-                <h3 class="text-xl md:text-2xl font-black text-[#4F4135] uppercase tracking-tight mb-2">Работаете с размахом?</h3>
-                <p class="text-[#6F5D4B] text-sm md:text-base">
-                    Оформляем праздники для бизнеса в Луганске. Работаем официально: оплата по счету, чеки и закрывающие документы для вашей бухгалтерии.
-                </p>
-            </div>
-            <a href="https://t.me/podarok_i_tochka?text=Здравствуйте! Меня интересует корпоративное оформление" 
-               target="_blank"
-               class="w-full md:w-auto bg-[#4F4135] text-white px-10 py-4 rounded-2xl font-bold uppercase tracking-wider hover:bg-[#6F5D4B] transition-all text-center">
-                Написать нам
-            </a>
-        </div>
-    </div>
-</section>	
-	
-<section id="custom-text" class="container mx-auto px-4 py-10">
-    <div class="bg-gradient-to-br from-[#6F5D4B] to-[#4F4135] rounded-[3rem] p-10 md:p-16 shadow-2xl text-center text-[#FBF9F6]">
-        <h2 class="text-3xl md:text-5xl font-extrabold mb-6 text-[#FBF9F6]">Ваша надпись на шаре</h2>
-        <p class="text-[#F1E8D9]/90 mb-10 text-lg leading-relaxed">Придумайте любой текст — поздравление, имя или шутку, — а мы нанесем его на большой шар.</p>
-        <div class="max-w-xl mx-auto bg-white p-2 rounded-3xl flex flex-col md:flex-row gap-2 shadow-inner border border-[#F1E8D9]">
-            <input type="text" id="userBalloonText" placeholder="Например: С днем рождения, Любимая!" class="flex-grow px-6 py-4 rounded-2xl border-none text-[#6F5D4B] outline-none placeholder-[#6F5D4B]/60">
-            <button onclick="sendCustomText()" class="bg-[#A98E73] hover:bg-[#6F5D4B] text-white px-10 py-4 rounded-2xl font-bold transition whitespace-nowrap">Отправить в TG</button>
-        </div>
-    </div>
-</section>
-
-   <section id="reviews" class="container mx-auto px-4 py-20 border-t border-[#F1E8D9]">
-    <div class="text-center mb-12 relative">
-        <h2 class="text-4xl font-extrabold text-[#4F4135] mb-4 uppercase tracking-tight">Ваше доверие — наша гордость</h2>
-        <p class="text-[#6F5D4B]/80 max-w-xl mx-auto italic">Реальные отзывы и фото от счастливых получателей в Луганске.</p>
-        
-        <div class="hidden md:flex absolute top-0 right-0 space-x-2">
-            <button onclick="scrollReviews('prev')" class="bg-white p-3 rounded-full border border-[#F1E8D9] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white transition-all active:scale-95 shadow-sm">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-            </button>
-            <button onclick="scrollReviews('next')" class="bg-white p-3 rounded-full border border-[#F1E8D9] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white transition-all active:scale-95 shadow-sm">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </button>
-        </div>
-    </div>
-
-<div id="review-carousel" class="flex overflow-x-auto space-x-6 pb-6 cursor-grab" style="scroll-behavior: smooth;">
-
-    <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo1.jpg" alt="Отзыв купить шары Луганск" class="w-full h-full object-cover">
-            </div>
-           <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-    <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Наращивание Ресниц-Луганск</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Фонтан «День рождения»</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Заказывала шарики на день рождения, все очень понравилось😍 Результат совпал с ожиданием 🔥🔥🔥 Спасибо большое☺"</p>
-        </div>
-    </div>
-
-    <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo2.jpg" alt="Отзыв купить подарок Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Настёна</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с фотографиями</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо за такой чудесный заказ Муж очень доволен🥰 Спасибо большое 🤗"</p>
-        </div>
-    </div>
-
-    <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo3.jpg" alt="Отзыв подарочный букет Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Ольга</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Сладкий букет с шоколадом</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо за заказ! Сделано с любовью!!😍"</p>
-        </div>
-    </div>
-
-    <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo4.jpg" alt="Отзыв шар бабл Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Оксана</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с текстом</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо огромное, шар просто вау, все в восторге😊😊😊"</p>
-        </div>
-    </div>
-
-	 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo5.jpg" alt="Отзыв подарок с шаром Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Anna</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с игристым</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Заказали вот такую красоту, юбиляру и гостям очень понравилось!Спасибо, что вы предоставляете такую услугу, очень необычно,получилось замечательно!
-				За оперативность и доставку🚗 отдельное спасибо, вы молодцы!Рекомендуем всем!👍"</p>
-        </div>
-    </div>
-
-	 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo6.jpg" alt="Отзыв купить подарочный бокс Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Екатерина</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с мыльными розами</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Огромное спасибо вам за такую красоту, я уверена что именинница тоже будет в восторге от такого букета😻🌸 
-				Быстро сделали заказ не пришлось долго ждать и всё качественно. Спасибо ещё раз вам😍🥰"</p>
-        </div>
-    </div>
-
-	 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo7.jpg" alt="Отзыв шар бабблс Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Наталья</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с игристым</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо большое! Очень всем понравилось! Все пунктуально, качественно и эстетично! Процветания Вам!!!"</p>
-        </div>
-    </div>
-
-		 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo8.jpg" alt="Отзыв шар бабблс Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-     <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Анна</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Шар Бабблс с наполнением</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Хочу выразить свою благодарность за прекрасное оформление композиции для подарка, идея воплощена полностью, именинница в восторге"</p>
-        </div>
-    </div>
-
-		 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo9.jpg" alt="Отзыв подарок маме Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Елизавета</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс с мыльными цветами</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Спасибо вам,маме очень понравится букетик который точно не завянет💜"</p>
-        </div>
-    </div>
-
-		 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo10.jpg" alt="Отзыв подарок мужчине Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Ameliya</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Бокс на 23 февраля</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Безумно всё понравилось,обслуживание,сам подарок,доставка быстра🥰 Процветания вам в работе"</p>
-        </div>
-    </div>
-
-		 <div class="review-item flex-none w-[300px] md:w-[350px]">
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-[#F1E8D9]/50 hover:shadow-lg transition-all">
-            <div class="aspect-[9/16] bg-[#FBF9F6] rounded-2xl flex items-center justify-center border border-dashed border-[#F1E8D9] text-[#6F5D4B]/50 mb-4 overflow-hidden">
-                <img src="review_photo11.jpg" alt="Отзыв фонтан из шаров Луганск" class="w-full h-full object-cover">
-            </div>
-            <div class="flex items-center space-x-3">
-    <div class="w-10 h-10 rounded-full bg-[#FBF9F6] border border-[#F1E8D9] flex items-center justify-center">
-        <svg class="w-5 h-5 text-[#6F5D4B]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-                <div>
-                    <p class="font-bold text-[#4F4135] text-sm">Александра</p>
-                    <p class="text-xs text-[#6F5D4B]/70">Заказ: Фонтан из шаров</p>
-                </div>
-            </div>
-            <p class="mt-3 text-sm text-[#4F4135] italic">"Большое спасибо ❣"</p>
-        </div>
-    </div>
-
-</div>
-
-    <div class="text-center mt-6 md:hidden">
-        <p class="text-xs text-[#6F5D4B]/60 italic">Листайте отзывы влево-вправо ← →</p>
-    </div>
-</section>
-
-    <section id="delivery" class="bg-[#F1E8D9] py-20 text-[#6F5D4B]">
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-4xl font-extrabold text-[#4F4135] mb-8">Доставим праздник <br><span class="text-[#6F5D4B] font-light italic">бережно и вовремя</span></h2>
-                <ul class="space-y-4 text-[#6F5D4B]/90 text-lg leading-relaxed">
-                    <li>🎈 Шары доставляются в защитных транспортировочных пакетах</li>
-                    <li>⏱️ Курьер приедет точно в назначенное время</li>
-					<li>📸 Пришлем фото вашего заказа перед отправкой</li>
-                </ul>
-            </div>
-            <div class="bg-white p-10 rounded-[2rem] border border-[#F1E8D9] text-center shadow-md">
-                <h4 class="text-2xl font-bold mb-6 text-[#4F4135]">Остались вопросы?</h4>
-                <a href="https://t.me/podarok_i_tochka" target="_blank" class="w-full bg-[#6F5D4B] text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-[#4F4135] transition block shadow-lg">Написать мастеру</a>
-            </div>
-        </div>
-    </section>
-<section id="about" class="bg-[#FBF9F6] py-16 border-t border-[#F1E8D9] scroll-mt-20">
-    <div class="container mx-auto px-4 max-w-4xl text-center">
-        <h2 class="text-3xl font-extrabold text-[#4F4135] mb-8 uppercase tracking-tight">Подарки и шары с душой</h2>
-        
-        <div class="space-y-6 text-[#6F5D4B] text-lg leading-relaxed">
-            <p>
-                Добро пожаловать в <strong>«Подарок и Точка»</strong>! Мы специализируемся на создании праздничного настроения в Луганске. Наша работа — это сочетание ярких <strong>воздушных шаров</strong> и <strong>изготовления уникальных подарков</strong> под заказ.
-            </p>
-            
-            <p>
-                Нужен эффектный фонтан из шаров на день рождения или нежная композиция на выписку? Мы подберем идеальный вариант и нанесем любую вашу надпись всего за 15 минут. А если вы ищете что-то особенное, мы предложим <strong>подарочные боксы и сувениры</strong>, созданные специально для вашего близкого человека.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 text-left">
-                <div class="bg-white p-6 rounded-2xl border border-[#F1E8D9] shadow-sm">
-                    <h4 class="font-bold text-[#4F4135] mb-2">🎈 Воздушные шары</h4>
-                    <p class="text-sm">Огромный выбор цветов, фольгированные цифры, фигуры и шары-гиганты с индивидуальным дизайном.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-[#F1E8D9] shadow-sm">
-                    <h4 class="font-bold text-[#4F4135] mb-2">🎁 Подарки на заказ</h4>
-                    <p class="text-sm">Собираем стильные подарочные наборы, боксы со сладостями и памятные подарки ручной работы.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="contacts" class="bg-white py-16 border-t border-[#F1E8D9]">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold text-[#4F4135] mb-8">Ждем вас в гости</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-            <div class="space-y-4 text-lg">
-                <p class="font-semibold text-[#6F5D4B]">📍 Наш адрес для самовывоза:</p>
-                <p>г. Луганск, Советская 7 (ориентир магазин "Шале")</p>
-            </div>
-            <div class="space-y-4">
-                <p class="font-semibold text-[#6F5D4B] text-lg">📞 Быстрая связь:</p>
-                <a href="tel:+79592840568" class="inline-block bg-[#A98E73] text-white px-8 py-3 rounded-full font-bold hover:bg-[#6F5D4B] transition shadow-md">+7 (959) 284-05-68</a>
-                <p class="text-sm text-gray-400 mt-2">Нажмите на номер, чтобы позвонить</p>
-            </div>
-        </div>
-    </div>
-</section>
-    <footer class="bg-white py-12 border-t border-[#F1E8D9]">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center text-[#6F5D4B]">
-            <div class="mb-6 md:mb-0">
-                <div class="text-xl font-black text-[#4F4135]">ПОДАРОК И ТОЧКА</div>
-                <p class="text-[#6F5D4B] text-xs mt-1 uppercase tracking-widest italic">Луганск и область. Доставка радости.</p>
-            </div>
-            <div class="flex space-x-6 text-[#6F5D4B]">
-                <a href="https://vk.com/podarok_i_tochka" class="hover:text-[#4F4135] font-bold">VKontakte</a>
-                <a href="https://t.me/podarok_i_tochka_lg" class="hover:text-[#4F4135] font-bold">Telegram</a>
-            </div>
-        </div>
-        <div class="mt-8 text-center text-[#6F5D4B]/40 text-[10px] uppercase tracking-[0.3em]">
-    <p>© 2026 Студия подарков "Подарок и точка"</p>
-    <p class="mt-2">Самозанятый САЛИЙ АНАСТАСИЯ ВИТАЛЬЕВНА ИНН 345954759745</p>
-<a href="oferta.html" target="_blank" class="block w-max mx-auto text-[#6F5D4B]/40">
-        Публичная оферта
-    </a>
-</div>
-    </footer>
-
-    <script>
-     function sendCustomText() {
-    const input = document.getElementById('userBalloonText');
-    const customText = input.value.trim();
-
-    if (customText === "") {
-        alert("Сначала введите текст надписи!");
-        return;
-    }
-
-    // Формируем сообщение
-    const prefixMessage = "Мне нужна надпись на шаре: ";
-    const fullMessage = prefixMessage + "'" + customText + "'";
-    const encodedMessage = encodeURIComponent(fullMessage);
-
-    // Прямая ссылка без лишних символов $
-    window.location.href = "https://t.me/podarok_i_tochka?text=" + encodedMessage;
-}
+        // --- 6. ОТПРАВКА КАСТОМНОЙ НАДПИСИ В TELEGRAM ---
+        window.sendCustomText = function() {
+            const input = document.getElementById('userBalloonText');
+            if (!input || !input.value.trim()) {
+                alert('Пожалуйста, введите желаемый текст надписи на шаре!');
+                if (input) input.focus();
+                return;
+            }
+            const encodedText = encodeURIComponent(`Здравствуйте! Хочу заказать индивидуальную надпись на шар: "${input.value.trim()}"`);
+            window.open(`https://t.me/podarok_i_tochka?text=${encodedText}`, '_blank');
+        };
     </script>
-<script>
-// Функция для открытия/закрытия мобильного меню
-function toggleMenu() {
-    const menu = document.getElementById('mobile-menu');
-    const iconPath = document.getElementById('icon-path');
-    
-    if (menu.classList.contains('hidden')) {
-        menu.classList.remove('hidden');
-        // Меняем иконку на КРЕСТИК
-        iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-    } else {
-        menu.classList.add('hidden');
-        // Возвращаем ТРИ ПОЛОСКИ
-        iconPath.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
-    }
-}
-	// Функция для скролла карусели отзывов
-function scrollReviews(direction) {
-    const carousel = document.getElementById('review-carousel');
-    const scrollAmount = 374; // Ширина карточки (350px) + отступ (24px)
-    
-    if (direction === 'prev') {
-        carousel.scrollLeft -= scrollAmount;
-    } else {
-        carousel.scrollLeft += scrollAmount;
-    }
-}
-	
-<div id="age-verification" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#4F4135]/95 backdrop-blur-lg transition-opacity duration-500">
-    <div class="bg-[#FBF9F6] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full text-center mx-4 border border-[#F1E8D9]">
-        <img src="podaroktxt.png" alt="Подарок и Точка" class="h-10 mx-auto mb-6">
-        <h2 class="text-2xl font-bold text-[#4F4135] mb-4 uppercase tracking-tight">Вам уже есть 18 лет?</h2>
-        <p class="text-[#6F5D4B] mb-8 leading-relaxed">В нашем каталоге представлены подарки, содержащие алкогольную продукцию. Подтвердите свой возраст, чтобы продолжить.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onclick="confirmAge()" class="bg-[#6F5D4B] hover:bg-[#4F4135] text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-wider text-sm transition-all shadow-md active:scale-95 w-full">Да, мне есть 18</button>
-            <button onclick="rejectAge()" class="border-2 border-[#6F5D4B] text-[#6F5D4B] hover:bg-[#6F5D4B] hover:text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-wider text-sm transition-all active:scale-95 w-full">Нет</button>
-        </div>
-    </div>
-</div>
+
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108349750', 'ym');
+
+        ym(108349750, 'init', {
+            ssr: true, 
+            webvisor: true, 
+            clickmap: true, 
+            ecommerce: "dataLayer", 
+            referrer: document.referrer, 
+            url: location.href, 
+            accurateTrackBounce: true, 
+            trackLinks: true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/108349750" style="position:absolute; left:-9999px;" alt="Яндекс Метрика" /></div></noscript>
 </body>
 </html>
